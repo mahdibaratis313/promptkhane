@@ -2058,7 +2058,7 @@
 
     $('adminBtn').onclick = () => localStorage.getItem(K.admin) === '1' ? showAdmin() : open('passwordModal');
     $('passSubmit').onclick = () => {
-      $('pass').value === 'admin123'
+      $('pass').value === '1348'
         ? (localStorage.setItem(K.admin, '1'), toast('ورود به پنل مدیریت موفق بود ✓'), showAdmin())
         : toast('رمز مدیریت صحیح نیست.', 'error');
     };
