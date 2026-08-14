@@ -1,0 +1,2697 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#172554" />
+  <title>پرامپت‌خانه | کتابخانه پرامپت‌ها</title>
+
+  <!-- فونت و آیکون‌ها از CDN -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+
+  <style>
+    :root {
+      --primary: #172554;
+      --primary-2: #1e3a8a;
+      --secondary: #7c3aed;
+      --cyan: #0891b2;
+      --success: #059669;
+      --danger: #dc2626;
+      --warning: #d97706;
+      --bg: #f5f7fb;
+      --surface: #ffffff;
+      --surface-2: #f8fafc;
+      --text: #172033;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --shadow: 0 12px 35px rgba(15, 23, 42, 0.08);
+      --radius: 18px;
+    }
+
+    body.dark {
+      --primary: #93c5fd;
+      --primary-2: #60a5fa;
+      --secondary: #a78bfa;
+      --cyan: #22d3ee;
+      --bg: #0b1120;
+      --surface: #111b30;
+      --surface-2: #17233b;
+      --text: #edf4ff;
+      --muted: #a9b9d3;
+      --border: #263753;
+      --shadow: 0 12px 35px rgba(0, 0, 0, 0.28);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Vazirmatn", Tahoma, sans-serif;
+      transition: background 0.25s, color 0.25s;
+      min-height: 100vh;
+    }
+
+    button,
+    input,
+    textarea,
+    select {
+      font-family: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    button:disabled {
+      cursor: not-allowed;
+      opacity: 0.55;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .app-view {
+      min-height: 100vh;
+    }
+
+    /* ورود */
+    #loginView {
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      background:
+        radial-gradient(circle at 12% 18%, rgba(124, 58, 237, 0.22), transparent 28%),
+        radial-gradient(circle at 87% 82%, rgba(8, 145, 178, 0.22), transparent 29%),
+        linear-gradient(135deg, #0f1c42, #1e3a8a 55%, #312e81);
+    }
+
+    .login-card {
+      width: min(100%, 470px);
+      background: rgba(255, 255, 255, 0.96);
+      color: #172033;
+      padding: 38px;
+      border-radius: 28px;
+      box-shadow: 0 28px 80px rgba(0, 0, 0, 0.28);
+      text-align: center;
+      animation: rise 0.55s ease both;
+    }
+
+    .brand-mark {
+      width: 68px;
+      height: 68px;
+      margin: 0 auto 18px;
+      border-radius: 20px;
+      display: grid;
+      place-items: center;
+      font-size: 28px;
+      color: white;
+      background: linear-gradient(135deg, #172554, #7c3aed);
+      box-shadow: 0 10px 24px rgba(79, 70, 229, 0.3);
+    }
+
+    .login-card h1 {
+      font-size: 28px;
+      margin: 0 0 8px;
+    }
+
+    .login-card p {
+      color: #64748b;
+      font-size: 14px;
+      margin: 0 0 28px;
+      line-height: 1.9;
+    }
+
+    .field {
+      text-align: right;
+      margin-bottom: 18px;
+    }
+
+    .field label {
+      display: block;
+      font-weight: 700;
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+
+    .input-wrap {
+      position: relative;
+    }
+
+    .input-wrap > i {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #64748b;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      border-radius: 12px;
+      outline: none;
+      font-size: 14px;
+      padding: 12px 14px;
+      transition: 0.2s ease;
+    }
+
+    .input-wrap input {
+      padding-right: 42px;
+      direction: ltr;
+      text-align: right;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      border-color: var(--secondary);
+      box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.12);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 110px;
+      line-height: 2;
+    }
+
+    .login-error {
+      display: none;
+      color: #b91c1c;
+      text-align: right;
+      font-size: 13px;
+      margin-top: -10px;
+      margin-bottom: 14px;
+    }
+
+    .demo-note {
+      background: #eff6ff;
+      color: #1e40af;
+      border-radius: 12px;
+      padding: 11px;
+      font-size: 12px;
+      text-align: right;
+      line-height: 1.9;
+      margin-top: 18px;
+    }
+
+    /* عمومی */
+    .btn {
+      border: 0;
+      border-radius: 12px;
+      padding: 11px 16px;
+      font-weight: 700;
+      font-size: 13px;
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s, opacity 0.2s, box-shadow 0.2s;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      color: #fff;
+      background: linear-gradient(135deg, #1e3a8a, #7c3aed);
+      box-shadow: 0 8px 18px rgba(79, 70, 229, 0.2);
+    }
+
+    .btn-success {
+      color: #fff;
+      background: linear-gradient(135deg, #047857, #059669);
+    }
+
+    .btn-danger {
+      color: #fff;
+      background: var(--danger);
+    }
+
+    .btn-soft {
+      color: var(--primary);
+      background: color-mix(in srgb, var(--primary) 10%, transparent);
+    }
+
+    .btn-outline {
+      color: var(--text);
+      background: transparent;
+      border: 1px solid var(--border);
+    }
+
+    .btn-block {
+      width: 100%;
+    }
+
+    .icon-btn {
+      border: 1px solid var(--border);
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: var(--surface);
+      color: var(--text);
+      display: inline-grid;
+      place-items: center;
+      transition: 0.2s;
+    }
+
+    .icon-btn:hover {
+      color: var(--secondary);
+      border-color: var(--secondary);
+      transform: translateY(-2px);
+    }
+
+    /* پنل کاربر */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      min-height: 76px;
+      padding: 12px max(18px, calc((100% - 1380px) / 2));
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: color-mix(in srgb, var(--surface) 92%, transparent);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(13px);
+    }
+
+    .logo {
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 19px;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .logo i {
+      width: 37px;
+      height: 37px;
+      color: white;
+      border-radius: 11px;
+      display: grid;
+      place-items: center;
+      font-size: 16px;
+      background: linear-gradient(135deg, #1e3a8a, #7c3aed);
+    }
+
+    .top-search {
+      flex: 1;
+      max-width: 580px;
+      position: relative;
+      margin-right: auto;
+    }
+
+    .top-search i {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+    }
+
+    .top-search input {
+      padding-right: 42px;
+      background: var(--surface-2);
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .top-actions .btn {
+      white-space: nowrap;
+    }
+
+    .main-layout {
+      width: min(100%, 1380px);
+      padding: 28px 20px 55px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: 230px 1fr;
+      gap: 25px;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 104px;
+      align-self: start;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      padding: 14px;
+      border-radius: var(--radius);
+    }
+
+    .sidebar-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+      padding: 4px 8px 12px;
+    }
+
+    .category-list {
+      display: grid;
+      gap: 4px;
+    }
+
+    .category-item {
+      width: 100%;
+      padding: 11px 10px;
+      border: 0;
+      border-radius: 10px;
+      background: transparent;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-family: inherit;
+      font-size: 13px;
+      text-align: right;
+    }
+
+    .category-item:hover,
+    .category-item.active {
+      background: color-mix(in srgb, var(--secondary) 11%, transparent);
+      color: var(--secondary);
+      font-weight: 700;
+    }
+
+    .category-count {
+      font-size: 11px;
+      background: var(--surface-2);
+      padding: 2px 8px;
+      border-radius: 999px;
+    }
+
+    .content-area {
+      min-width: 0;
+    }
+
+    .page-intro {
+      margin-bottom: 20px;
+    }
+
+    .page-intro h2 {
+      margin: 0 0 5px;
+      font-size: 24px;
+    }
+
+    .page-intro p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .filter-bar {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px;
+      margin-bottom: 20px;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+      box-shadow: 0 5px 20px rgba(15, 23, 42, 0.03);
+    }
+
+    .filter-bar select {
+      width: auto;
+      min-width: 160px;
+      padding: 10px;
+    }
+
+    .filter-label {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .tag-filter-wrap {
+      flex: 1;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .filter-tag {
+      border: 1px solid var(--border);
+      color: var(--muted);
+      background: var(--surface);
+      border-radius: 999px;
+      padding: 6px 11px;
+      font-family: inherit;
+      font-size: 12px;
+    }
+
+    .filter-tag.active {
+      border-color: var(--secondary);
+      color: #fff;
+      background: var(--secondary);
+    }
+
+    .prompt-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 17px;
+    }
+
+    .prompt-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.23s, box-shadow 0.23s, border-color 0.23s;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .prompt-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow);
+      border-color: color-mix(in srgb, var(--secondary) 35%, var(--border));
+    }
+
+    .prompt-card-top {
+      display: flex;
+      gap: 10px;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .prompt-card h3 {
+      margin: 0;
+      font-size: 16px;
+      line-height: 1.8;
+    }
+
+    .favorite-btn {
+      flex: none;
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      border: 0;
+      background: var(--surface-2);
+      color: var(--muted);
+    }
+
+    .favorite-btn.active {
+      color: #e11d48;
+      background: #fff1f2;
+    }
+
+    .prompt-desc {
+      color: var(--muted);
+      font-size: 12.5px;
+      line-height: 1.9;
+      min-height: 47px;
+      margin: 9px 0;
+    }
+
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+
+    .category-badge,
+    .tag-badge {
+      font-size: 11px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    .category-badge {
+      color: #1d4ed8;
+      background: #eff6ff;
+    }
+
+    body.dark .category-badge {
+      color: #93c5fd;
+      background: rgba(59, 130, 246, 0.16);
+    }
+
+    .tag-badge {
+      color: var(--muted);
+      background: var(--surface-2);
+    }
+
+    .prompt-preview {
+      border-right: 3px solid var(--cyan);
+      color: var(--muted);
+      background: var(--surface-2);
+      border-radius: 8px;
+      padding: 9px 10px;
+      font-size: 11.5px;
+      line-height: 1.9;
+      margin: 4px 0 13px;
+      min-height: 66px;
+    }
+
+    .card-footer {
+      margin-top: auto;
+      padding-top: 11px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 9px;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .date-text {
+      color: var(--muted);
+      font-size: 10.5px;
+    }
+
+    .card-footer .btn {
+      padding: 8px 11px;
+      font-size: 11px;
+    }
+
+    .empty-state {
+      padding: 58px 24px;
+      text-align: center;
+      border: 1px dashed var(--border);
+      background: var(--surface);
+      border-radius: var(--radius);
+    }
+
+    .empty-state i {
+      display: block;
+      font-size: 45px;
+      color: var(--secondary);
+      margin-bottom: 13px;
+    }
+
+    .empty-state h3 {
+      margin: 0 0 8px;
+      font-size: 18px;
+    }
+
+    .empty-state p {
+      color: var(--muted);
+      margin: 0;
+      font-size: 13px;
+    }
+
+    /* مودال */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      background: rgba(5, 12, 30, 0.66);
+      backdrop-filter: blur(4px);
+    }
+
+    .modal-overlay.show {
+      display: flex;
+      animation: fade 0.18s ease;
+    }
+
+    .modal {
+      width: min(100%, 780px);
+      max-height: min(90vh, 850px);
+      overflow: auto;
+      padding: 24px;
+      border-radius: 22px;
+      color: var(--text);
+      background: var(--surface);
+      box-shadow: 0 22px 70px rgba(0, 0, 0, 0.28);
+      animation: rise 0.23s ease;
+    }
+
+    .modal.small {
+      width: min(100%, 430px);
+    }
+
+    .modal-header {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 18px;
+    }
+
+    .modal-header h2 {
+      margin: 0;
+      font-size: 21px;
+      line-height: 1.7;
+    }
+
+    .modal-close {
+      border: 0;
+      color: var(--muted);
+      background: var(--surface-2);
+      width: 37px;
+      height: 37px;
+      border-radius: 10px;
+      font-size: 17px;
+      flex: none;
+    }
+
+    .modal-section-title {
+      font-size: 14px;
+      font-weight: 800;
+      margin: 21px 0 9px;
+    }
+
+    .full-prompt {
+      direction: rtl;
+      white-space: pre-wrap;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-right: 4px solid var(--secondary);
+      border-radius: 12px;
+      padding: 16px;
+      line-height: 2.15;
+      font-size: 13px;
+    }
+
+    .sample-image,
+    .image-placeholder {
+      width: 100%;
+      min-height: 220px;
+      max-height: 390px;
+      object-fit: cover;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+    }
+
+    .sample-image {
+      cursor: zoom-in;
+    }
+
+    .image-placeholder {
+      display: grid;
+      place-items: center;
+      text-align: center;
+      color: var(--muted);
+      background:
+        radial-gradient(circle at 20% 20%, rgba(124, 58, 237, 0.16), transparent 26%),
+        var(--surface-2);
+      font-size: 13px;
+      line-height: 2;
+    }
+
+    .image-placeholder i {
+      display: block;
+      color: var(--secondary);
+      font-size: 35px;
+      margin-bottom: 9px;
+    }
+
+    .image-modal-content {
+      width: min(100%, 1000px);
+      max-height: 90vh;
+      object-fit: contain;
+      border-radius: 14px;
+    }
+
+    /* مدیریت */
+    .admin-view {
+      min-height: 100vh;
+      background: var(--bg);
+    }
+
+    .admin-header {
+      padding: 13px max(18px, calc((100% - 1380px) / 2));
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .admin-shell {
+      width: min(100%, 1380px);
+      margin: auto;
+      padding: 28px 20px 55px;
+      display: grid;
+      grid-template-columns: 215px 1fr;
+      gap: 24px;
+    }
+
+    .admin-nav {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 12px;
+      border-radius: var(--radius);
+      height: max-content;
+      position: sticky;
+      top: 93px;
+    }
+
+    .admin-tab {
+      width: 100%;
+      padding: 12px;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      background: transparent;
+      border: 0;
+      color: var(--text);
+      border-radius: 10px;
+      font-family: inherit;
+      text-align: right;
+    }
+
+    .admin-tab.active,
+    .admin-tab:hover {
+      background: color-mix(in srgb, var(--secondary) 12%, transparent);
+      color: var(--secondary);
+      font-weight: 700;
+    }
+
+    .admin-section {
+      display: none;
+    }
+
+    .admin-section.active {
+      display: block;
+    }
+
+    .section-head {
+      display: flex;
+      gap: 13px;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-size: 22px;
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .stat-card {
+      padding: 19px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+
+    .stat-card i {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      background: color-mix(in srgb, var(--secondary) 13%, transparent);
+      color: var(--secondary);
+      border-radius: 12px;
+      margin-bottom: 12px;
+    }
+
+    .stat-card strong {
+      display: block;
+      font-size: 27px;
+      margin-bottom: 2px;
+    }
+
+    .stat-card span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .panel-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 17px;
+    }
+
+    .admin-search {
+      max-width: 330px;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 690px;
+    }
+
+    th,
+    td {
+      text-align: right;
+      padding: 13px 10px;
+      border-bottom: 1px solid var(--border);
+      font-size: 12px;
+      vertical-align: middle;
+    }
+
+    th {
+      color: var(--muted);
+      font-weight: 700;
+      background: var(--surface-2);
+    }
+
+    .table-actions {
+      display: flex;
+      gap: 6px;
+    }
+
+    .mini-btn {
+      width: 31px;
+      height: 31px;
+      border: 0;
+      border-radius: 8px;
+      color: var(--primary);
+      background: color-mix(in srgb, var(--primary) 10%, transparent);
+    }
+
+    .mini-btn.delete {
+      color: var(--danger);
+      background: #fff1f2;
+    }
+
+    .entity-list {
+      display: grid;
+      gap: 9px;
+    }
+
+    .entity-item {
+      border: 1px solid var(--border);
+      background: var(--surface);
+      border-radius: 12px;
+      padding: 11px 13px;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .entity-item span {
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    .form-grid .full {
+      grid-column: 1 / -1;
+    }
+
+    .field.compact {
+      margin: 0;
+    }
+
+    .tag-select-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 11px;
+      min-height: 44px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--surface);
+    }
+
+    .check-tag {
+      font-size: 12px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 5px 9px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .check-tag input {
+      width: auto;
+      margin-left: 4px;
+      accent-color: var(--secondary);
+    }
+
+    /* پشتیبانی و Toast */
+    .support-fab {
+      position: fixed;
+      z-index: 70;
+      left: 20px;
+      bottom: 20px;
+      width: 58px;
+      height: 58px;
+      border: 0;
+      border-radius: 50%;
+      color: #fff;
+      font-size: 21px;
+      background: linear-gradient(135deg, #0ea5e9, #7c3aed);
+      box-shadow: 0 10px 26px rgba(79, 70, 229, 0.43);
+      transition: transform 0.25s;
+    }
+
+    .support-fab:hover {
+      transform: translateY(-5px) scale(1.05);
+    }
+
+    .support-box {
+      position: fixed;
+      z-index: 71;
+      left: 20px;
+      bottom: 92px;
+      width: min(calc(100vw - 40px), 335px);
+      padding: 18px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 17px;
+      box-shadow: var(--shadow);
+      display: none;
+      animation: rise 0.2s ease;
+    }
+
+    .support-box.show {
+      display: block;
+    }
+
+    .support-box h3 {
+      font-size: 15px;
+      margin: 0 0 8px;
+    }
+
+    .support-box p {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.9;
+      margin: 0 0 13px;
+    }
+
+    .support-row {
+      width: 100%;
+      border: 0;
+      text-align: right;
+      display: flex;
+      gap: 9px;
+      align-items: center;
+      padding: 10px;
+      margin-top: 7px;
+      border-radius: 10px;
+      background: var(--surface-2);
+      color: var(--text);
+      font-family: inherit;
+      font-size: 12px;
+    }
+
+    .support-row i {
+      color: var(--secondary);
+      width: 18px;
+    }
+
+    .toast-container {
+      position: fixed;
+      z-index: 200;
+      top: 20px;
+      left: 20px;
+      width: min(calc(100vw - 40px), 350px);
+      display: grid;
+      gap: 10px;
+    }
+
+    .toast {
+      padding: 13px 15px;
+      border-radius: 12px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 13px;
+      line-height: 1.7;
+      box-shadow: 0 12px 26px rgba(0, 0, 0, 0.2);
+      animation: slideIn 0.3s ease;
+    }
+
+    .toast.success { background: #047857; }
+    .toast.error { background: #b91c1c; }
+    .toast.info { background: #1e3a8a; }
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(15px) scale(0.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @keyframes fade {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(-25px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @media (max-width: 1050px) {
+      .prompt-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .stat-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 780px) {
+      .topbar {
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .logo {
+        font-size: 16px;
+      }
+
+      .top-search {
+        order: 3;
+        flex-basis: 100%;
+      }
+
+      .top-actions .btn span {
+        display: none;
+      }
+
+      .main-layout,
+      .admin-shell {
+        grid-template-columns: 1fr;
+        padding: 18px 14px 45px;
+      }
+
+      .sidebar,
+      .admin-nav {
+        position: static;
+      }
+
+      .category-list {
+        display: flex;
+        overflow-x: auto;
+        padding-bottom: 4px;
+      }
+
+      .category-item {
+        min-width: max-content;
+      }
+
+      .prompt-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .filter-bar select {
+        flex: 1;
+        min-width: 130px;
+      }
+
+      .admin-nav {
+        display: flex;
+        overflow-x: auto;
+        gap: 4px;
+      }
+
+      .admin-tab {
+        width: max-content;
+        white-space: nowrap;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .form-grid .full {
+        grid-column: auto;
+      }
+
+      .login-card {
+        padding: 28px 21px;
+      }
+
+      .admin-header {
+        padding: 12px 14px;
+      }
+    }
+
+    @media (max-width: 460px) {
+      .top-actions {
+        gap: 5px;
+      }
+
+      .top-actions .btn {
+        padding: 10px;
+      }
+
+      .top-actions .btn i {
+        margin: 0;
+      }
+
+      .stat-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .modal {
+        padding: 18px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!--
+    نسخه نمایشی:
+    ورود کاربر، رمز ادمین و تمام داده‌ها در localStorage مرورگر ذخیره می‌شوند.
+    برای نسخه واقعی باید از بک‌اند امن، OTP، هش رمز عبور، کنترل دسترسی
+    و دیتابیس استفاده شود؛ رمز فرانت‌اند به هیچ وجه امنیت واقعی ندارد.
+  -->
+
+  <!-- صفحه ورود -->
+  <section id="loginView" class="app-view">
+    <div class="login-card">
+      <div class="brand-mark"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+      <h1>به پرامپت‌خانه خوش آمدید</h1>
+      <p>کتابخانه شخصی و حرفه‌ای شما برای ذخیره، مدیریت و استفاده از پرامپت‌ها.</p>
+
+      <form id="loginForm" novalidate>
+        <div class="field">
+          <label for="mobileInput">شماره موبایل</label>
+          <div class="input-wrap">
+            <i class="fa-solid fa-mobile-screen-button"></i>
+            <input
+              id="mobileInput"
+              type="tel"
+              inputmode="numeric"
+              autocomplete="tel"
+              maxlength="11"
+              placeholder="مثال: 09121234567"
+              aria-label="شماره موبایل ایران"
+            />
+          </div>
+        </div>
+
+        <div id="loginError" class="login-error"></div>
+
+        <button class="btn btn-primary btn-block" type="submit">
+          <i class="fa-solid fa-right-to-bracket"></i>
+          ورود به پرامپت‌خانه
+        </button>
+      </form>
+
+      <div class="demo-note">
+      </div>
+    </div>
+  </section>
+
+  <!-- پنل کاربر -->
+  <section id="userView" class="app-view hidden">
+    <header class="topbar">
+      <a class="logo" href="#" aria-label="صفحه اصلی پرامپت‌خانه">
+        <i class="fa-solid fa-wand-magic-sparkles"></i>
+        <span>پرامپت‌خانه</span>
+      </a>
+
+      <div class="top-search">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input id="globalSearch" type="search" placeholder="جست‌وجو در پرامپت‌ها..." aria-label="جست‌وجو در پرامپت‌ها" />
+      </div>
+
+      <div class="top-actions">
+        <button id="themeBtn" class="icon-btn" title="تغییر حالت روشن و تیره" aria-label="تغییر حالت روشن و تیره">
+          <i class="fa-solid fa-moon"></i>
+        </button>
+
+        <button id="adminEntryBtn" class="btn btn-soft" title="ورود به پنل مدیریت">
+          <i class="fa-solid fa-shield-halved"></i>
+          <span>پنل مدیریت</span>
+        </button>
+
+        <button id="logoutBtn" class="btn btn-outline" title="خروج از حساب">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+          <span>خروج</span>
+        </button>
+      </div>
+    </header>
+
+    <main class="main-layout">
+      <aside class="sidebar">
+        <div class="sidebar-title">
+          <span>دسته‌بندی‌ها</span>
+          <i class="fa-solid fa-layer-group"></i>
+        </div>
+        <div id="categoryList" class="category-list"></div>
+      </aside>
+
+      <section class="content-area">
+        <div class="page-intro">
+          <h2 id="pageTitle">همه پرامپت‌ها</h2>
+          <p id="resultCount">در حال نمایش پرامپت‌های موجود</p>
+        </div>
+
+        <div class="filter-bar">
+          <span class="filter-label"><i class="fa-solid fa-filter"></i> فیلتر برچسب:</span>
+          <div id="tagFilters" class="tag-filter-wrap"></div>
+
+          <select id="sortSelect" aria-label="مرتب‌سازی پرامپت‌ها">
+            <option value="newest">جدیدترین</option>
+            <option value="oldest">قدیمی‌ترین</option>
+            <option value="popular">محبوب‌ترین</option>
+          </select>
+        </div>
+
+        <div id="promptGrid" class="prompt-grid"></div>
+        <div id="emptyState" class="empty-state hidden">
+          <i class="fa-regular fa-folder-open"></i>
+          <h3>پرامپتی پیدا نشد</h3>
+          <p>عبارت جست‌وجو یا فیلترها را تغییر دهید.</p>
+        </div>
+      </section>
+    </main>
+  </section>
+
+  <!-- پنل مدیریت -->
+  <section id="adminView" class="admin-view hidden">
+    <header class="admin-header">
+      <div class="logo">
+        <i class="fa-solid fa-shield-halved"></i>
+        <span>مدیریت پرامپت‌خانه</span>
+      </div>
+
+      <div style="display:flex; gap:8px;">
+        <button id="backToUserBtn" class="btn btn-outline" title="بازگشت به پنل کاربر">
+          <i class="fa-solid fa-arrow-right"></i> بازگشت
+        </button>
+        <button id="adminLogoutBtn" class="btn btn-danger" title="خروج از مدیریت">
+          <i class="fa-solid fa-lock"></i> خروج مدیریت
+        </button>
+      </div>
+    </header>
+
+    <main class="admin-shell">
+      <nav class="admin-nav">
+        <button class="admin-tab active" data-tab="dashboard">
+          <i class="fa-solid fa-chart-pie"></i> داشبورد
+        </button>
+        <button class="admin-tab" data-tab="prompts">
+          <i class="fa-solid fa-file-lines"></i> مدیریت پرامپت‌ها
+        </button>
+        <button class="admin-tab" data-tab="categories">
+          <i class="fa-solid fa-folder-tree"></i> دسته‌بندی‌ها
+        </button>
+        <button class="admin-tab" data-tab="tags">
+          <i class="fa-solid fa-tags"></i> برچسب‌ها
+        </button>
+      </nav>
+
+      <section>
+        <!-- داشبورد -->
+        <div id="dashboardTab" class="admin-section active">
+          <div class="section-head">
+            <div>
+              <h2>داشبورد مدیریت</h2>
+              <p style="margin:5px 0 0;color:var(--muted);font-size:13px;">نمای کلی کتابخانه پرامپت‌های شما</p>
+            </div>
+          </div>
+
+          <div class="stat-grid">
+            <div class="stat-card">
+              <i class="fa-solid fa-file-lines"></i>
+              <strong id="statPrompts">۰</strong>
+              <span>کل پرامپت‌ها</span>
+            </div>
+            <div class="stat-card">
+              <i class="fa-solid fa-folder-open"></i>
+              <strong id="statCategories">۰</strong>
+              <span>دسته‌بندی‌ها</span>
+            </div>
+            <div class="stat-card">
+              <i class="fa-solid fa-tags"></i>
+              <strong id="statTags">۰</strong>
+              <span>برچسب‌ها</span>
+            </div>
+            <div class="stat-card">
+              <i class="fa-solid fa-heart"></i>
+              <strong id="statFavorites">۰</strong>
+              <span>موارد علاقه‌مندی‌شده</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- مدیریت پرامپت -->
+        <div id="promptsTab" class="admin-section">
+          <div class="section-head">
+            <h2>مدیریت پرامپت‌ها</h2>
+            <div style="display:flex;gap:9px;flex-wrap:wrap;">
+              <input id="adminPromptSearch" class="admin-search" type="search" placeholder="جست‌وجو در فهرست..." />
+              <button id="addPromptBtn" class="btn btn-primary">
+                <i class="fa-solid fa-plus"></i> افزودن پرامپت
+              </button>
+            </div>
+          </div>
+
+          <div class="panel-card table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>عنوان</th>
+                  <th>دسته‌بندی</th>
+                  <th>برچسب‌ها</th>
+                  <th>تاریخ ویرایش</th>
+                  <th>عملیات</th>
+                </tr>
+              </thead>
+              <tbody id="adminPromptsBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- مدیریت دسته بندی -->
+        <div id="categoriesTab" class="admin-section">
+          <div class="section-head">
+            <h2>مدیریت دسته‌بندی‌ها</h2>
+            <button id="addCategoryBtn" class="btn btn-primary">
+              <i class="fa-solid fa-plus"></i> افزودن دسته‌بندی
+            </button>
+          </div>
+          <div id="adminCategoriesList" class="entity-list"></div>
+        </div>
+
+        <!-- مدیریت تگ -->
+        <div id="tagsTab" class="admin-section">
+          <div class="section-head">
+            <h2>مدیریت برچسب‌ها</h2>
+            <button id="addTagBtn" class="btn btn-primary">
+              <i class="fa-solid fa-plus"></i> افزودن برچسب
+            </button>
+          </div>
+          <div id="adminTagsList" class="entity-list"></div>
+        </div>
+      </section>
+    </main>
+  </section>
+
+  <!-- مودال جزئیات پرامپت -->
+  <div id="promptModalOverlay" class="modal-overlay" role="dialog" aria-modal="true">
+    <div class="modal">
+      <div class="modal-header">
+        <div>
+          <h2 id="modalPromptTitle"></h2>
+          <div id="modalPromptMeta" class="meta-row" style="margin-top:8px;"></div>
+        </div>
+        <button class="modal-close" data-close="promptModalOverlay" title="بستن" aria-label="بستن مودال">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="modal-section-title">متن کامل پرامپت</div>
+      <div id="modalPromptText" class="full-prompt"></div>
+
+      <button id="copyPromptBtn" class="btn btn-primary btn-block" style="margin-top:14px;">
+        <i class="fa-regular fa-copy"></i>
+        کپی پرامپت
+      </button>
+
+      <div class="modal-section-title">نمونه خروجی</div>
+      <div id="modalSampleOutput"></div>
+    </div>
+  </div>
+
+  <!-- مودال بزرگنمایی تصویر -->
+  <div id="imageModalOverlay" class="modal-overlay" role="dialog" aria-modal="true">
+    <div style="position:relative;max-width:100%;">
+      <button class="modal-close" data-close="imageModalOverlay" title="بستن تصویر" aria-label="بستن تصویر" style="position:absolute;top:10px;left:10px;z-index:2;">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <img id="largeImage" class="image-modal-content" src="" alt="نمونه خروجی بزرگ‌شده" />
+    </div>
+  </div>
+
+  <!-- مودال رمز مدیریت -->
+  <div id="adminPasswordOverlay" class="modal-overlay" role="dialog" aria-modal="true">
+    <div class="modal small">
+      <div class="modal-header">
+        <h2>ورود به پنل مدیریت</h2>
+        <button class="modal-close" data-close="adminPasswordOverlay" title="بستن" aria-label="بستن">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <p style="color:var(--muted);font-size:13px;line-height:2;">
+        برای نسخه نمایشی، رمز مدیریت را وارد کنید.
+      </p>
+
+      <div class="field">
+        <label for="adminPasswordInput">رمز مدیریت</label>
+        <input id="adminPasswordInput" type="password" placeholder="رمز نمونه: 12345678" />
+      </div>
+
+      <button id="adminPasswordSubmit" class="btn btn-primary btn-block">
+        <i class="fa-solid fa-unlock-keyhole"></i> ورود به مدیریت
+      </button>
+    </div>
+  </div>
+
+  <!-- مودال افزودن / ویرایش پرامپت -->
+  <div id="promptFormOverlay" class="modal-overlay" role="dialog" aria-modal="true">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 id="promptFormTitle">افزودن پرامپت جدید</h2>
+        <button class="modal-close" data-close="promptFormOverlay" title="بستن" aria-label="بستن">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <form id="promptForm">
+        <input id="editingPromptId" type="hidden" />
+
+        <div class="form-grid">
+          <div class="field compact">
+            <label for="promptTitleInput">عنوان پرامپت *</label>
+            <input id="promptTitleInput" required placeholder="مثال: تولید تصویر محصول لوکس" />
+          </div>
+
+          <div class="field compact">
+            <label for="promptCategoryInput">دسته‌بندی *</label>
+            <select id="promptCategoryInput" required></select>
+          </div>
+
+          <div class="field compact full">
+            <label for="promptDescInput">توضیح کوتاه *</label>
+            <input id="promptDescInput" required placeholder="توضیحی کوتاه درباره کاربرد این پرامپت..." />
+          </div>
+
+          <div class="field compact full">
+            <label>برچسب‌ها</label>
+            <div id="promptTagsCheckboxes" class="tag-select-list"></div>
+          </div>
+
+          <div class="field compact full">
+            <label for="promptTextInput">متن کامل پرامپت *</label>
+            <textarea id="promptTextInput" required placeholder="متن کامل پرامپت را وارد کنید..."></textarea>
+          </div>
+
+          <div class="field compact">
+            <label for="promptImageUrlInput">آدرس تصویر نمونه (اختیاری)</label>
+            <input id="promptImageUrlInput" type="url" placeholder="https://images.unsplash.com/..." />
+          </div>
+
+          <div class="field compact">
+            <label for="promptImageFileInput">یا آپلود تصویر نمونه</label>
+            <input id="promptImageFileInput" type="file" accept="image/*" />
+          </div>
+        </div>
+
+        <div style="display:flex;justify-content:flex-end;gap:9px;margin-top:19px;">
+          <button type="button" class="btn btn-outline" data-close="promptFormOverlay">انصراف</button>
+          <button type="submit" class="btn btn-success">
+            <i class="fa-solid fa-floppy-disk"></i> ذخیره اطلاعات
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- مودال افزودن/ویرایش آیتم -->
+  <div id="entityFormOverlay" class="modal-overlay" role="dialog" aria-modal="true">
+    <div class="modal small">
+      <div class="modal-header">
+        <h2 id="entityFormTitle">افزودن مورد جدید</h2>
+        <button class="modal-close" data-close="entityFormOverlay" title="بستن" aria-label="بستن">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <form id="entityForm">
+        <input id="entityType" type="hidden" />
+        <input id="entityOldValue" type="hidden" />
+
+        <div class="field">
+          <label id="entityNameLabel" for="entityNameInput">نام</label>
+          <input id="entityNameInput" required maxlength="40" placeholder="نام را وارد کنید" />
+        </div>
+
+        <button class="btn btn-primary btn-block" type="submit">
+          <i class="fa-solid fa-check"></i> ذخیره
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- مودال تایید حذف -->
+  <div id="confirmOverlay" class="modal-overlay" role="dialog" aria-modal="true">
+    <div class="modal small">
+      <div class="modal-header">
+        <h2 id="confirmTitle">تأیید حذف</h2>
+        <button class="modal-close" data-close="confirmOverlay" title="بستن" aria-label="بستن">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <p id="confirmText" style="color:var(--muted);font-size:13px;line-height:2;"></p>
+
+      <div style="display:flex;gap:9px;margin-top:18px;">
+        <button class="btn btn-outline" style="flex:1;" data-close="confirmOverlay">انصراف</button>
+        <button id="confirmActionBtn" class="btn btn-danger" style="flex:1;">
+          <i class="fa-solid fa-trash"></i> حذف
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- پشتیبانی شناور -->
+  <button id="supportFab" class="support-fab" title="پشتیبانی پرامپت‌خانه" aria-label="باز کردن پشتیبانی">
+    <i class="fa-solid fa-headset"></i>
+  </button>
+
+  <div id="supportBox" class="support-box">
+    <h3><i class="fa-solid fa-headset" style="color:var(--secondary);"></i> پشتیبانی پرامپت‌خانه</h3>
+    <p>برای ارتباط با پشتیبانی از راه‌های زیر استفاده کنید:</p>
+
+    <button id="copyEmailBtn" class="support-row" title="کپی ایمیل">
+      <i class="fa-solid fa-envelope"></i>
+      <span>bratymhdy910@gmail.com</span>
+      <i class="fa-regular fa-copy" style="margin-right:auto;"></i>
+    </button>
+
+    <a class="support-row" href="https://eitaa.com/ermia313" target="_blank" rel="noopener" title="باز کردن ایتا">
+      <i class="fa-solid fa-paper-plane"></i>
+      <span>@ermia313 در ایتا</span>
+      <i class="fa-solid fa-arrow-up-left" style="margin-right:auto;"></i>
+    </a>
+  </div>
+
+  <div id="toastContainer" class="toast-container" aria-live="polite"></div>
+
+  <script>
+    "use strict";
+
+    /* =========================
+       ابزارها و داده‌های اولیه
+    ========================= */
+
+    const STORAGE_KEYS = {
+      initialized: "promptkhane_initialized",
+      prompts: "promptkhane_prompts",
+      categories: "promptkhane_categories",
+      tags: "promptkhane_tags",
+      favorites: "promptkhane_favorites",
+      user: "promptkhane_user",
+      admin: "promptkhane_admin",
+      theme: "promptkhane_theme"
+    };
+
+    const defaultCategories = [
+      "تولید تصویر",
+      "تولید محتوا",
+      "شبکه‌های اجتماعی",
+      "آموزشی",
+      "کسب‌وکار",
+      "برنامه‌نویسی",
+      "ترجمه",
+      "ایده‌پردازی"
+    ];
+
+    const defaultTags = [
+      "تصویر",
+      "محصول",
+      "تبلیغات",
+      "اینستاگرام",
+      "محتوا",
+      "بازاریابی",
+      "برنامه‌نویسی",
+      "آموزش",
+      "ساده‌سازی",
+      "فروش"
+    ];
+
+    const defaultPrompts = [
+      {
+        id: "prompt_1",
+        title: "تولید تصویر محصول لوکس",
+        description: "ساخت تصویر تبلیغاتی حرفه‌ای و لوکس برای معرفی محصول.",
+        category: "تولید تصویر",
+        tags: ["محصول", "تبلیغات", "تصویر"],
+        text: `یک تصویر تبلیغاتی لوکس و فوتورئال برای محصول «[نام محصول]» تولید کن. محصول را روی یک سطح مینیمال و براق قرار بده. از نورپردازی استودیویی سینمایی، بازتاب‌های ظریف، پس‌زمینه تیره با جزئیات طلایی و ترکیب‌بندی حرفه‌ای استفاده کن. محصول باید در مرکز توجه باشد، کیفیت تصویر بسیار بالا، جزئیات دقیق، مناسب کمپین تبلیغاتی برندهای لوکس و نسبت تصویر 1:1 باشد.`,
+        image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=1200&q=85",
+        createdAt: "2026-07-18T10:00:00.000Z",
+        updatedAt: "2026-07-18T10:00:00.000Z"
+      },
+      {
+        id: "prompt_2",
+        title: "تقویم محتوایی اینستاگرام",
+        description: "برنامه‌ریزی یک تقویم محتوایی 30 روزه برای رشد پیج اینستاگرام.",
+        category: "شبکه‌های اجتماعی",
+        tags: ["اینستاگرام", "محتوا", "بازاریابی"],
+        text: `برای کسب‌وکار «[نام کسب‌وکار]» که در حوزه «[حوزه فعالیت]» فعال است، یک تقویم محتوایی کامل 30 روزه برای اینستاگرام طراحی کن. برای هر روز موضوع محتوا، نوع محتوا (ریلز، پست، استوری یا کاروسل)، هدف محتوا، کپشن کوتاه پیشنهادی، دعوت به اقدام (CTA) و هشتگ‌های مرتبط را در قالب جدول ارائه بده. لحن برند «[رسمی/صمیمی/آموزشی]» باشد و محتواها به افزایش تعامل و فروش کمک کنند.`,
+        image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=1200&q=85",
+        createdAt: "2026-07-25T10:00:00.000Z",
+        updatedAt: "2026-07-25T10:00:00.000Z"
+      },
+      {
+        id: "prompt_3",
+        title: "توضیح ساده مفاهیم برنامه‌نویسی",
+        description: "تبدیل مفاهیم پیچیده برنامه‌نویسی به توضیحی ساده و قابل فهم.",
+        category: "آموزشی",
+        tags: ["برنامه‌نویسی", "آموزش", "ساده‌سازی"],
+        text: `مفهوم برنامه‌نویسی «[نام مفهوم]» را به زبان فارسی بسیار ساده و روان برای فردی که تازه برنامه‌نویسی را شروع کرده توضیح بده. ابتدا یک تعریف کوتاه ارائه کن، سپس با یک مثال روزمره مفهوم را ملموس کن. بعد یک نمونه کد کوتاه در زبان «[نام زبان]» بنویس و هر خط آن را توضیح بده. در پایان سه اشتباه رایج و سه تمرین کوتاه برای تثبیت یادگیری پیشنهاد کن.`,
+        image: "",
+        createdAt: "2026-08-02T10:00:00.000Z",
+        updatedAt: "2026-08-02T10:00:00.000Z"
+      }
+    ];
+
+    const state = {
+      selectedCategory: "همه پرامپت‌ها",
+      selectedTag: "",
+      search: "",
+      sort: "newest",
+      currentPromptId: null,
+      confirmCallback: null
+    };
+
+    function getData(key, fallback) {
+      try {
+        const value = localStorage.getItem(key);
+        return value ? JSON.parse(value) : fallback;
+      } catch {
+        return fallback;
+      }
+    }
+
+    function setData(key, value) {
+      localStorage.setItem(key, JSON.stringify(value));
+    }
+
+    function getPrompts() {
+      return getData(STORAGE_KEYS.prompts, []);
+    }
+
+    function setPrompts(data) {
+      setData(STORAGE_KEYS.prompts, data);
+    }
+
+    function getCategories() {
+      return getData(STORAGE_KEYS.categories, []);
+    }
+
+    function setCategories(data) {
+      setData(STORAGE_KEYS.categories, data);
+    }
+
+    function getTags() {
+      return getData(STORAGE_KEYS.tags, []);
+    }
+
+    function setTags(data) {
+      setData(STORAGE_KEYS.tags, data);
+    }
+
+    function getFavorites() {
+      return getData(STORAGE_KEYS.favorites, []);
+    }
+
+    function setFavorites(data) {
+      setData(STORAGE_KEYS.favorites, data);
+    }
+
+    function initializeData() {
+      if (!localStorage.getItem(STORAGE_KEYS.initialized)) {
+        setPrompts(defaultPrompts);
+        setCategories(defaultCategories);
+        setTags(defaultTags);
+        setFavorites([]);
+        localStorage.setItem(STORAGE_KEYS.initialized, "true");
+      }
+    }
+
+    function escapeHTML(value = "") {
+      return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function toPersianNumber(value) {
+      return String(value).replace(/\d/g, digit => "۰۱۲۳۴۵۶۷۸۹"[digit]);
+    }
+
+    function formatDate(iso) {
+      try {
+        return new Intl.DateTimeFormat("fa-IR", {
+          year: "numeric",
+          month: "short",
+          day: "numeric"
+        }).format(new Date(iso));
+      } catch {
+        return "-";
+      }
+    }
+
+    function normalizeDigits(value) {
+      const persian = "۰۱۲۳۴۵۶۷۸۹";
+      const arabic = "٠١٢٣٤٥٦٧٨٩";
+
+      return String(value)
+        .replace(/[۰-۹]/g, char => String(persian.indexOf(char)))
+        .replace(/[٠-٩]/g, char => String(arabic.indexOf(char)));
+    }
+
+    function toast(message, type = "success") {
+      const icons = {
+        success: "fa-circle-check",
+        error: "fa-circle-exclamation",
+        info: "fa-circle-info"
+      };
+
+      const item = document.createElement("div");
+      item.className = `toast ${type}`;
+      item.innerHTML = `<i class="fa-solid ${icons[type]}"></i><span>${escapeHTML(message)}</span>`;
+      document.getElementById("toastContainer").appendChild(item);
+
+      setTimeout(() => {
+        item.style.opacity = "0";
+        item.style.transform = "translateX(-25px)";
+        item.style.transition = "0.25s";
+        setTimeout(() => item.remove(), 280);
+      }, 3200);
+    }
+
+    async function copyText(text, successMessage = "با موفقیت کپی شد ✓") {
+      try {
+        await navigator.clipboard.writeText(text);
+        toast(successMessage, "success");
+      } catch {
+        const temp = document.createElement("textarea");
+        temp.value = text;
+        temp.style.position = "fixed";
+        temp.style.opacity = "0";
+        document.body.appendChild(temp);
+        temp.select();
+        document.execCommand("copy");
+        temp.remove();
+        toast(successMessage, "success");
+      }
+    }
+
+    function openModal(id) {
+      document.getElementById(id).classList.add("show");
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).classList.remove("show");
+    }
+
+    function applyTheme() {
+      const theme = localStorage.getItem(STORAGE_KEYS.theme) || "light";
+      document.body.classList.toggle("dark", theme === "dark");
+
+      const icon = document.querySelector("#themeBtn i");
+      if (icon) {
+        icon.className = theme === "dark" ? "fa-solid fa-sun" : "fa-solid fa-moon";
+      }
+    }
+
+    /* =========================
+       ورود کاربر
+    ========================= */
+
+    function showLoginError(message) {
+      const error = document.getElementById("loginError");
+      error.textContent = message;
+      error.style.display = "block";
+    }
+
+    function clearLoginError() {
+      const error = document.getElementById("loginError");
+      error.textContent = "";
+      error.style.display = "none";
+    }
+
+    function showUserView() {
+      document.getElementById("loginView").classList.add("hidden");
+      document.getElementById("adminView").classList.add("hidden");
+      document.getElementById("userView").classList.remove("hidden");
+      renderUserPanel();
+    }
+
+    function showLoginView() {
+      document.getElementById("userView").classList.add("hidden");
+      document.getElementById("adminView").classList.add("hidden");
+      document.getElementById("loginView").classList.remove("hidden");
+      document.getElementById("mobileInput").value = "";
+      clearLoginError();
+    }
+
+    document.getElementById("mobileInput").addEventListener("input", event => {
+      let value = normalizeDigits(event.target.value);
+      value = value.replace(/\D/g, "").slice(0, 11);
+      event.target.value = value;
+      clearLoginError();
+    });
+
+    document.getElementById("loginForm").addEventListener("submit", event => {
+      event.preventDefault();
+
+      const mobile = normalizeDigits(document.getElementById("mobileInput").value).replace(/\D/g, "");
+
+      if (!mobile) {
+        showLoginError("لطفاً شماره موبایل خود را وارد کنید.");
+        return;
+      }
+
+      if (mobile.length !== 11) {
+        showLoginError("شماره موبایل باید 11 رقم باشد.");
+        return;
+      }
+
+      if (!mobile.startsWith("09")) {
+        showLoginError("شماره موبایل باید با 09 شروع شود.");
+        return;
+      }
+
+      localStorage.setItem(STORAGE_KEYS.user, JSON.stringify({ mobile, loginAt: new Date().toISOString() }));
+      toast("ورود شما با موفقیت انجام شد ✓", "success");
+      showUserView();
+    });
+
+    document.getElementById("logoutBtn").addEventListener("click", () => {
+      localStorage.removeItem(STORAGE_KEYS.user);
+      localStorage.removeItem(STORAGE_KEYS.admin);
+      toast("از حساب کاربری خارج شدید.", "info");
+      showLoginView();
+    });
+
+    /* =========================
+       پنل کاربر و پرامپت‌ها
+    ========================= */
+
+    function renderCategories() {
+      const categories = getCategories();
+      const prompts = getPrompts();
+      const list = document.getElementById("categoryList");
+
+      const items = ["همه پرامپت‌ها", ...categories];
+
+      list.innerHTML = items.map(category => {
+        const count = category === "همه پرامپت‌ها"
+          ? prompts.length
+          : prompts.filter(p => p.category === category).length;
+
+        return `
+          <button class="category-item ${state.selectedCategory === category ? "active" : ""}"
+                  data-category="${escapeHTML(category)}">
+            <span>${escapeHTML(category)}</span>
+            <span class="category-count">${toPersianNumber(count)}</span>
+          </button>
+        `;
+      }).join("");
+
+      document.querySelectorAll(".category-item").forEach(button => {
+        button.addEventListener("click", () => {
+          state.selectedCategory = button.dataset.category;
+          renderUserPanel();
+        });
+      });
+    }
+
+    function renderTagFilters() {
+      const tags = getTags();
+      const wrap = document.getElementById("tagFilters");
+
+      wrap.innerHTML = `
+        <button class="filter-tag ${!state.selectedTag ? "active" : ""}" data-tag="">همه</button>
+        ${tags.map(tag => `
+          <button class="filter-tag ${state.selectedTag === tag ? "active" : ""}" data-tag="${escapeHTML(tag)}">
+            ${escapeHTML(tag)}
+          </button>
+        `).join("")}
+      `;
+
+      document.querySelectorAll(".filter-tag").forEach(button => {
+        button.addEventListener("click", () => {
+          state.selectedTag = button.dataset.tag;
+          renderUserPanel();
+        });
+      });
+    }
+
+    function filteredPrompts() {
+      const query = state.search.trim().toLowerCase();
+
+      let prompts = getPrompts().filter(prompt => {
+        const searchable = [
+          prompt.title,
+          prompt.description,
+          prompt.category,
+          prompt.text,
+          ...(prompt.tags || [])
+        ].join(" ").toLowerCase();
+
+        const categoryMatches =
+          state.selectedCategory === "همه پرامپت‌ها" ||
+          prompt.category === state.selectedCategory;
+
+        const tagMatches =
+          !state.selectedTag ||
+          (prompt.tags || []).includes(state.selectedTag);
+
+        const searchMatches = !query || searchable.includes(query);
+
+        return categoryMatches && tagMatches && searchMatches;
+      });
+
+      const favorites = getFavorites();
+
+      prompts.sort((a, b) => {
+        if (state.sort === "oldest") {
+          return new Date(a.updatedAt) - new Date(b.updatedAt);
+        }
+
+        if (state.sort === "popular") {
+          const aFav = favorites.includes(a.id) ? 1 : 0;
+          const bFav = favorites.includes(b.id) ? 1 : 0;
+          return bFav - aFav || new Date(b.updatedAt) - new Date(a.updatedAt);
+        }
+
+        return new Date(b.updatedAt) - new Date(a.updatedAt);
+      });
+
+      return prompts;
+    }
+
+    function renderPrompts() {
+      const prompts = filteredPrompts();
+      const favorites = getFavorites();
+      const grid = document.getElementById("promptGrid");
+      const empty = document.getElementById("emptyState");
+
+      document.getElementById("pageTitle").textContent = state.selectedCategory;
+      document.getElementById("resultCount").textContent =
+        `${toPersianNumber(prompts.length)} پرامپت مطابق فیلتر شما نمایش داده می‌شود.`;
+
+      if (!prompts.length) {
+        grid.innerHTML = "";
+        empty.classList.remove("hidden");
+        return;
+      }
+
+      empty.classList.add("hidden");
+
+      grid.innerHTML = prompts.map(prompt => {
+        const isFavorite = favorites.includes(prompt.id);
+        const shortText = prompt.text.length > 135 ? `${prompt.text.slice(0, 135)}...` : prompt.text;
+
+        return `
+          <article class="prompt-card">
+            <div class="prompt-card-top">
+              <h3>${escapeHTML(prompt.title)}</h3>
+              <button class="favorite-btn ${isFavorite ? "active" : ""}" data-favorite="${prompt.id}"
+                title="${isFavorite ? "حذف از علاقه‌مندی‌ها" : "افزودن به علاقه‌مندی‌ها"}"
+                aria-label="علاقه‌مندی">
+                <i class="${isFavorite ? "fa-solid" : "fa-regular"} fa-heart"></i>
+              </button>
+            </div>
+
+            <p class="prompt-desc">${escapeHTML(prompt.description)}</p>
+
+            <div class="meta-row">
+              <span class="category-badge">${escapeHTML(prompt.category)}</span>
+              ${(prompt.tags || []).slice(0, 3).map(tag => `<span class="tag-badge">${escapeHTML(tag)}</span>`).join("")}
+            </div>
+
+            <div class="prompt-preview">${escapeHTML(shortText)}</div>
+
+            <div class="card-footer">
+              <span class="date-text"><i class="fa-regular fa-calendar"></i> ${formatDate(prompt.updatedAt)}</span>
+              <button class="btn btn-soft" data-view-prompt="${prompt.id}">
+                مشاهده و کپی <i class="fa-solid fa-arrow-left"></i>
+              </button>
+            </div>
+          </article>
+        `;
+      }).join("");
+
+      document.querySelectorAll("[data-favorite]").forEach(button => {
+        button.addEventListener("click", () => toggleFavorite(button.dataset.favorite));
+      });
+
+      document.querySelectorAll("[data-view-prompt]").forEach(button => {
+        button.addEventListener("click", () => openPromptDetails(button.dataset.viewPrompt));
+      });
+    }
+
+    function toggleFavorite(id) {
+      let favorites = getFavorites();
+
+      if (favorites.includes(id)) {
+        favorites = favorites.filter(item => item !== id);
+        toast("از علاقه‌مندی‌ها حذف شد.", "info");
+      } else {
+        favorites.push(id);
+        toast("به علاقه‌مندی‌ها اضافه شد ✓", "success");
+      }
+
+      setFavorites(favorites);
+      renderUserPanel();
+    }
+
+    function renderUserPanel() {
+      renderCategories();
+      renderTagFilters();
+      renderPrompts();
+      updateDashboard();
+    }
+
+    function openPromptDetails(id) {
+      const prompt = getPrompts().find(item => item.id === id);
+      if (!prompt) return;
+
+      state.currentPromptId = id;
+      document.getElementById("modalPromptTitle").textContent = prompt.title;
+      document.getElementById("modalPromptText").textContent = prompt.text;
+      document.getElementById("modalPromptMeta").innerHTML = `
+        <span class="category-badge">${escapeHTML(prompt.category)}</span>
+        ${(prompt.tags || []).map(tag => `<span class="tag-badge">${escapeHTML(tag)}</span>`).join("")}
+      `;
+
+      const sample = document.getElementById("modalSampleOutput");
+
+      if (prompt.image) {
+        sample.innerHTML = `
+          <img class="sample-image" id="sampleImage" src="${escapeHTML(prompt.image)}"
+               alt="نمونه خروجی برای ${escapeHTML(prompt.title)}" />
+        `;
+
+        document.getElementById("sampleImage").addEventListener("click", () => {
+          document.getElementById("largeImage").src = prompt.image;
+          openModal("imageModalOverlay");
+        });
+      } else {
+        sample.innerHTML = `
+          <div class="image-placeholder">
+            <div>
+              <i class="fa-regular fa-image"></i>
+              نمونه خروجی تصویری برای این پرامپت ثبت نشده است.
+            </div>
+          </div>
+        `;
+      }
+
+      openModal("promptModalOverlay");
+    }
+
+    document.getElementById("copyPromptBtn").addEventListener("click", () => {
+      const prompt = getPrompts().find(item => item.id === state.currentPromptId);
+      if (prompt) copyText(prompt.text, "پرامپت با موفقیت کپی شد ✓");
+    });
+
+    document.getElementById("globalSearch").addEventListener("input", event => {
+      state.search = event.target.value;
+      renderPrompts();
+    });
+
+    document.getElementById("sortSelect").addEventListener("change", event => {
+      state.sort = event.target.value;
+      renderPrompts();
+    });
+
+    document.getElementById("themeBtn").addEventListener("click", () => {
+      const current = localStorage.getItem(STORAGE_KEYS.theme) || "light";
+      localStorage.setItem(STORAGE_KEYS.theme, current === "light" ? "dark" : "light");
+      applyTheme();
+    });
+
+    /* =========================
+       ورود و پنل مدیریت
+    ========================= */
+
+    document.getElementById("adminEntryBtn").addEventListener("click", () => {
+      if (localStorage.getItem(STORAGE_KEYS.admin) === "true") {
+        showAdminView();
+      } else {
+        document.getElementById("adminPasswordInput").value = "";
+        openModal("adminPasswordOverlay");
+      }
+    });
+
+    function showAdminView() {
+      document.getElementById("userView").classList.add("hidden");
+      document.getElementById("loginView").classList.add("hidden");
+      document.getElementById("adminView").classList.remove("hidden");
+      closeModal("adminPasswordOverlay");
+      renderAdminPanel();
+    }
+
+    document.getElementById("adminPasswordSubmit").addEventListener("click", () => {
+      const password = document.getElementById("adminPasswordInput").value;
+
+      // هشدار: این رمز در فرانت‌اند است و برای استفاده واقعی امن نیست.
+      if (password === "1348") {
+        localStorage.setItem(STORAGE_KEYS.admin, "true");
+        toast("ورود به پنل مدیریت موفق بود ✓", "success");
+        showAdminView();
+      } else {
+        toast("رمز مدیریت صحیح نیست.", "error");
+      }
+    });
+
+    document.getElementById("backToUserBtn").addEventListener("click", showUserView);
+
+    document.getElementById("adminLogoutBtn").addEventListener("click", () => {
+      localStorage.removeItem(STORAGE_KEYS.admin);
+      toast("از پنل مدیریت خارج شدید.", "info");
+      showUserView();
+    });
+
+    document.querySelectorAll(".admin-tab").forEach(button => {
+      button.addEventListener("click", () => {
+        document.querySelectorAll(".admin-tab").forEach(item => item.classList.remove("active"));
+        document.querySelectorAll(".admin-section").forEach(item => item.classList.remove("active"));
+
+        button.classList.add("active");
+        document.getElementById(`${button.dataset.tab}Tab`).classList.add("active");
+      });
+    });
+
+    function updateDashboard() {
+      const prompts = getPrompts();
+      const categories = getCategories();
+      const tags = getTags();
+      const favorites = getFavorites();
+
+      document.getElementById("statPrompts").textContent = toPersianNumber(prompts.length);
+      document.getElementById("statCategories").textContent = toPersianNumber(categories.length);
+      document.getElementById("statTags").textContent = toPersianNumber(tags.length);
+      document.getElementById("statFavorites").textContent = toPersianNumber(favorites.length);
+    }
+
+    function renderAdminPanel() {
+      updateDashboard();
+      renderAdminPrompts();
+      renderAdminCategories();
+      renderAdminTags();
+    }
+
+    function renderAdminPrompts() {
+      const query = document.getElementById("adminPromptSearch").value.trim().toLowerCase();
+      const prompts = getPrompts().filter(prompt => {
+        return [prompt.title, prompt.category, prompt.description, ...(prompt.tags || [])]
+          .join(" ")
+          .toLowerCase()
+          .includes(query);
+      });
+
+      const body = document.getElementById("adminPromptsBody");
+
+      if (!prompts.length) {
+        body.innerHTML = `<tr><td colspan="5" style="text-align:center;color:var(--muted);padding:25px;">موردی پیدا نشد.</td></tr>`;
+        return;
+      }
+
+      body.innerHTML = prompts.map(prompt => `
+        <tr>
+          <td><strong>${escapeHTML(prompt.title)}</strong><br><small style="color:var(--muted);">${escapeHTML(prompt.description)}</small></td>
+          <td><span class="category-badge">${escapeHTML(prompt.category)}</span></td>
+          <td>${(prompt.tags || []).map(tag => `<span class="tag-badge">${escapeHTML(tag)}</span>`).join(" ")}</td>
+          <td>${formatDate(prompt.updatedAt)}</td>
+          <td>
+            <div class="table-actions">
+              <button class="mini-btn" title="ویرایش" data-edit-prompt="${prompt.id}">
+                <i class="fa-solid fa-pen"></i>
+              </button>
+              <button class="mini-btn delete" title="حذف" data-delete-prompt="${prompt.id}">
+                <i class="fa-solid fa-trash"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+      `).join("");
+
+      document.querySelectorAll("[data-edit-prompt]").forEach(button => {
+        button.addEventListener("click", () => openPromptForm(button.dataset.editPrompt));
+      });
+
+      document.querySelectorAll("[data-delete-prompt]").forEach(button => {
+        button.addEventListener("click", () => confirmDeletePrompt(button.dataset.deletePrompt));
+      });
+    }
+
+    document.getElementById("adminPromptSearch").addEventListener("input", renderAdminPrompts);
+
+    function renderAdminCategories() {
+      const categories = getCategories();
+      const prompts = getPrompts();
+      const list = document.getElementById("adminCategoriesList");
+
+      list.innerHTML = categories.map(category => {
+        const count = prompts.filter(p => p.category === category).length;
+
+        return `
+          <div class="entity-item">
+            <span><i class="fa-solid fa-folder" style="color:var(--secondary);"></i> ${escapeHTML(category)}
+              <small style="color:var(--muted);font-weight:400;">(${toPersianNumber(count)} پرامپت)</small>
+            </span>
+            <div class="table-actions">
+              <button class="mini-btn" title="ویرایش" data-edit-category="${escapeHTML(category)}">
+                <i class="fa-solid fa-pen"></i>
+              </button>
+              <button class="mini-btn delete" title="حذف" data-delete-category="${escapeHTML(category)}">
+                <i class="fa-solid fa-trash"></i>
+              </button>
+            </div>
+          </div>
+        `;
+      }).join("");
+
+      document.querySelectorAll("[data-edit-category]").forEach(button => {
+        button.addEventListener("click", () => openEntityForm("category", button.dataset.editCategory));
+      });
+
+      document.querySelectorAll("[data-delete-category]").forEach(button => {
+        button.addEventListener("click", () => confirmDeleteCategory(button.dataset.deleteCategory));
+      });
+    }
+
+    function renderAdminTags() {
+      const tags = getTags();
+      const list = document.getElementById("adminTagsList");
+
+      list.innerHTML = tags.map(tag => `
+        <div class="entity-item">
+          <span><i class="fa-solid fa-tag" style="color:var(--cyan);"></i> ${escapeHTML(tag)}</span>
+          <div class="table-actions">
+            <button class="mini-btn" title="ویرایش" data-edit-tag="${escapeHTML(tag)}">
+              <i class="fa-solid fa-pen"></i>
+            </button>
+            <button class="mini-btn delete" title="حذف" data-delete-tag="${escapeHTML(tag)}">
+              <i class="fa-solid fa-trash"></i>
+            </button>
+          </div>
+        </div>
+      `).join("");
+
+      document.querySelectorAll("[data-edit-tag]").forEach(button => {
+        button.addEventListener("click", () => openEntityForm("tag", button.dataset.editTag));
+      });
+
+      document.querySelectorAll("[data-delete-tag]").forEach(button => {
+        button.addEventListener("click", () => confirmDeleteTag(button.dataset.deleteTag));
+      });
+    }
+
+    /* =========================
+       مدیریت پرامپت‌ها
+    ========================= */
+
+    document.getElementById("addPromptBtn").addEventListener("click", () => openPromptForm());
+
+    function renderPromptFormOptions(selectedCategory = "", selectedTags = []) {
+      const categories = getCategories();
+      const tags = getTags();
+
+      document.getElementById("promptCategoryInput").innerHTML = `
+        <option value="">انتخاب دسته‌بندی</option>
+        ${categories.map(category => `
+          <option value="${escapeHTML(category)}" ${selectedCategory === category ? "selected" : ""}>
+            ${escapeHTML(category)}
+          </option>
+        `).join("")}
+      `;
+
+      document.getElementById("promptTagsCheckboxes").innerHTML = tags.length
+        ? tags.map(tag => `
+          <label class="check-tag">
+            <input type="checkbox" value="${escapeHTML(tag)}" ${selectedTags.includes(tag) ? "checked" : ""} />
+            ${escapeHTML(tag)}
+          </label>
+        `).join("")
+        : `<span style="font-size:12px;color:var(--muted);">ابتدا از بخش برچسب‌ها، برچسب جدید اضافه کنید.</span>`;
+    }
+
+    function openPromptForm(id = null) {
+      const form = document.getElementById("promptForm");
+      form.reset();
+      document.getElementById("editingPromptId").value = "";
+
+      if (id) {
+        const prompt = getPrompts().find(item => item.id === id);
+        if (!prompt) return;
+
+        document.getElementById("promptFormTitle").textContent = "ویرایش پرامپت";
+        document.getElementById("editingPromptId").value = prompt.id;
+        document.getElementById("promptTitleInput").value = prompt.title;
+        document.getElementById("promptDescInput").value = prompt.description;
+        document.getElementById("promptTextInput").value = prompt.text;
+        document.getElementById("promptImageUrlInput").value = prompt.image || "";
+        renderPromptFormOptions(prompt.category, prompt.tags || []);
+      } else {
+        document.getElementById("promptFormTitle").textContent = "افزودن پرامپت جدید";
+        renderPromptFormOptions();
+      }
+
+      openModal("promptFormOverlay");
+    }
+
+    function readFileAsDataURL(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+
+    document.getElementById("promptForm").addEventListener("submit", async event => {
+      event.preventDefault();
+
+      const title = document.getElementById("promptTitleInput").value.trim();
+      const category = document.getElementById("promptCategoryInput").value;
+      const description = document.getElementById("promptDescInput").value.trim();
+      const text = document.getElementById("promptTextInput").value.trim();
+      const imageUrl = document.getElementById("promptImageUrlInput").value.trim();
+      const file = document.getElementById("promptImageFileInput").files[0];
+      const id = document.getElementById("editingPromptId").value;
+      const selectedTags = [...document.querySelectorAll("#promptTagsCheckboxes input:checked")].map(item => item.value);
+
+      if (!title || !category || !description || !text) {
+        toast("لطفاً تمام فیلدهای ضروری را کامل کنید.", "error");
+        return;
+      }
+
+      let image = imageUrl;
+      if (file) {
+        try {
+          image = await readFileAsDataURL(file);
+        } catch {
+          toast("خواندن تصویر با خطا مواجه شد.", "error");
+          return;
+        }
+      }
+
+      const prompts = getPrompts();
+      const now = new Date().toISOString();
+
+      if (id) {
+        const index = prompts.findIndex(item => item.id === id);
+        if (index !== -1) {
+          prompts[index] = {
+            ...prompts[index],
+            title,
+            category,
+            description,
+            text,
+            tags: selectedTags,
+            image,
+            updatedAt: now
+          };
+        }
+        toast("پرامپت با موفقیت ویرایش شد ✓", "success");
+      } else {
+        prompts.push({
+          id: `prompt_${Date.now()}`,
+          title,
+          category,
+          description,
+          text,
+          tags: selectedTags,
+          image,
+          createdAt: now,
+          updatedAt: now
+        });
+        toast("پرامپت جدید با موفقیت اضافه شد ✓", "success");
+      }
+
+      setPrompts(prompts);
+      closeModal("promptFormOverlay");
+      renderAdminPanel();
+      renderUserPanel();
+    });
+
+    function confirmDeletePrompt(id) {
+      const prompt = getPrompts().find(item => item.id === id);
+      if (!prompt) return;
+
+      openConfirm(
+        "حذف پرامپت",
+        `آیا از حذف پرامپت «${prompt.title}» مطمئن هستید؟ این عملیات قابل بازگشت نیست.`,
+        () => {
+          setPrompts(getPrompts().filter(item => item.id !== id));
+          setFavorites(getFavorites().filter(item => item !== id));
+          toast("پرامپت حذف شد.", "success");
+          renderAdminPanel();
+          renderUserPanel();
+        }
+      );
+    }
+
+    /* =========================
+       مدیریت دسته‌بندی و برچسب
+    ========================= */
+
+    document.getElementById("addCategoryBtn").addEventListener("click", () => openEntityForm("category"));
+    document.getElementById("addTagBtn").addEventListener("click", () => openEntityForm("tag"));
+
+    function openEntityForm(type, oldValue = "") {
+      document.getElementById("entityForm").reset();
+      document.getElementById("entityType").value = type;
+      document.getElementById("entityOldValue").value = oldValue;
+      document.getElementById("entityNameInput").value = oldValue;
+
+      const isCategory = type === "category";
+      document.getElementById("entityFormTitle").textContent = oldValue
+        ? `ویرایش ${isCategory ? "دسته‌بندی" : "برچسب"}`
+        : `افزودن ${isCategory ? "دسته‌بندی" : "برچسب"} جدید`;
+
+      document.getElementById("entityNameLabel").textContent =
+        `نام ${isCategory ? "دسته‌بندی" : "برچسب"}`;
+
+      openModal("entityFormOverlay");
+      setTimeout(() => document.getElementById("entityNameInput").focus(), 150);
+    }
+
+    document.getElementById("entityForm").addEventListener("submit", event => {
+      event.preventDefault();
+
+      const type = document.getElementById("entityType").value;
+      const oldValue = document.getElementById("entityOldValue").value;
+      const newValue = document.getElementById("entityNameInput").value.trim();
+
+      if (!newValue) {
+        toast("نام نمی‌تواند خالی باشد.", "error");
+        return;
+      }
+
+      const isCategory = type === "category";
+      const values = isCategory ? getCategories() : getTags();
+
+      if (values.includes(newValue) && newValue !== oldValue) {
+        toast(`این ${isCategory ? "دسته‌بندی" : "برچسب"} قبلاً وجود دارد.`, "error");
+        return;
+      }
+
+      let updatedValues;
+
+      if (oldValue) {
+        updatedValues = values.map(item => item === oldValue ? newValue : item);
+
+        const prompts = getPrompts().map(prompt => {
+          if (isCategory && prompt.category === oldValue) {
+            return { ...prompt, category: newValue, updatedAt: new Date().toISOString() };
+          }
+
+          if (!isCategory && (prompt.tags || []).includes(oldValue)) {
+            return {
+              ...prompt,
+              tags: prompt.tags.map(tag => tag === oldValue ? newValue : tag),
+              updatedAt: new Date().toISOString()
+            };
+          }
+
+          return prompt;
+        });
+
+        setPrompts(prompts);
+        toast(`${isCategory ? "دسته‌بندی" : "برچسب"} با موفقیت ویرایش شد ✓`, "success");
+      } else {
+        updatedValues = [...values, newValue];
+        toast(`${isCategory ? "دسته‌بندی" : "برچسب"} جدید اضافه شد ✓`, "success");
+      }
+
+      if (isCategory) setCategories(updatedValues);
+      else setTags(updatedValues);
+
+      closeModal("entityFormOverlay");
+      renderAdminPanel();
+      renderUserPanel();
+    });
+
+    function confirmDeleteCategory(category) {
+      const promptCount = getPrompts().filter(prompt => prompt.category === category).length;
+
+      if (promptCount > 0) {
+        openConfirm(
+          "حذف دسته‌بندی",
+          `دسته‌بندی «${category}» دارای ${toPersianNumber(promptCount)} پرامپت است. ابتدا پرامپت‌های این دسته را ویرایش یا حذف کنید.`,
+          null,
+          "متوجه شدم"
+        );
+        return;
+      }
+
+      openConfirm(
+        "حذف دسته‌بندی",
+        `آیا از حذف دسته‌بندی «${category}» مطمئن هستید؟`,
+        () => {
+          setCategories(getCategories().filter(item => item !== category));
+          if (state.selectedCategory === category) state.selectedCategory = "همه پرامپت‌ها";
+          toast("دسته‌بندی حذف شد.", "success");
+          renderAdminPanel();
+          renderUserPanel();
+        }
+      );
+    }
+
+    function confirmDeleteTag(tag) {
+      const usedCount = getPrompts().filter(prompt => (prompt.tags || []).includes(tag)).length;
+      const message = usedCount
+        ? `برچسب «${tag}» از ${toPersianNumber(usedCount)} پرامپت نیز حذف خواهد شد. آیا ادامه می‌دهید؟`
+        : `آیا از حذف برچسب «${tag}» مطمئن هستید؟`;
+
+      openConfirm(
+        "حذف برچسب",
+        message,
+        () => {
+          setTags(getTags().filter(item => item !== tag));
+
+          const prompts = getPrompts().map(prompt => ({
+            ...prompt,
+            tags: (prompt.tags || []).filter(item => item !== tag)
+          }));
+
+          setPrompts(prompts);
+
+          if (state.selectedTag === tag) state.selectedTag = "";
+          toast("برچسب حذف شد.", "success");
+          renderAdminPanel();
+          renderUserPanel();
+        }
+      );
+    }
+
+    /* =========================
+       تأییدیه حذف
+    ========================= */
+
+    function openConfirm(title, text, callback = null, buttonText = "حذف") {
+      state.confirmCallback = callback;
+      document.getElementById("confirmTitle").textContent = title;
+      document.getElementById("confirmText").textContent = text;
+
+      const actionButton = document.getElementById("confirmActionBtn");
+
+      if (callback) {
+        actionButton.style.display = "inline-flex";
+        actionButton.innerHTML = `<i class="fa-solid fa-trash"></i> ${buttonText}`;
+      } else {
+        actionButton.style.display = "none";
+      }
+
+      openModal("confirmOverlay");
+    }
+
+    document.getElementById("confirmActionBtn").addEventListener("click", () => {
+      if (typeof state.confirmCallback === "function") {
+        state.confirmCallback();
+      }
+      closeModal("confirmOverlay");
+      state.confirmCallback = null;
+    });
+
+    /* =========================
+       پشتیبانی و مودال‌ها
+    ========================= */
+
+    document.getElementById("supportFab").addEventListener("click", () => {
+      document.getElementById("supportBox").classList.toggle("show");
+    });
+
+    document.getElementById("copyEmailBtn").addEventListener("click", () => {
+      copyText("bratymhdy910@gmail.com", "ایمیل کپی شد ✓");
+    });
+
+    document.querySelectorAll("[data-close]").forEach(button => {
+      button.addEventListener("click", () => closeModal(button.dataset.close));
+    });
+
+    document.querySelectorAll(".modal-overlay").forEach(overlay => {
+      overlay.addEventListener("click", event => {
+        if (event.target === overlay) {
+          overlay.classList.remove("show");
+        }
+      });
+    });
+
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape") {
+        document.querySelectorAll(".modal-overlay.show").forEach(overlay => {
+          overlay.classList.remove("show");
+        });
+      }
+    });
+
+    /* =========================
+       راه‌اندازی برنامه
+    ========================= */
+
+    initializeData();
+    applyTheme();
+
+    if (localStorage.getItem(STORAGE_KEYS.user)) {
+      showUserView();
+    } else {
+      showLoginView();
+    }
+  </script>
+</body>
+</html>
+نمایشی
