@@ -120,10 +120,9 @@
       border-radius: 20px;
       display: grid;
       place-items: center;
+      color: #fff;
       font-size: 28px;
-      color: white;
       background: linear-gradient(135deg, #172554, #7c3aed);
-      box-shadow: 0 10px 24px rgba(79, 70, 229, 0.3);
     }
 
     .login-card h1 {
@@ -132,22 +131,21 @@
     }
 
     .login-card p {
+      font-size: 14px;
       color: #64748b;
-      font-size: 14px;
-      margin: 0 0 28px;
       line-height: 1.9;
+      margin: 0 0 28px;
     }
-
-    .field {
+    .form-group {
       text-align: right;
-      margin-bottom: 18px;
+      margin-bottom: 16px;
     }
 
-    .field label {
+    .form-group label {
       display: block;
+      font-size: 13px;
       font-weight: 700;
-      font-size: 14px;
-      margin-bottom: 8px;
+      margin-bottom: 7px;
     }
 
     .input-wrap {
@@ -162,6 +160,19 @@
       color: #64748b;
     }
 
+    .input-wrap input {
+      padding-right: 42px;
+    }
+
+    .input-error {
+      display: none;
+      text-align: right;
+      color: #b91c1c;
+      font-size: 13px;
+      margin: -8px 0 12px;
+    }
+
+    /* فرم‌ها و ورودی‌های عمومی */
     input,
     textarea,
     select {
@@ -170,16 +181,10 @@
       background: var(--surface);
       color: var(--text);
       border-radius: 12px;
-      outline: none;
-      font-size: 14px;
       padding: 12px 14px;
-      transition: 0.2s ease;
-    }
-
-    .input-wrap input {
-      padding-right: 42px;
-      direction: ltr;
-      text-align: right;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
     }
 
     input:focus,
@@ -191,46 +196,32 @@
 
     textarea {
       resize: vertical;
-      min-height: 110px;
+      min-height: 115px;
       line-height: 2;
     }
 
-    .login-error {
-      display: none;
-      color: #b91c1c;
-      text-align: right;
-      font-size: 13px;
-      margin-top: -10px;
-      margin-bottom: 14px;
-    }
-
-    .demo-note {
-      background: #eff6ff;
-      color: #1e40af;
-      border-radius: 12px;
-      padding: 11px;
-      font-size: 12px;
-      text-align: right;
-      line-height: 1.9;
-      margin-top: 18px;
-    }
-
-    /* عمومی */
     .btn {
       border: 0;
       border-radius: 12px;
-      padding: 11px 16px;
-      font-weight: 700;
+      padding: 11px 15px;
       font-size: 13px;
+      font-weight: 700;
       display: inline-flex;
-      gap: 8px;
       align-items: center;
       justify-content: center;
-      transition: transform 0.2s, opacity 0.2s, box-shadow 0.2s;
+      gap: 8px;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
     }
 
     .btn:hover {
       transform: translateY(-2px);
+    }
+
+    .btn:disabled {
+      cursor: not-allowed;
+      opacity: 0.55;
+      transform: none;
     }
 
     .btn-primary {
@@ -249,15 +240,15 @@
       background: var(--danger);
     }
 
-    .btn-soft {
-      color: var(--primary);
-      background: color-mix(in srgb, var(--primary) 10%, transparent);
-    }
-
     .btn-outline {
       color: var(--text);
       background: transparent;
       border: 1px solid var(--border);
+    }
+
+    .btn-soft {
+      color: var(--primary);
+      background: rgba(124, 58, 237, 0.1);
     }
 
     .btn-block {
@@ -265,24 +256,23 @@
     }
 
     .icon-btn {
-      border: 1px solid var(--border);
       width: 42px;
       height: 42px;
+      display: grid;
+      place-items: center;
       border-radius: 12px;
+      border: 1px solid var(--border);
       background: var(--surface);
       color: var(--text);
-      display: inline-grid;
-      place-items: center;
-      transition: 0.2s;
+      cursor: pointer;
+      transition: transform 0.2s, background 0.2s;
     }
 
     .icon-btn:hover {
-      color: var(--secondary);
-      border-color: var(--secondary);
       transform: translateY(-2px);
     }
 
-    /* پنل کاربر */
+    /* نوار بالایی کاربر */
     .topbar {
       position: sticky;
       top: 0;
@@ -292,40 +282,44 @@
       display: flex;
       align-items: center;
       gap: 16px;
-      background: color-mix(in srgb, var(--surface) 92%, transparent);
-      border-bottom: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.92);
       backdrop-filter: blur(13px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    body.dark .topbar {
+      background: rgba(17, 27, 48, 0.92);
     }
 
     .logo {
-      white-space: nowrap;
       display: flex;
       align-items: center;
       gap: 9px;
-      font-size: 19px;
       font-weight: 800;
+      font-size: 19px;
       color: var(--primary);
+      white-space: nowrap;
     }
 
     .logo i {
       width: 37px;
       height: 37px;
-      color: white;
-      border-radius: 11px;
       display: grid;
       place-items: center;
+      border-radius: 11px;
+      color: #fff;
       font-size: 16px;
       background: linear-gradient(135deg, #1e3a8a, #7c3aed);
     }
 
-    .top-search {
+    .search-box {
+      position: relative;
       flex: 1;
       max-width: 580px;
-      position: relative;
       margin-right: auto;
     }
 
-    .top-search i {
+    .search-box i {
       position: absolute;
       right: 15px;
       top: 50%;
@@ -333,25 +327,20 @@
       color: var(--muted);
     }
 
-    .top-search input {
+    .search-box input {
       padding-right: 42px;
       background: var(--surface-2);
     }
 
-    .top-actions {
+    .topbar-actions {
       display: flex;
-      align-items: center;
       gap: 8px;
+      align-items: center;
     }
-
-    .top-actions .btn {
-      white-space: nowrap;
-    }
-
-    .main-layout {
+    .layout {
       width: min(100%, 1380px);
-      padding: 28px 20px 55px;
       margin: auto;
+      padding: 28px 20px 55px;
       display: grid;
       grid-template-columns: 230px 1fr;
       gap: 25px;
@@ -364,17 +353,16 @@
       background: var(--surface);
       border: 1px solid var(--border);
       box-shadow: var(--shadow);
-      padding: 14px;
       border-radius: var(--radius);
+      padding: 14px;
     }
 
     .sidebar-title {
       display: flex;
       justify-content: space-between;
-      align-items: center;
       color: var(--muted);
-      font-size: 13px;
       font-weight: 700;
+      font-size: 13px;
       padding: 4px 8px 12px;
     }
 
@@ -384,56 +372,57 @@
     }
 
     .category-item {
+      font-family: inherit;
       width: 100%;
-      padding: 11px 10px;
       border: 0;
-      border-radius: 10px;
       background: transparent;
       color: var(--text);
+      border-radius: 10px;
+      padding: 11px 10px;
+      text-align: right;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      font-family: inherit;
       font-size: 13px;
-      text-align: right;
     }
 
     .category-item:hover,
     .category-item.active {
-      background: color-mix(in srgb, var(--secondary) 11%, transparent);
+      background: rgba(124, 58, 237, 0.11);
       color: var(--secondary);
       font-weight: 700;
     }
 
-    .category-count {
+    .category-item.favorites i {
+      color: #e11d48;
+    }
+
+    .count {
       font-size: 11px;
       background: var(--surface-2);
       padding: 2px 8px;
       border-radius: 999px;
     }
 
-    .content-area {
-      min-width: 0;
-    }
-
-    .page-intro {
+    .intro {
       margin-bottom: 20px;
     }
 
-    .page-intro h2 {
-      margin: 0 0 5px;
+    .intro h2 {
       font-size: 24px;
+      margin: 0 0 5px;
     }
 
-    .page-intro p {
-      margin: 0;
-      color: var(--muted);
+    .intro p {
       font-size: 13px;
+      color: var(--muted);
+      margin: 0;
     }
 
-    .filter-bar {
+    .filters {
       background: var(--surface);
       border: 1px solid var(--border);
+      box-shadow: 0 5px 20px rgba(15, 23, 42, 0.05);
       border-radius: var(--radius);
       padding: 14px;
       margin-bottom: 20px;
@@ -441,87 +430,118 @@
       gap: 12px;
       align-items: center;
       flex-wrap: wrap;
-      box-shadow: 0 5px 20px rgba(15, 23, 42, 0.03);
     }
 
-    .filter-bar select {
+    .filters select {
       width: auto;
-      min-width: 160px;
+      min-width: 150px;
       padding: 10px;
     }
 
     .filter-label {
-      color: var(--muted);
       font-size: 13px;
       font-weight: 700;
+      color: var(--muted);
     }
 
-    .tag-filter-wrap {
+    .tag-filters {
       flex: 1;
       display: flex;
-      flex-wrap: wrap;
       gap: 7px;
+      flex-wrap: wrap;
     }
 
-    .filter-tag {
+    .tag-filter {
       border: 1px solid var(--border);
-      color: var(--muted);
       background: var(--surface);
-      border-radius: 999px;
-      padding: 6px 11px;
+      color: var(--muted);
       font-family: inherit;
       font-size: 12px;
+      padding: 6px 11px;
+      border-radius: 999px;
     }
 
-    .filter-tag.active {
-      border-color: var(--secondary);
+    .tag-filter.active {
       color: #fff;
       background: var(--secondary);
+      border-color: var(--secondary);
     }
 
-    .prompt-grid {
+    .grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 17px;
     }
 
     .prompt-card {
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      padding: 0;
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 18px;
-      display: flex;
-      flex-direction: column;
-      transition: transform 0.23s, box-shadow 0.23s, border-color 0.23s;
-      overflow: hidden;
-      position: relative;
+      transition: 0.23s;
     }
 
     .prompt-card:hover {
       transform: translateY(-5px);
       box-shadow: var(--shadow);
-      border-color: color-mix(in srgb, var(--secondary) 35%, var(--border));
+      border-color: rgba(124, 58, 237, 0.35);
     }
 
-    .prompt-card-top {
+    .card-image {
+      width: 100%;
+      height: 170px;
+      object-fit: cover;
+      display: block;
+      cursor: zoom-in;
+      background: var(--surface-2);
+    }
+
+    .no-image {
+      height: 120px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      color: var(--muted);
+      background: radial-gradient(circle at 20% 20%, rgba(124, 58, 237, 0.15), transparent 28%), var(--surface-2);
+      font-size: 12px;
+    }
+
+    .no-image i {
+      font-size: 25px;
+      color: var(--secondary);
+      display: block;
+      margin-bottom: 7px;
+    }
+
+    .card-body {
+      padding: 16px 17px 17px;
       display: flex;
-      gap: 10px;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .card-top {
+      display: flex;
       justify-content: space-between;
+      gap: 10px;
       align-items: flex-start;
     }
 
     .prompt-card h3 {
-      margin: 0;
       font-size: 16px;
       line-height: 1.8;
+      margin: 0;
     }
 
     .favorite-btn {
       flex: none;
       width: 34px;
       height: 34px;
-      border-radius: 10px;
       border: 0;
+      border-radius: 10px;
       background: var(--surface-2);
       color: var(--muted);
     }
@@ -531,55 +551,53 @@
       background: #fff1f2;
     }
 
-    .prompt-desc {
-      color: var(--muted);
+    .desc {
       font-size: 12.5px;
       line-height: 1.9;
+      color: var(--muted);
       min-height: 47px;
       margin: 9px 0;
     }
 
     .meta-row {
       display: flex;
-      flex-wrap: wrap;
-      align-items: center;
       gap: 6px;
+      flex-wrap: wrap;
       margin-bottom: 10px;
     }
 
-    .category-badge,
-    .tag-badge {
+    .badge {
       font-size: 11px;
       padding: 4px 9px;
       border-radius: 999px;
       white-space: nowrap;
     }
 
-    .category-badge {
-      color: #1d4ed8;
+    .badge-category {
       background: #eff6ff;
+      color: #1d4ed8;
     }
 
-    body.dark .category-badge {
-      color: #93c5fd;
+    body.dark .badge-category {
       background: rgba(59, 130, 246, 0.16);
+      color: #93c5fd;
     }
 
-    .tag-badge {
-      color: var(--muted);
+    .badge-tag {
       background: var(--surface-2);
+      color: var(--muted);
     }
 
     .prompt-preview {
       border-right: 3px solid var(--cyan);
-      color: var(--muted);
-      background: var(--surface-2);
-      border-radius: 8px;
       padding: 9px 10px;
+      border-radius: 8px;
+      background: var(--surface-2);
+      color: var(--muted);
       font-size: 11.5px;
       line-height: 1.9;
-      margin: 4px 0 13px;
       min-height: 66px;
+      margin: 4px 0 13px;
     }
 
     .card-footer {
@@ -587,19 +605,19 @@
       padding-top: 11px;
       border-top: 1px solid var(--border);
       display: flex;
-      gap: 9px;
       align-items: center;
       justify-content: space-between;
+      gap: 8px;
     }
 
-    .date-text {
-      color: var(--muted);
+    .date {
       font-size: 10.5px;
+      color: var(--muted);
     }
 
     .card-footer .btn {
-      padding: 8px 11px;
       font-size: 11px;
+      padding: 8px 11px;
     }
 
     .empty-state {
@@ -611,25 +629,25 @@
     }
 
     .empty-state i {
-      display: block;
       font-size: 45px;
       color: var(--secondary);
+      display: block;
       margin-bottom: 13px;
     }
 
     .empty-state h3 {
-      margin: 0 0 8px;
       font-size: 18px;
+      margin: 0 0 8px;
     }
 
     .empty-state p {
-      color: var(--muted);
       margin: 0;
+      color: var(--muted);
       font-size: 13px;
     }
 
-    /* مودال */
-    .modal-overlay {
+    /* مودال‌ها */
+    .overlay {
       position: fixed;
       inset: 0;
       z-index: 100;
@@ -641,104 +659,99 @@
       backdrop-filter: blur(4px);
     }
 
-    .modal-overlay.show {
+    .overlay.show {
       display: flex;
-      animation: fade 0.18s ease;
+      animation: fade 0.18s ease both;
     }
 
     .modal {
       width: min(100%, 780px);
-      max-height: min(90vh, 850px);
+      max-height: 90vh;
       overflow: auto;
       padding: 24px;
       border-radius: 22px;
       color: var(--text);
       background: var(--surface);
-      box-shadow: 0 22px 70px rgba(0, 0, 0, 0.28);
-      animation: rise 0.23s ease;
+      box-shadow: 0 22px 70px rgba(0, 0, 0, 0.3);
+      animation: rise 0.23s ease both;
     }
 
     .modal.small {
       width: min(100%, 430px);
     }
 
-    .modal-header {
+    .modal-head {
       display: flex;
-      gap: 14px;
       align-items: flex-start;
       justify-content: space-between;
+      gap: 14px;
       margin-bottom: 18px;
     }
 
-    .modal-header h2 {
+    .modal-head h2 {
       margin: 0;
       font-size: 21px;
       line-height: 1.7;
     }
 
-    .modal-close {
-      border: 0;
-      color: var(--muted);
-      background: var(--surface-2);
+    .close-btn {
       width: 37px;
       height: 37px;
-      border-radius: 10px;
-      font-size: 17px;
       flex: none;
+      border: 0;
+      border-radius: 10px;
+      color: var(--muted);
+      background: var(--surface-2);
+      font-size: 17px;
     }
 
-    .modal-section-title {
+    .section-title {
       font-size: 14px;
       font-weight: 800;
       margin: 21px 0 9px;
     }
 
-    .full-prompt {
-      direction: rtl;
+    .fulltext {
       white-space: pre-wrap;
-      background: var(--surface-2);
       border: 1px solid var(--border);
       border-right: 4px solid var(--secondary);
       border-radius: 12px;
+      background: var(--surface-2);
       padding: 16px;
       line-height: 2.15;
       font-size: 13px;
     }
 
-    .sample-image,
-    .image-placeholder {
-      width: 100%;
-      min-height: 220px;
-      max-height: 390px;
-      object-fit: cover;
-      border-radius: 14px;
-      border: 1px solid var(--border);
-    }
-
     .sample-image {
+      width: 100%;
+      max-height: 390px;
+      min-height: 220px;
+      object-fit: cover;
+      border: 1px solid var(--border);
+      border-radius: 14px;
       cursor: zoom-in;
     }
 
     .image-placeholder {
+      min-height: 220px;
       display: grid;
       place-items: center;
       text-align: center;
       color: var(--muted);
-      background:
-        radial-gradient(circle at 20% 20%, rgba(124, 58, 237, 0.16), transparent 26%),
-        var(--surface-2);
-      font-size: 13px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 14px;
       line-height: 2;
     }
 
     .image-placeholder i {
-      display: block;
-      color: var(--secondary);
       font-size: 35px;
+      color: var(--secondary);
+      display: block;
       margin-bottom: 9px;
     }
 
-    .image-modal-content {
+    .large-image {
       width: min(100%, 1000px);
       max-height: 90vh;
       object-fit: contain;
@@ -748,12 +761,11 @@
     /* مدیریت */
     .admin-view {
       min-height: 100vh;
-      background: var(--bg);
     }
 
-    .admin-header {
-      padding: 13px max(18px, calc((100% - 1380px) / 2));
+    .admin-top {
       min-height: 72px;
+      padding: 13px max(18px, calc((100% - 1380px) / 2));
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -772,32 +784,32 @@
     }
 
     .admin-nav {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      padding: 12px;
-      border-radius: var(--radius);
-      height: max-content;
       position: sticky;
       top: 93px;
+      height: max-content;
+      padding: 12px;
+      border-radius: var(--radius);
+      background: var(--surface);
+      border: 1px solid var(--border);
     }
 
     .admin-tab {
       width: 100%;
-      padding: 12px;
-      display: flex;
-      gap: 10px;
-      align-items: center;
-      background: transparent;
-      border: 0;
-      color: var(--text);
-      border-radius: 10px;
-      font-family: inherit;
       text-align: right;
+      border: 0;
+      background: transparent;
+      color: var(--text);
+      font-family: inherit;
+      padding: 12px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
-    .admin-tab.active,
-    .admin-tab:hover {
-      background: color-mix(in srgb, var(--secondary) 12%, transparent);
+    .admin-tab:hover,
+    .admin-tab.active {
+      background: rgba(124, 58, 237, 0.12);
       color: var(--secondary);
       font-weight: 700;
     }
@@ -812,11 +824,11 @@
 
     .section-head {
       display: flex;
-      gap: 13px;
-      align-items: center;
       justify-content: space-between;
-      margin-bottom: 18px;
+      align-items: center;
+      gap: 13px;
       flex-wrap: wrap;
+      margin-bottom: 18px;
     }
 
     .section-head h2 {
@@ -824,46 +836,45 @@
       font-size: 22px;
     }
 
-    .stat-grid {
+    .stats {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 14px;
     }
 
-    .stat-card {
+    .stat {
       padding: 19px;
-      background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius);
+      background: var(--surface);
     }
 
-    .stat-card i {
+    .stat i {
       width: 42px;
       height: 42px;
       display: grid;
       place-items: center;
-      background: color-mix(in srgb, var(--secondary) 13%, transparent);
-      color: var(--secondary);
       border-radius: 12px;
+      background: rgba(124, 58, 237, 0.12);
+      color: var(--secondary);
       margin-bottom: 12px;
     }
 
-    .stat-card strong {
+    .stat strong {
       display: block;
       font-size: 27px;
-      margin-bottom: 2px;
     }
 
-    .stat-card span {
-      color: var(--muted);
+    .stat span {
       font-size: 12px;
+      color: var(--muted);
     }
 
-    .panel-card {
-      background: var(--surface);
+    .panel {
+      padding: 17px;
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 17px;
+      background: var(--surface);
     }
 
     .admin-search {
@@ -890,9 +901,8 @@
     }
 
     th {
-      color: var(--muted);
-      font-weight: 700;
       background: var(--surface-2);
+      color: var(--muted);
     }
 
     .table-actions {
@@ -906,31 +916,31 @@
       border: 0;
       border-radius: 8px;
       color: var(--primary);
-      background: color-mix(in srgb, var(--primary) 10%, transparent);
+      background: rgba(23, 37, 84, 0.08);
     }
 
-    .mini-btn.delete {
+    .mini-btn.del {
       color: var(--danger);
       background: #fff1f2;
     }
 
-    .entity-list {
+    .entities {
       display: grid;
       gap: 9px;
     }
 
-    .entity-item {
-      border: 1px solid var(--border);
-      background: var(--surface);
-      border-radius: 12px;
+    .entity {
       padding: 11px 13px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--surface);
       display: flex;
-      gap: 10px;
       align-items: center;
       justify-content: space-between;
+      gap: 10px;
     }
 
-    .entity-item span {
+    .entity span {
       font-size: 13px;
       font-weight: 600;
     }
@@ -941,15 +951,15 @@
       gap: 14px;
     }
 
-    .form-grid .full {
+    .full {
       grid-column: 1 / -1;
     }
 
-    .field.compact {
+    .compact {
       margin: 0;
     }
 
-    .tag-select-list {
+    .checks {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
@@ -960,22 +970,21 @@
       background: var(--surface);
     }
 
-    .check-tag {
+    .check {
       font-size: 12px;
       border: 1px solid var(--border);
       border-radius: 999px;
       padding: 5px 9px;
       cursor: pointer;
-      user-select: none;
     }
 
-    .check-tag input {
+    .check input {
       width: auto;
       margin-left: 4px;
       accent-color: var(--secondary);
     }
 
-    /* پشتیبانی و Toast */
+    /* پشتیبانی و اعلان */
     .support-fab {
       position: fixed;
       z-index: 70;
@@ -989,57 +998,57 @@
       font-size: 21px;
       background: linear-gradient(135deg, #0ea5e9, #7c3aed);
       box-shadow: 0 10px 26px rgba(79, 70, 229, 0.43);
-      transition: transform 0.25s;
+      transition: 0.25s;
     }
 
     .support-fab:hover {
       transform: translateY(-5px) scale(1.05);
     }
 
-    .support-box {
+    .support-panel {
       position: fixed;
       z-index: 71;
       left: 20px;
       bottom: 92px;
       width: min(calc(100vw - 40px), 335px);
       padding: 18px;
-      background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 17px;
+      background: var(--surface);
       box-shadow: var(--shadow);
       display: none;
-      animation: rise 0.2s ease;
+      animation: rise 0.2s ease both;
     }
 
-    .support-box.show {
+    .support-panel.show {
       display: block;
     }
 
-    .support-box h3 {
+    .support-panel h3 {
       font-size: 15px;
       margin: 0 0 8px;
     }
 
-    .support-box p {
-      color: var(--muted);
+    .support-panel p {
       font-size: 12px;
       line-height: 1.9;
+      color: var(--muted);
       margin: 0 0 13px;
     }
 
     .support-row {
       width: 100%;
       border: 0;
+      text-decoration: none;
       text-align: right;
       display: flex;
-      gap: 9px;
       align-items: center;
+      gap: 9px;
       padding: 10px;
       margin-top: 7px;
       border-radius: 10px;
       background: var(--surface-2);
       color: var(--text);
-      font-family: inherit;
       font-size: 12px;
     }
 
@@ -1048,7 +1057,7 @@
       width: 18px;
     }
 
-    .toast-container {
+    .toasts {
       position: fixed;
       z-index: 200;
       top: 20px;
@@ -1067,57 +1076,98 @@
       gap: 9px;
       font-size: 13px;
       line-height: 1.7;
-      box-shadow: 0 12px 26px rgba(0, 0, 0, 0.2);
-      animation: slideIn 0.3s ease;
+      box-shadow: 0 12px 26px rgba(0, 0, 0, 0.18);
+      animation: slide 0.3s ease both;
     }
 
-    .toast.success { background: #047857; }
-    .toast.error { background: #b91c1c; }
-    .toast.info { background: #1e3a8a; }
+    .toast.success {
+      background: #047857;
+    }
+
+    .toast.error {
+      background: #b91c1c;
+    }
+
+    .toast.info {
+      background: #1e3a8a;
+    }
 
     @keyframes rise {
-      from { opacity: 0; transform: translateY(15px) scale(0.98); }
-      to { opacity: 1; transform: translateY(0) scale(1); }
+      from {
+        opacity: 0;
+        transform: translateY(15px) scale(0.98);
+      }
+      to {
+        opacity: 1;
+        transform: none;
+      }
     }
 
     @keyframes fade {
-      from { opacity: 0; }
-      to { opacity: 1; }
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
     }
 
-    @keyframes slideIn {
-      from { opacity: 0; transform: translateX(-25px); }
-      to { opacity: 1; transform: translateX(0); }
+    @keyframes slide {
+      from {
+        opacity: 0;
+        transform: translateX(-25px);
+      }
+      to {
+        opacity: 1;
+        transform: none;
+      }
     }
 
     @media (max-width: 1050px) {
-      .prompt-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .stat-grid { grid-template-columns: repeat(2, 1fr); }
+      .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
     }
 
     @media (max-width: 780px) {
       .topbar {
+        padding: 10px 14px;
+        gap: 9px;
         flex-wrap: wrap;
-        gap: 10px;
       }
 
       .logo {
         font-size: 16px;
       }
 
-      .top-search {
+      .search-box {
         order: 3;
         flex-basis: 100%;
+        max-width: none;
       }
 
-      .top-actions .btn span {
+      .topbar-actions {
+        gap: 5px;
+        margin-right: auto;
+      }
+
+      .topbar-actions .btn span {
         display: none;
       }
 
-      .main-layout,
+      .topbar-actions .btn {
+        padding: 10px;
+      }
+
+      .layout,
       .admin-shell {
         grid-template-columns: 1fr;
-        padding: 18px 14px 45px;
+        padding: 17px 13px 45px;
+        gap: 16px;
       }
 
       .sidebar,
@@ -1125,23 +1175,58 @@
         position: static;
       }
 
+      .sidebar {
+        padding: 10px;
+      }
+
+      .sidebar-title {
+        padding: 4px 6px 9px;
+      }
+
       .category-list {
         display: flex;
         overflow-x: auto;
-        padding-bottom: 4px;
+        padding: 2px 0 6px;
+        scrollbar-width: thin;
       }
 
       .category-item {
         min-width: max-content;
+        padding: 10px 12px;
       }
 
-      .prompt-grid {
+      .grid {
         grid-template-columns: 1fr;
+        gap: 14px;
       }
 
-      .filter-bar select {
+      .card-image {
+        height: 190px;
+      }
+
+      .filters {
+        padding: 12px;
+        gap: 9px;
+      }
+
+      .filters select {
         flex: 1;
         min-width: 130px;
+      }
+
+      .tag-filters {
+        flex-basis: 100%;
+        order: 3;
+        max-height: 80px;
+        overflow: auto;
+      }
+
+      .intro h2 {
+        font-size: 21px;
+      }
+
+      .admin-shell {
+        padding-top: 18px;
       }
 
       .admin-nav {
@@ -1159,52 +1244,80 @@
         grid-template-columns: 1fr;
       }
 
-      .form-grid .full {
+      .full {
         grid-column: auto;
       }
 
-      .login-card {
-        padding: 28px 21px;
+      .admin-top {
+        padding: 11px 14px;
       }
 
-      .admin-header {
-        padding: 12px 14px;
-      }
-    }
-
-    @media (max-width: 460px) {
-      .top-actions {
-        gap: 5px;
-      }
-
-      .top-actions .btn {
-        padding: 10px;
-      }
-
-      .top-actions .btn i {
-        margin: 0;
-      }
-
-      .stat-grid {
-        grid-template-columns: 1fr 1fr;
+      .admin-top .logo {
+        font-size: 15px;
       }
 
       .modal {
         padding: 18px;
+        border-radius: 18px;
+      }
+
+      .modal-head h2 {
+        font-size: 18px;
+      }
+
+      .sample-image,
+      .image-placeholder {
+        min-height: 180px;
+      }
+
+      .support-fab {
+        left: 14px;
+        bottom: 14px;
+        width: 54px;
+        height: 54px;
+      }
+
+      .support-panel {
+        left: 14px;
+        bottom: 80px;
+        width: calc(100vw - 28px);
+      }
+    }
+
+    @media (max-width: 420px) {
+      .topbar-actions .btn-outline {
+        display: none;
+      }
+
+      .stats {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .stat {
+        padding: 15px;
+      }
+
+      .stat strong {
+        font-size: 23px;
+      }
+
+      .card-footer {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .card-footer .btn {
+        width: 100%;
+      }
+
+      .card-image {
+        height: 170px;
       }
     }
   </style>
 </head>
-
 <body>
-  <!--
-    نسخه نمایشی:
-    ورود کاربر، رمز ادمین و تمام داده‌ها در localStorage مرورگر ذخیره می‌شوند.
-    برای نسخه واقعی باید از بک‌اند امن، OTP، هش رمز عبور، کنترل دسترسی
-    و دیتابیس استفاده شود؛ رمز فرانت‌اند به هیچ وجه امنیت واقعی ندارد.
-  -->
-
-  <!-- صفحه ورود -->
+  <!-- توجه: برای امنیت واقعی، ورود، رمز مدیر و داده‌ها باید با بک‌اند امن، OTP و دیتابیس پیاده‌سازی شوند. -->
   <section id="loginView" class="app-view">
     <div class="login-card">
       <div class="brand-mark"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
@@ -1212,93 +1325,73 @@
       <p>کتابخانه شخصی و حرفه‌ای شما برای ذخیره، مدیریت و استفاده از پرامپت‌ها.</p>
 
       <form id="loginForm" novalidate>
-        <div class="field">
-          <label for="mobileInput">شماره موبایل</label>
+        <div class="form-group">
+          <label for="mobile">شماره موبایل</label>
           <div class="input-wrap">
             <i class="fa-solid fa-mobile-screen-button"></i>
-            <input
-              id="mobileInput"
-              type="tel"
-              inputmode="numeric"
-              autocomplete="tel"
-              maxlength="11"
-              placeholder="مثال: 09121234567"
-              aria-label="شماره موبایل ایران"
-            />
+            <input id="mobile" type="tel" inputmode="numeric" maxlength="11" placeholder="مثال: 09121234567" />
           </div>
         </div>
-
-        <div id="loginError" class="login-error"></div>
-
+        <div id="loginErr" class="input-error"></div>
         <button class="btn btn-primary btn-block" type="submit">
-          <i class="fa-solid fa-right-to-bracket"></i>
-          ورود به پرامپت‌خانه
+          <i class="fa-solid fa-right-to-bracket"></i> ورود به پرامپت‌خانه
         </button>
       </form>
-
-      <div class="demo-note">
-      </div>
     </div>
   </section>
 
-  <!-- پنل کاربر -->
   <section id="userView" class="app-view hidden">
     <header class="topbar">
-      <a class="logo" href="#" aria-label="صفحه اصلی پرامپت‌خانه">
+      <a class="logo" href="#">
         <i class="fa-solid fa-wand-magic-sparkles"></i>
         <span>پرامپت‌خانه</span>
       </a>
 
-      <div class="top-search">
+      <div class="search-box">
         <i class="fa-solid fa-magnifying-glass"></i>
-        <input id="globalSearch" type="search" placeholder="جست‌وجو در پرامپت‌ها..." aria-label="جست‌وجو در پرامپت‌ها" />
+        <input id="search" type="search" placeholder="جست‌وجو در پرامپت‌ها..." />
       </div>
 
-      <div class="top-actions">
-        <button id="themeBtn" class="icon-btn" title="تغییر حالت روشن و تیره" aria-label="تغییر حالت روشن و تیره">
+      <div class="topbar-actions">
+        <button id="themeBtn" class="icon-btn" title="تغییر حالت روشن و تیره" aria-label="تغییر تم">
           <i class="fa-solid fa-moon"></i>
         </button>
-
-        <button id="adminEntryBtn" class="btn btn-soft" title="ورود به پنل مدیریت">
-          <i class="fa-solid fa-shield-halved"></i>
-          <span>پنل مدیریت</span>
+        <button id="adminBtn" class="btn btn-soft" title="پنل مدیریت">
+          <i class="fa-solid fa-shield-halved"></i><span>پنل مدیریت</span>
         </button>
-
         <button id="logoutBtn" class="btn btn-outline" title="خروج از حساب">
-          <i class="fa-solid fa-arrow-right-from-bracket"></i>
-          <span>خروج</span>
+          <i class="fa-solid fa-arrow-right-from-bracket"></i><span>خروج</span>
         </button>
       </div>
     </header>
 
-    <main class="main-layout">
+    <main class="layout">
       <aside class="sidebar">
         <div class="sidebar-title">
           <span>دسته‌بندی‌ها</span>
           <i class="fa-solid fa-layer-group"></i>
         </div>
-        <div id="categoryList" class="category-list"></div>
+        <div id="cats" class="category-list"></div>
       </aside>
 
-      <section class="content-area">
-        <div class="page-intro">
+      <section>
+        <div class="intro">
           <h2 id="pageTitle">همه پرامپت‌ها</h2>
-          <p id="resultCount">در حال نمایش پرامپت‌های موجود</p>
+          <p id="result">در حال نمایش پرامپت‌ها</p>
         </div>
 
-        <div class="filter-bar">
-          <span class="filter-label"><i class="fa-solid fa-filter"></i> فیلتر برچسب:</span>
-          <div id="tagFilters" class="tag-filter-wrap"></div>
-
-          <select id="sortSelect" aria-label="مرتب‌سازی پرامپت‌ها">
-            <option value="newest">جدیدترین</option>
-            <option value="oldest">قدیمی‌ترین</option>
-            <option value="popular">محبوب‌ترین</option>
+        <div class="filters">
+          <span class="filter-label"><i class="fa-solid fa-filter"></i> برچسب:</span>
+          <div id="tagFilters" class="tag-filters"></div>
+          <select id="sort" aria-label="مرتب‌سازی">
+            <option value="new">جدیدترین</option>
+            <option value="old">قدیمی‌ترین</option>
+            <option value="pop">محبوب‌ترین</option>
           </select>
         </div>
 
-        <div id="promptGrid" class="prompt-grid"></div>
-        <div id="emptyState" class="empty-state hidden">
+        <div id="grid" class="grid"></div>
+        <div id="empty" class="empty-state hidden">
           <i class="fa-regular fa-folder-open"></i>
           <h3>پرامپتی پیدا نشد</h3>
           <p>عبارت جست‌وجو یا فیلترها را تغییر دهید.</p>
@@ -1307,87 +1400,53 @@
     </main>
   </section>
 
-  <!-- پنل مدیریت -->
   <section id="adminView" class="admin-view hidden">
-    <header class="admin-header">
+    <header class="admin-top">
       <div class="logo">
         <i class="fa-solid fa-shield-halved"></i>
         <span>مدیریت پرامپت‌خانه</span>
       </div>
-
-      <div style="display:flex; gap:8px;">
-        <button id="backToUserBtn" class="btn btn-outline" title="بازگشت به پنل کاربر">
-          <i class="fa-solid fa-arrow-right"></i> بازگشت
-        </button>
-        <button id="adminLogoutBtn" class="btn btn-danger" title="خروج از مدیریت">
-          <i class="fa-solid fa-lock"></i> خروج مدیریت
-        </button>
+      <div style="display:flex;gap:8px">
+        <button id="backBtn" class="btn btn-outline"><i class="fa-solid fa-arrow-right"></i> بازگشت</button>
+        <button id="adminOutBtn" class="btn btn-danger"><i class="fa-solid fa-lock"></i> خروج</button>
       </div>
     </header>
 
     <main class="admin-shell">
       <nav class="admin-nav">
-        <button class="admin-tab active" data-tab="dashboard">
-          <i class="fa-solid fa-chart-pie"></i> داشبورد
-        </button>
-        <button class="admin-tab" data-tab="prompts">
-          <i class="fa-solid fa-file-lines"></i> مدیریت پرامپت‌ها
-        </button>
-        <button class="admin-tab" data-tab="categories">
-          <i class="fa-solid fa-folder-tree"></i> دسته‌بندی‌ها
-        </button>
-        <button class="admin-tab" data-tab="tags">
-          <i class="fa-solid fa-tags"></i> برچسب‌ها
-        </button>
+        <button class="admin-tab active" data-tab="dash"><i class="fa-solid fa-chart-pie"></i> داشبورد</button>
+        <button class="admin-tab" data-tab="prompts"><i class="fa-solid fa-file-lines"></i> پرامپت‌ها</button>
+        <button class="admin-tab" data-tab="categories"><i class="fa-solid fa-folder-tree"></i> دسته‌بندی‌ها</button>
+        <button class="admin-tab" data-tab="tags"><i class="fa-solid fa-tags"></i> برچسب‌ها</button>
       </nav>
 
       <section>
-        <!-- داشبورد -->
-        <div id="dashboardTab" class="admin-section active">
+        <div id="dashTab" class="admin-section active">
           <div class="section-head">
             <div>
               <h2>داشبورد مدیریت</h2>
-              <p style="margin:5px 0 0;color:var(--muted);font-size:13px;">نمای کلی کتابخانه پرامپت‌های شما</p>
+              <p style="margin:5px 0 0;color:var(--muted);font-size:13px">نمای کلی کتابخانه پرامپت‌های شما</p>
             </div>
           </div>
 
-          <div class="stat-grid">
-            <div class="stat-card">
-              <i class="fa-solid fa-file-lines"></i>
-              <strong id="statPrompts">۰</strong>
-              <span>کل پرامپت‌ها</span>
-            </div>
-            <div class="stat-card">
-              <i class="fa-solid fa-folder-open"></i>
-              <strong id="statCategories">۰</strong>
-              <span>دسته‌بندی‌ها</span>
-            </div>
-            <div class="stat-card">
-              <i class="fa-solid fa-tags"></i>
-              <strong id="statTags">۰</strong>
-              <span>برچسب‌ها</span>
-            </div>
-            <div class="stat-card">
-              <i class="fa-solid fa-heart"></i>
-              <strong id="statFavorites">۰</strong>
-              <span>موارد علاقه‌مندی‌شده</span>
-            </div>
+          <div class="stats">
+            <div class="stat"><i class="fa-solid fa-file-lines"></i><strong id="sp">۰</strong><span>کل پرامپت‌ها</span></div>
+            <div class="stat"><i class="fa-solid fa-folder-open"></i><strong id="sc">۰</strong><span>دسته‌بندی‌ها</span></div>
+            <div class="stat"><i class="fa-solid fa-tags"></i><strong id="st">۰</strong><span>برچسب‌ها</span></div>
+            <div class="stat"><i class="fa-solid fa-heart"></i><strong id="sf">۰</strong><span>علاقه‌مندی‌ها</span></div>
           </div>
         </div>
 
-        <!-- مدیریت پرامپت -->
         <div id="promptsTab" class="admin-section">
           <div class="section-head">
             <h2>مدیریت پرامپت‌ها</h2>
-            <div style="display:flex;gap:9px;flex-wrap:wrap;">
-              <input id="adminPromptSearch" class="admin-search" type="search" placeholder="جست‌وجو در فهرست..." />
-              <button id="addPromptBtn" class="btn btn-primary">
-                <i class="fa-solid fa-plus"></i> افزودن پرامپت
-              </button>
+            <div style="display:flex;gap:9px;flex-wrap:wrap">
+              <input id="adminSearch" class="admin-search" type="search" placeholder="جست‌وجو در فهرست..." />
+              <button id="addPrompt" class="btn btn-primary"><i class="fa-solid fa-plus"></i> افزودن پرامپت</button>
             </div>
           </div>
 
-          <div class="panel-card table-wrap">
+          <div class="panel table-wrap">
             <table>
               <thead>
                 <tr>
@@ -1398,149 +1457,119 @@
                   <th>عملیات</th>
                 </tr>
               </thead>
-              <tbody id="adminPromptsBody"></tbody>
+              <tbody id="promptRows"></tbody>
             </table>
           </div>
         </div>
 
-        <!-- مدیریت دسته بندی -->
         <div id="categoriesTab" class="admin-section">
           <div class="section-head">
             <h2>مدیریت دسته‌بندی‌ها</h2>
-            <button id="addCategoryBtn" class="btn btn-primary">
-              <i class="fa-solid fa-plus"></i> افزودن دسته‌بندی
-            </button>
+            <button id="addCat" class="btn btn-primary"><i class="fa-solid fa-plus"></i> افزودن دسته‌بندی</button>
           </div>
-          <div id="adminCategoriesList" class="entity-list"></div>
+          <div id="catEntities" class="entities"></div>
         </div>
 
-        <!-- مدیریت تگ -->
         <div id="tagsTab" class="admin-section">
           <div class="section-head">
             <h2>مدیریت برچسب‌ها</h2>
-            <button id="addTagBtn" class="btn btn-primary">
-              <i class="fa-solid fa-plus"></i> افزودن برچسب
-            </button>
+            <button id="addTag" class="btn btn-primary"><i class="fa-solid fa-plus"></i> افزودن برچسب</button>
           </div>
-          <div id="adminTagsList" class="entity-list"></div>
+          <div id="tagEntities" class="entities"></div>
         </div>
       </section>
     </main>
   </section>
 
-  <!-- مودال جزئیات پرامپت -->
-  <div id="promptModalOverlay" class="modal-overlay" role="dialog" aria-modal="true">
+  <div id="promptModal" class="overlay">
     <div class="modal">
-      <div class="modal-header">
+      <div class="modal-head">
         <div>
-          <h2 id="modalPromptTitle"></h2>
-          <div id="modalPromptMeta" class="meta-row" style="margin-top:8px;"></div>
+          <h2 id="mTitle"></h2>
+          <div id="mMeta" class="meta-row" style="margin-top:8px"></div>
         </div>
-        <button class="modal-close" data-close="promptModalOverlay" title="بستن" aria-label="بستن مودال">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
+        <button class="close-btn" data-close="promptModal"><i class="fa-solid fa-xmark"></i></button>
       </div>
 
-      <div class="modal-section-title">متن کامل پرامپت</div>
-      <div id="modalPromptText" class="full-prompt"></div>
-
-      <button id="copyPromptBtn" class="btn btn-primary btn-block" style="margin-top:14px;">
-        <i class="fa-regular fa-copy"></i>
-        کپی پرامپت
+      <div class="section-title">متن کامل پرامپت</div>
+      <div id="mText" class="fulltext"></div>
+      <button id="copyPrompt" class="btn btn-primary btn-block" style="margin-top:14px">
+        <i class="fa-regular fa-copy"></i> کپی پرامپت
       </button>
 
-      <div class="modal-section-title">نمونه خروجی</div>
-      <div id="modalSampleOutput"></div>
+      <div class="section-title">نمونه خروجی</div>
+      <div id="mSample"></div>
     </div>
   </div>
 
-  <!-- مودال بزرگنمایی تصویر -->
-  <div id="imageModalOverlay" class="modal-overlay" role="dialog" aria-modal="true">
-    <div style="position:relative;max-width:100%;">
-      <button class="modal-close" data-close="imageModalOverlay" title="بستن تصویر" aria-label="بستن تصویر" style="position:absolute;top:10px;left:10px;z-index:2;">
+  <div id="imageModal" class="overlay">
+    <div style="position:relative;max-width:100%">
+      <button class="close-btn" data-close="imageModal" style="position:absolute;top:10px;left:10px;z-index:2">
         <i class="fa-solid fa-xmark"></i>
       </button>
-      <img id="largeImage" class="image-modal-content" src="" alt="نمونه خروجی بزرگ‌شده" />
+      <img id="large" class="large-image" alt="نمونه خروجی بزرگ‌شده" />
     </div>
   </div>
 
-  <!-- مودال رمز مدیریت -->
-  <div id="adminPasswordOverlay" class="modal-overlay" role="dialog" aria-modal="true">
+  <div id="passwordModal" class="overlay">
     <div class="modal small">
-      <div class="modal-header">
+      <div class="modal-head">
         <h2>ورود به پنل مدیریت</h2>
-        <button class="modal-close" data-close="adminPasswordOverlay" title="بستن" aria-label="بستن">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
+        <button class="close-btn" data-close="passwordModal"><i class="fa-solid fa-xmark"></i></button>
       </div>
-
-      <p style="color:var(--muted);font-size:13px;line-height:2;">
-        برای نسخه نمایشی، رمز مدیریت را وارد کنید.
-      </p>
-
-      <div class="field">
-        <label for="adminPasswordInput">رمز مدیریت</label>
-        <input id="adminPasswordInput" type="password" placeholder="رمز نمونه: 12345678" />
+      <p style="color:var(--muted);font-size:13px;line-height:2">رمز مدیریت را وارد کنید.</p>
+      <div class="form-group">
+        <label for="pass">رمز مدیریت</label>
+        <input id="pass" type="password" placeholder="رمز را وارد کنید" />
       </div>
-
-      <button id="adminPasswordSubmit" class="btn btn-primary btn-block">
+      <button id="passSubmit" class="btn btn-primary btn-block">
         <i class="fa-solid fa-unlock-keyhole"></i> ورود به مدیریت
       </button>
     </div>
   </div>
 
-  <!-- مودال افزودن / ویرایش پرامپت -->
-  <div id="promptFormOverlay" class="modal-overlay" role="dialog" aria-modal="true">
+  <div id="promptFormModal" class="overlay">
     <div class="modal">
-      <div class="modal-header">
-        <h2 id="promptFormTitle">افزودن پرامپت جدید</h2>
-        <button class="modal-close" data-close="promptFormOverlay" title="بستن" aria-label="بستن">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
+      <div class="modal-head">
+        <h2 id="formTitle">افزودن پرامپت جدید</h2>
+        <button class="close-btn" data-close="promptFormModal"><i class="fa-solid fa-xmark"></i></button>
       </div>
 
       <form id="promptForm">
-        <input id="editingPromptId" type="hidden" />
-
+        <input id="editId" type="hidden" />
         <div class="form-grid">
-          <div class="field compact">
-            <label for="promptTitleInput">عنوان پرامپت *</label>
-            <input id="promptTitleInput" required placeholder="مثال: تولید تصویر محصول لوکس" />
+          <div class="form-group compact">
+            <label>عنوان پرامپت *</label>
+            <input id="ptitle" required />
           </div>
-
-          <div class="field compact">
-            <label for="promptCategoryInput">دسته‌بندی *</label>
-            <select id="promptCategoryInput" required></select>
+          <div class="form-group compact">
+            <label>دسته‌بندی *</label>
+            <select id="pcat" required></select>
           </div>
-
-          <div class="field compact full">
-            <label for="promptDescInput">توضیح کوتاه *</label>
-            <input id="promptDescInput" required placeholder="توضیحی کوتاه درباره کاربرد این پرامپت..." />
+          <div class="form-group compact full">
+            <label>توضیح کوتاه *</label>
+            <input id="pdesc" required />
           </div>
-
-          <div class="field compact full">
+          <div class="form-group compact full">
             <label>برچسب‌ها</label>
-            <div id="promptTagsCheckboxes" class="tag-select-list"></div>
+            <div id="pchecks" class="checks"></div>
           </div>
-
-          <div class="field compact full">
-            <label for="promptTextInput">متن کامل پرامپت *</label>
-            <textarea id="promptTextInput" required placeholder="متن کامل پرامپت را وارد کنید..."></textarea>
+          <div class="form-group compact full">
+            <label>متن کامل پرامپت *</label>
+            <textarea id="ptext" required></textarea>
           </div>
-
-          <div class="field compact">
-            <label for="promptImageUrlInput">آدرس تصویر نمونه (اختیاری)</label>
-            <input id="promptImageUrlInput" type="url" placeholder="https://images.unsplash.com/..." />
+          <div class="form-group compact">
+            <label>آدرس تصویر نمونه</label>
+            <input id="pimage" type="url" placeholder="https://..." />
           </div>
-
-          <div class="field compact">
-            <label for="promptImageFileInput">یا آپلود تصویر نمونه</label>
-            <input id="promptImageFileInput" type="file" accept="image/*" />
+          <div class="form-group compact">
+            <label>یا آپلود تصویر نمونه</label>
+            <input id="pfile" type="file" accept="image/*" />
           </div>
         </div>
 
-        <div style="display:flex;justify-content:flex-end;gap:9px;margin-top:19px;">
-          <button type="button" class="btn btn-outline" data-close="promptFormOverlay">انصراف</button>
+        <div style="display:flex;justify-content:flex-end;gap:9px;margin-top:19px">
+          <button type="button" class="btn btn-outline" data-close="promptFormModal">انصراف</button>
           <button type="submit" class="btn btn-success">
             <i class="fa-solid fa-floppy-disk"></i> ذخیره اطلاعات
           </button>
@@ -1549,1149 +1578,530 @@
     </div>
   </div>
 
-  <!-- مودال افزودن/ویرایش آیتم -->
-  <div id="entityFormOverlay" class="modal-overlay" role="dialog" aria-modal="true">
+  <div id="entityModal" class="overlay">
     <div class="modal small">
-      <div class="modal-header">
-        <h2 id="entityFormTitle">افزودن مورد جدید</h2>
-        <button class="modal-close" data-close="entityFormOverlay" title="بستن" aria-label="بستن">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
+      <div class="modal-head">
+        <h2 id="entityTitle"></h2>
+        <button class="close-btn" data-close="entityModal"><i class="fa-solid fa-xmark"></i></button>
       </div>
-
       <form id="entityForm">
-        <input id="entityType" type="hidden" />
-        <input id="entityOldValue" type="hidden" />
-
-        <div class="field">
-          <label id="entityNameLabel" for="entityNameInput">نام</label>
-          <input id="entityNameInput" required maxlength="40" placeholder="نام را وارد کنید" />
+        <input id="etype" type="hidden" />
+        <input id="eold" type="hidden" />
+        <div class="form-group">
+          <label id="elabel" for="ename">نام</label>
+          <input id="ename" required maxlength="40" />
         </div>
-
-        <button class="btn btn-primary btn-block" type="submit">
-          <i class="fa-solid fa-check"></i> ذخیره
-        </button>
+        <button class="btn btn-primary btn-block"><i class="fa-solid fa-check"></i> ذخیره</button>
       </form>
     </div>
   </div>
 
-  <!-- مودال تایید حذف -->
-  <div id="confirmOverlay" class="modal-overlay" role="dialog" aria-modal="true">
+  <div id="confirmModal" class="overlay">
     <div class="modal small">
-      <div class="modal-header">
+      <div class="modal-head">
         <h2 id="confirmTitle">تأیید حذف</h2>
-        <button class="modal-close" data-close="confirmOverlay" title="بستن" aria-label="بستن">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
+        <button class="close-btn" data-close="confirmModal"><i class="fa-solid fa-xmark"></i></button>
       </div>
-
-      <p id="confirmText" style="color:var(--muted);font-size:13px;line-height:2;"></p>
-
-      <div style="display:flex;gap:9px;margin-top:18px;">
-        <button class="btn btn-outline" style="flex:1;" data-close="confirmOverlay">انصراف</button>
-        <button id="confirmActionBtn" class="btn btn-danger" style="flex:1;">
-          <i class="fa-solid fa-trash"></i> حذف
-        </button>
+      <p id="confirmText" style="color:var(--muted);font-size:13px;line-height:2"></p>
+      <div style="display:flex;gap:9px;margin-top:18px">
+        <button class="btn btn-outline" style="flex:1" data-close="confirmModal">انصراف</button>
+        <button id="confirmBtn" class="btn btn-danger" style="flex:1"><i class="fa-solid fa-trash"></i> حذف</button>
       </div>
     </div>
   </div>
 
-  <!-- پشتیبانی شناور -->
-  <button id="supportFab" class="support-fab" title="پشتیبانی پرامپت‌خانه" aria-label="باز کردن پشتیبانی">
+  <button id="supportBtn" class="support-fab" title="پشتیبانی پرامپت‌خانه">
     <i class="fa-solid fa-headset"></i>
   </button>
 
-  <div id="supportBox" class="support-box">
-    <h3><i class="fa-solid fa-headset" style="color:var(--secondary);"></i> پشتیبانی پرامپت‌خانه</h3>
+  <div id="support" class="support-panel">
+    <h3><i class="fa-solid fa-headset" style="color:var(--secondary)"></i> پشتیبانی پرامپت‌خانه</h3>
     <p>برای ارتباط با پشتیبانی از راه‌های زیر استفاده کنید:</p>
-
-    <button id="copyEmailBtn" class="support-row" title="کپی ایمیل">
-      <i class="fa-solid fa-envelope"></i>
-      <span>bratymhdy910@gmail.com</span>
-      <i class="fa-regular fa-copy" style="margin-right:auto;"></i>
+    <button id="email" class="support-row">
+      <i class="fa-solid fa-envelope"></i><span>bratymhdy910@gmail.com</span><i class="fa-regular fa-copy" style="margin-right:auto"></i>
     </button>
-
-    <a class="support-row" href="https://eitaa.com/ermia313" target="_blank" rel="noopener" title="باز کردن ایتا">
-      <i class="fa-solid fa-paper-plane"></i>
-      <span>@ermia313 در ایتا</span>
-      <i class="fa-solid fa-arrow-up-left" style="margin-right:auto;"></i>
+    <a class="support-row" href="https://eitaa.com/ermia313" target="_blank" rel="noopener">
+      <i class="fa-solid fa-paper-plane"></i><span>@ermia313 در ایتا</span><i class="fa-solid fa-arrow-up-left" style="margin-right:auto"></i>
     </a>
   </div>
 
-  <div id="toastContainer" class="toast-container" aria-live="polite"></div>
+  <div id="toasts" class="toasts" aria-live="polite"></div>
 
   <script>
-    "use strict";
-
-    /* =========================
-       ابزارها و داده‌های اولیه
-    ========================= */
-
-    const STORAGE_KEYS = {
-      initialized: "promptkhane_initialized",
-      prompts: "promptkhane_prompts",
-      categories: "promptkhane_categories",
-      tags: "promptkhane_tags",
-      favorites: "promptkhane_favorites",
-      user: "promptkhane_user",
-      admin: "promptkhane_admin",
-      theme: "promptkhane_theme"
-    };
-
-    const defaultCategories = [
-      "تولید تصویر",
-      "تولید محتوا",
-      "شبکه‌های اجتماعی",
-      "آموزشی",
-      "کسب‌وکار",
-      "برنامه‌نویسی",
-      "ترجمه",
-      "ایده‌پردازی"
+    'use strict';
+    const K = { init:'pk_init_v2', prompts:'pk_prompts', cats:'pk_cats', tags:'pk_tags', favs:'pk_favs', user:'pk_user', admin:'pk_admin', theme:'pk_theme' };
+    const baseCats = ['تولید تصویر','تولید محتوا','شبکه‌های اجتماعی','آموزشی','کسب‌وکار','برنامه‌نویسی','ترجمه','ایده‌پردازی'];
+    const baseTags = ['تصویر','محصول','تبلیغات','اینستاگرام','محتوا','بازاریابی','برنامه‌نویسی','آموزش','ساده‌سازی','فروش'];
+    const basePrompts = [
+      {id:'p1',title:'تولید تصویر محصول لوکس',description:'ساخت تصویر تبلیغاتی حرفه‌ای و لوکس برای معرفی محصول.',category:'تولید تصویر',tags:['محصول','تبلیغات','تصویر'],text:'یک تصویر تبلیغاتی لوکس و فوتورئال برای محصول «[نام محصول]» تولید کن. محصول را روی یک سطح مینیمال و براق قرار بده. از نورپردازی استودیویی سینمایی، بازتاب‌های ظریف، پس‌زمینه تیره با جزئیات طلایی و ترکیب‌بندی حرفه‌ای استفاده کن. محصول باید در مرکز توجه باشد، کیفیت تصویر بسیار بالا، جزئیات دقیق، مناسب کمپین تبلیغاتی برندهای لوکس و نسبت تصویر 1:1 باشد.',image:'https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=1200&q=85',createdAt:'2026-07-18T10:00:00.000Z',updatedAt:'2026-07-18T10:00:00.000Z'},
+      {id:'p2',title:'تقویم محتوایی اینستاگرام',description:'برنامه‌ریزی یک تقویم محتوایی 30 روزه برای رشد پیج اینستاگرام.',category:'شبکه‌های اجتماعی',tags:['اینستاگرام','محتوا','بازاریابی'],text:'برای کسب‌وکار «[نام کسب‌وکار]» که در حوزه «[حوزه فعالیت]» فعال است، یک تقویم محتوایی کامل 30 روزه برای اینستاگرام طراحی کن. برای هر روز موضوع محتوا، نوع محتوا، هدف محتوا، کپشن کوتاه پیشنهادی، دعوت به اقدام و هشتگ‌های مرتبط را در قالب جدول ارائه بده.',image:'https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=1200&q=85',createdAt:'2026-07-25T10:00:00.000Z',updatedAt:'2026-07-25T10:00:00.000Z'},
+      {id:'p3',title:'توضیح ساده مفاهیم برنامه‌نویسی',description:'تبدیل مفاهیم پیچیده برنامه‌نویسی به توضیحی ساده و قابل فهم.',category:'آموزشی',tags:['برنامه‌نویسی','آموزش','ساده‌سازی'],text:'مفهوم برنامه‌نویسی «[نام مفهوم]» را به زبان فارسی بسیار ساده و روان برای فردی که تازه برنامه‌نویسی را شروع کرده توضیح بده. ابتدا یک تعریف کوتاه ارائه کن، سپس با یک مثال روزمره مفهوم را ملموس کن. بعد یک نمونه کد کوتاه در زبان «[نام زبان]» بنویس و هر خط آن را توضیح بده.',image:'',createdAt:'2026-08-02T10:00:00.000Z',updatedAt:'2026-08-02T10:00:00.000Z'}
     ];
 
-    const defaultTags = [
-      "تصویر",
-      "محصول",
-      "تبلیغات",
-      "اینستاگرام",
-      "محتوا",
-      "بازاریابی",
-      "برنامه‌نویسی",
-      "آموزش",
-      "ساده‌سازی",
-      "فروش"
-    ];
+    const S = { category:'همه پرامپت‌ها', tag:'', search:'', sort:'new', current:null, confirm:null };
+    const $ = id => document.getElementById(id);
 
-    const defaultPrompts = [
-      {
-        id: "prompt_1",
-        title: "تولید تصویر محصول لوکس",
-        description: "ساخت تصویر تبلیغاتی حرفه‌ای و لوکس برای معرفی محصول.",
-        category: "تولید تصویر",
-        tags: ["محصول", "تبلیغات", "تصویر"],
-        text: `یک تصویر تبلیغاتی لوکس و فوتورئال برای محصول «[نام محصول]» تولید کن. محصول را روی یک سطح مینیمال و براق قرار بده. از نورپردازی استودیویی سینمایی، بازتاب‌های ظریف، پس‌زمینه تیره با جزئیات طلایی و ترکیب‌بندی حرفه‌ای استفاده کن. محصول باید در مرکز توجه باشد، کیفیت تصویر بسیار بالا، جزئیات دقیق، مناسب کمپین تبلیغاتی برندهای لوکس و نسبت تصویر 1:1 باشد.`,
-        image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=1200&q=85",
-        createdAt: "2026-07-18T10:00:00.000Z",
-        updatedAt: "2026-07-18T10:00:00.000Z"
-      },
-      {
-        id: "prompt_2",
-        title: "تقویم محتوایی اینستاگرام",
-        description: "برنامه‌ریزی یک تقویم محتوایی 30 روزه برای رشد پیج اینستاگرام.",
-        category: "شبکه‌های اجتماعی",
-        tags: ["اینستاگرام", "محتوا", "بازاریابی"],
-        text: `برای کسب‌وکار «[نام کسب‌وکار]» که در حوزه «[حوزه فعالیت]» فعال است، یک تقویم محتوایی کامل 30 روزه برای اینستاگرام طراحی کن. برای هر روز موضوع محتوا، نوع محتوا (ریلز، پست، استوری یا کاروسل)، هدف محتوا، کپشن کوتاه پیشنهادی، دعوت به اقدام (CTA) و هشتگ‌های مرتبط را در قالب جدول ارائه بده. لحن برند «[رسمی/صمیمی/آموزشی]» باشد و محتواها به افزایش تعامل و فروش کمک کنند.`,
-        image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=1200&q=85",
-        createdAt: "2026-07-25T10:00:00.000Z",
-        updatedAt: "2026-07-25T10:00:00.000Z"
-      },
-      {
-        id: "prompt_3",
-        title: "توضیح ساده مفاهیم برنامه‌نویسی",
-        description: "تبدیل مفاهیم پیچیده برنامه‌نویسی به توضیحی ساده و قابل فهم.",
-        category: "آموزشی",
-        tags: ["برنامه‌نویسی", "آموزش", "ساده‌سازی"],
-        text: `مفهوم برنامه‌نویسی «[نام مفهوم]» را به زبان فارسی بسیار ساده و روان برای فردی که تازه برنامه‌نویسی را شروع کرده توضیح بده. ابتدا یک تعریف کوتاه ارائه کن، سپس با یک مثال روزمره مفهوم را ملموس کن. بعد یک نمونه کد کوتاه در زبان «[نام زبان]» بنویس و هر خط آن را توضیح بده. در پایان سه اشتباه رایج و سه تمرین کوتاه برای تثبیت یادگیری پیشنهاد کن.`,
-        image: "",
-        createdAt: "2026-08-02T10:00:00.000Z",
-        updatedAt: "2026-08-02T10:00:00.000Z"
-      }
-    ];
+    const get = (k,d) => { try { const x = localStorage.getItem(k); return x ? JSON.parse(x) : d; } catch { return d; } };
+    const set = (k,v) => localStorage.setItem(k, JSON.stringify(v));
 
-    const state = {
-      selectedCategory: "همه پرامپت‌ها",
-      selectedTag: "",
-      search: "",
-      sort: "newest",
-      currentPromptId: null,
-      confirmCallback: null
-    };
+    const prompts = () => get(K.prompts, []);
+    const cats = () => get(K.cats, []);
+    const tags = () => get(K.tags, []);
+    const favs = () => get(K.favs, []);
 
-    function getData(key, fallback) {
-      try {
-        const value = localStorage.getItem(key);
-        return value ? JSON.parse(value) : fallback;
-      } catch {
-        return fallback;
+    const esc = x => String(x ?? '').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#039;');
+    const fa = n => String(n).replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[d]);
+    const date = x => new Intl.DateTimeFormat('fa-IR',{year:'numeric',month:'short',day:'numeric'}).format(new Date(x));
+
+    function init() {
+      if (!localStorage.getItem(K.init)) {
+        set(K.prompts, basePrompts);
+        set(K.cats, baseCats);
+        set(K.tags, baseTags);
+        set(K.favs, []);
+        localStorage.setItem(K.init, '1');
       }
     }
 
-    function setData(key, value) {
-      localStorage.setItem(key, JSON.stringify(value));
-    }
-
-    function getPrompts() {
-      return getData(STORAGE_KEYS.prompts, []);
-    }
-
-    function setPrompts(data) {
-      setData(STORAGE_KEYS.prompts, data);
-    }
-
-    function getCategories() {
-      return getData(STORAGE_KEYS.categories, []);
-    }
-
-    function setCategories(data) {
-      setData(STORAGE_KEYS.categories, data);
-    }
-
-    function getTags() {
-      return getData(STORAGE_KEYS.tags, []);
-    }
-
-    function setTags(data) {
-      setData(STORAGE_KEYS.tags, data);
-    }
-
-    function getFavorites() {
-      return getData(STORAGE_KEYS.favorites, []);
-    }
-
-    function setFavorites(data) {
-      setData(STORAGE_KEYS.favorites, data);
-    }
-
-    function initializeData() {
-      if (!localStorage.getItem(STORAGE_KEYS.initialized)) {
-        setPrompts(defaultPrompts);
-        setCategories(defaultCategories);
-        setTags(defaultTags);
-        setFavorites([]);
-        localStorage.setItem(STORAGE_KEYS.initialized, "true");
-      }
-    }
-
-    function escapeHTML(value = "") {
-      return String(value)
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
-    }
-
-    function toPersianNumber(value) {
-      return String(value).replace(/\d/g, digit => "۰۱۲۳۴۵۶۷۸۹"[digit]);
-    }
-
-    function formatDate(iso) {
-      try {
-        return new Intl.DateTimeFormat("fa-IR", {
-          year: "numeric",
-          month: "short",
-          day: "numeric"
-        }).format(new Date(iso));
-      } catch {
-        return "-";
-      }
-    }
-
-    function normalizeDigits(value) {
-      const persian = "۰۱۲۳۴۵۶۷۸۹";
-      const arabic = "٠١٢٣٤٥٦٧٨٩";
-
-      return String(value)
-        .replace(/[۰-۹]/g, char => String(persian.indexOf(char)))
-        .replace(/[٠-٩]/g, char => String(arabic.indexOf(char)));
-    }
-
-    function toast(message, type = "success") {
-      const icons = {
-        success: "fa-circle-check",
-        error: "fa-circle-exclamation",
-        info: "fa-circle-info"
-      };
-
-      const item = document.createElement("div");
-      item.className = `toast ${type}`;
-      item.innerHTML = `<i class="fa-solid ${icons[type]}"></i><span>${escapeHTML(message)}</span>`;
-      document.getElementById("toastContainer").appendChild(item);
-
+    function toast(t, type='success') {
+      const i = { success:'fa-circle-check', error:'fa-circle-exclamation', info:'fa-circle-info' }[type];
+      const e = document.createElement('div');
+      e.className = 'toast ' + type;
+      e.innerHTML = `<i class="fa-solid ${i}"></i><span>${esc(t)}</span>`;
+      $('toasts').append(e);
       setTimeout(() => {
-        item.style.opacity = "0";
-        item.style.transform = "translateX(-25px)";
-        item.style.transition = "0.25s";
-        setTimeout(() => item.remove(), 280);
+        e.style.cssText = 'opacity:0;transform:translateX(-25px);transition:.25s';
+        setTimeout(() => e.remove(), 280);
       }, 3200);
     }
 
-    async function copyText(text, successMessage = "با موفقیت کپی شد ✓") {
-      try {
-        await navigator.clipboard.writeText(text);
-        toast(successMessage, "success");
-      } catch {
-        const temp = document.createElement("textarea");
-        temp.value = text;
-        temp.style.position = "fixed";
-        temp.style.opacity = "0";
-        document.body.appendChild(temp);
-        temp.select();
-        document.execCommand("copy");
-        temp.remove();
-        toast(successMessage, "success");
+    async function copy(t, msg='با موفقیت کپی شد ✓') {
+      try { await navigator.clipboard.writeText(t); }
+      catch {
+        const a = document.createElement('textarea');
+        a.value = t;
+        document.body.append(a);
+        a.select();
+        document.execCommand('copy');
+        a.remove();
       }
+      toast(msg);
     }
 
-    function openModal(id) {
-      document.getElementById(id).classList.add("show");
+    function open(id){ $(id).classList.add('show'); }
+    function close(id){ $(id).classList.remove('show'); }
+
+    function theme() {
+      const t = localStorage.getItem(K.theme) || 'light';
+      document.body.classList.toggle('dark', t === 'dark');
+      $('themeBtn').innerHTML = `<i class="fa-solid fa-${t==='dark'?'sun':'moon'}"></i>`;
     }
 
-    function closeModal(id) {
-      document.getElementById(id).classList.remove("show");
+    function showUser() {
+      $('loginView').classList.add('hidden');
+      $('adminView').classList.add('hidden');
+      $('userView').classList.remove('hidden');
+      renderUser();
     }
 
-    function applyTheme() {
-      const theme = localStorage.getItem(STORAGE_KEYS.theme) || "light";
-      document.body.classList.toggle("dark", theme === "dark");
-
-      const icon = document.querySelector("#themeBtn i");
-      if (icon) {
-        icon.className = theme === "dark" ? "fa-solid fa-sun" : "fa-solid fa-moon";
-      }
+    function showLogin() {
+      $('userView').classList.add('hidden');
+      $('adminView').classList.add('hidden');
+      $('loginView').classList.remove('hidden');
     }
 
-    /* =========================
-       ورود کاربر
-    ========================= */
-
-    function showLoginError(message) {
-      const error = document.getElementById("loginError");
-      error.textContent = message;
-      error.style.display = "block";
+    function renderCats() {
+      const p = prompts(), f = favs();
+      const all = [
+        ['همه پرامپت‌ها','fa-layer-group',p.length],
+        ['علاقه‌مندی‌ها','fa-heart',f.length],
+        ...cats().map(x => [x,'fa-folder',p.filter(q => q.category === x).length])
+      ];
+      $('cats').innerHTML = all.map(([x,icon,n]) => `
+        <button class="category-item ${S.category===x?'active':''} ${x==='علاقه‌مندی‌ها'?'favorites':''}" data-cat="${esc(x)}">
+          <span><i class="fa-solid ${icon}"></i> ${esc(x)}</span>
+          <span class="count">${fa(n)}</span>
+        </button>
+      `).join('');
+      document.querySelectorAll('[data-cat]').forEach(b => b.onclick = () => { S.category = b.dataset.cat; renderUser(); });
     }
 
-    function clearLoginError() {
-      const error = document.getElementById("loginError");
-      error.textContent = "";
-      error.style.display = "none";
+    function renderTags() {
+      $('tagFilters').innerHTML = `<button class="tag-filter ${!S.tag?'active':''}" data-tag="">همه</button>` + tags().map(x => `
+        <button class="tag-filter ${S.tag===x?'active':''}" data-tag="${esc(x)}">${esc(x)}</button>
+      `).join('');
+      document.querySelectorAll('[data-tag]').forEach(b => b.onclick = () => { S.tag = b.dataset.tag; renderUser(); });
     }
 
-    function showUserView() {
-      document.getElementById("loginView").classList.add("hidden");
-      document.getElementById("adminView").classList.add("hidden");
-      document.getElementById("userView").classList.remove("hidden");
-      renderUserPanel();
-    }
-
-    function showLoginView() {
-      document.getElementById("userView").classList.add("hidden");
-      document.getElementById("adminView").classList.add("hidden");
-      document.getElementById("loginView").classList.remove("hidden");
-      document.getElementById("mobileInput").value = "";
-      clearLoginError();
-    }
-
-    document.getElementById("mobileInput").addEventListener("input", event => {
-      let value = normalizeDigits(event.target.value);
-      value = value.replace(/\D/g, "").slice(0, 11);
-      event.target.value = value;
-      clearLoginError();
-    });
-
-    document.getElementById("loginForm").addEventListener("submit", event => {
-      event.preventDefault();
-
-      const mobile = normalizeDigits(document.getElementById("mobileInput").value).replace(/\D/g, "");
-
-      if (!mobile) {
-        showLoginError("لطفاً شماره موبایل خود را وارد کنید.");
-        return;
-      }
-
-      if (mobile.length !== 11) {
-        showLoginError("شماره موبایل باید 11 رقم باشد.");
-        return;
-      }
-
-      if (!mobile.startsWith("09")) {
-        showLoginError("شماره موبایل باید با 09 شروع شود.");
-        return;
-      }
-
-      localStorage.setItem(STORAGE_KEYS.user, JSON.stringify({ mobile, loginAt: new Date().toISOString() }));
-      toast("ورود شما با موفقیت انجام شد ✓", "success");
-      showUserView();
-    });
-
-    document.getElementById("logoutBtn").addEventListener("click", () => {
-      localStorage.removeItem(STORAGE_KEYS.user);
-      localStorage.removeItem(STORAGE_KEYS.admin);
-      toast("از حساب کاربری خارج شدید.", "info");
-      showLoginView();
-    });
-
-    /* =========================
-       پنل کاربر و پرامپت‌ها
-    ========================= */
-
-    function renderCategories() {
-      const categories = getCategories();
-      const prompts = getPrompts();
-      const list = document.getElementById("categoryList");
-
-      const items = ["همه پرامپت‌ها", ...categories];
-
-      list.innerHTML = items.map(category => {
-        const count = category === "همه پرامپت‌ها"
-          ? prompts.length
-          : prompts.filter(p => p.category === category).length;
-
-        return `
-          <button class="category-item ${state.selectedCategory === category ? "active" : ""}"
-                  data-category="${escapeHTML(category)}">
-            <span>${escapeHTML(category)}</span>
-            <span class="category-count">${toPersianNumber(count)}</span>
-          </button>
-        `;
-      }).join("");
-
-      document.querySelectorAll(".category-item").forEach(button => {
-        button.addEventListener("click", () => {
-          state.selectedCategory = button.dataset.category;
-          renderUserPanel();
-        });
+    function filtered() {
+      const q = S.search.trim().toLowerCase();
+      const f = favs();
+      let a = prompts().filter(p => {
+        const find = [p.title,p.description,p.category,p.text,...(p.tags||[])].join(' ').toLowerCase();
+        const cm = S.category === 'همه پرامپت‌ها' || (S.category === 'علاقه‌مندی‌ها' ? f.includes(p.id) : p.category === S.category);
+        return cm && (!S.tag || (p.tags||[]).includes(S.tag)) && (!q || find.includes(q));
       });
+      return a.sort((a,b) => S.sort === 'old'
+        ? new Date(a.updatedAt) - new Date(b.updatedAt)
+        : S.sort === 'pop'
+          ? (f.includes(b.id) - f.includes(a.id) || new Date(b.updatedAt) - new Date(a.updatedAt))
+          : new Date(b.updatedAt) - new Date(a.updatedAt)
+      );
     }
 
-    function renderTagFilters() {
-      const tags = getTags();
-      const wrap = document.getElementById("tagFilters");
+    function renderGrid() {
+      const a = filtered(), f = favs();
+      $('pageTitle').textContent = S.category;
+      $('result').textContent = `${fa(a.length)} پرامپت مطابق فیلتر شما نمایش داده می‌شود.`;
+      $('empty').classList.toggle('hidden', !!a.length);
 
-      wrap.innerHTML = `
-        <button class="filter-tag ${!state.selectedTag ? "active" : ""}" data-tag="">همه</button>
-        ${tags.map(tag => `
-          <button class="filter-tag ${state.selectedTag === tag ? "active" : ""}" data-tag="${escapeHTML(tag)}">
-            ${escapeHTML(tag)}
-          </button>
-        `).join("")}
-      `;
-
-      document.querySelectorAll(".filter-tag").forEach(button => {
-        button.addEventListener("click", () => {
-          state.selectedTag = button.dataset.tag;
-          renderUserPanel();
-        });
-      });
-    }
-
-    function filteredPrompts() {
-      const query = state.search.trim().toLowerCase();
-
-      let prompts = getPrompts().filter(prompt => {
-        const searchable = [
-          prompt.title,
-          prompt.description,
-          prompt.category,
-          prompt.text,
-          ...(prompt.tags || [])
-        ].join(" ").toLowerCase();
-
-        const categoryMatches =
-          state.selectedCategory === "همه پرامپت‌ها" ||
-          prompt.category === state.selectedCategory;
-
-        const tagMatches =
-          !state.selectedTag ||
-          (prompt.tags || []).includes(state.selectedTag);
-
-        const searchMatches = !query || searchable.includes(query);
-
-        return categoryMatches && tagMatches && searchMatches;
-      });
-
-      const favorites = getFavorites();
-
-      prompts.sort((a, b) => {
-        if (state.sort === "oldest") {
-          return new Date(a.updatedAt) - new Date(b.updatedAt);
-        }
-
-        if (state.sort === "popular") {
-          const aFav = favorites.includes(a.id) ? 1 : 0;
-          const bFav = favorites.includes(b.id) ? 1 : 0;
-          return bFav - aFav || new Date(b.updatedAt) - new Date(a.updatedAt);
-        }
-
-        return new Date(b.updatedAt) - new Date(a.updatedAt);
-      });
-
-      return prompts;
-    }
-
-    function renderPrompts() {
-      const prompts = filteredPrompts();
-      const favorites = getFavorites();
-      const grid = document.getElementById("promptGrid");
-      const empty = document.getElementById("emptyState");
-
-      document.getElementById("pageTitle").textContent = state.selectedCategory;
-      document.getElementById("resultCount").textContent =
-        `${toPersianNumber(prompts.length)} پرامپت مطابق فیلتر شما نمایش داده می‌شود.`;
-
-      if (!prompts.length) {
-        grid.innerHTML = "";
-        empty.classList.remove("hidden");
-        return;
-      }
-
-      empty.classList.add("hidden");
-
-      grid.innerHTML = prompts.map(prompt => {
-        const isFavorite = favorites.includes(prompt.id);
-        const shortText = prompt.text.length > 135 ? `${prompt.text.slice(0, 135)}...` : prompt.text;
-
+      $('grid').innerHTML = a.map(p => {
+        const short = p.text.length > 135 ? p.text.slice(0,135) + '...' : p.text;
+        const image = p.image
+          ? `<img class="card-image" src="${esc(p.image)}" alt="نمونه خروجی ${esc(p.title)}" data-image="${esc(p.image)}">`
+          : `<div class="no-image"><div><i class="fa-regular fa-image"></i>نمونه خروجی تصویری ثبت نشده است</div></div>`;
         return `
           <article class="prompt-card">
-            <div class="prompt-card-top">
-              <h3>${escapeHTML(prompt.title)}</h3>
-              <button class="favorite-btn ${isFavorite ? "active" : ""}" data-favorite="${prompt.id}"
-                title="${isFavorite ? "حذف از علاقه‌مندی‌ها" : "افزودن به علاقه‌مندی‌ها"}"
-                aria-label="علاقه‌مندی">
-                <i class="${isFavorite ? "fa-solid" : "fa-regular"} fa-heart"></i>
-              </button>
-            </div>
-
-            <p class="prompt-desc">${escapeHTML(prompt.description)}</p>
-
-            <div class="meta-row">
-              <span class="category-badge">${escapeHTML(prompt.category)}</span>
-              ${(prompt.tags || []).slice(0, 3).map(tag => `<span class="tag-badge">${escapeHTML(tag)}</span>`).join("")}
-            </div>
-
-            <div class="prompt-preview">${escapeHTML(shortText)}</div>
-
-            <div class="card-footer">
-              <span class="date-text"><i class="fa-regular fa-calendar"></i> ${formatDate(prompt.updatedAt)}</span>
-              <button class="btn btn-soft" data-view-prompt="${prompt.id}">
-                مشاهده و کپی <i class="fa-solid fa-arrow-left"></i>
-              </button>
+            ${image}
+            <div class="card-body">
+              <div class="card-top">
+                <h3>${esc(p.title)}</h3>
+                <button class="favorite-btn ${f.includes(p.id)?'active':''}" data-fav="${p.id}" title="علاقه‌مندی">
+                  <i class="${f.includes(p.id)?'fa-solid':'fa-regular'} fa-heart"></i>
+                </button>
+              </div>
+              <p class="desc">${esc(p.description)}</p>
+              <div class="meta-row">
+                <span class="badge badge-category">${esc(p.category)}</span>
+                ${(p.tags||[]).slice(0,3).map(t => `<span class="badge badge-tag">${esc(t)}</span>`).join('')}
+              </div>
+              <div class="prompt-preview">${esc(short)}</div>
+              <div class="card-footer">
+                <span class="date"><i class="fa-regular fa-calendar"></i> ${date(p.updatedAt)}</span>
+                <button class="btn btn-soft" data-view="${p.id}">مشاهده و کپی <i class="fa-solid fa-arrow-left"></i></button>
+              </div>
             </div>
           </article>
         `;
-      }).join("");
+      }).join('');
 
-      document.querySelectorAll("[data-favorite]").forEach(button => {
-        button.addEventListener("click", () => toggleFavorite(button.dataset.favorite));
-      });
-
-      document.querySelectorAll("[data-view-prompt]").forEach(button => {
-        button.addEventListener("click", () => openPromptDetails(button.dataset.viewPrompt));
-      });
+      document.querySelectorAll('[data-fav]').forEach(b => b.onclick = () => toggleFav(b.dataset.fav));
+      document.querySelectorAll('[data-view]').forEach(b => b.onclick = () => view(b.dataset.view));
+      document.querySelectorAll('[data-image]').forEach(i => i.onclick = () => { $('large').src = i.dataset.image; open('imageModal'); });
     }
 
-    function toggleFavorite(id) {
-      let favorites = getFavorites();
-
-      if (favorites.includes(id)) {
-        favorites = favorites.filter(item => item !== id);
-        toast("از علاقه‌مندی‌ها حذف شد.", "info");
+    function toggleFav(id) {
+      const f = favs();
+      if (f.includes(id)) {
+        set(K.favs, f.filter(x => x !== id));
+        toast('از علاقه‌مندی‌ها حذف شد.', 'info');
       } else {
-        favorites.push(id);
-        toast("به علاقه‌مندی‌ها اضافه شد ✓", "success");
+        set(K.favs, [...f, id]);
+        toast('به علاقه‌مندی‌ها اضافه شد ✓');
       }
-
-      setFavorites(favorites);
-      renderUserPanel();
+      renderUser();
     }
 
-    function renderUserPanel() {
-      renderCategories();
-      renderTagFilters();
-      renderPrompts();
-      updateDashboard();
+    function renderUser() {
+      renderCats();
+      renderTags();
+      renderGrid();
+      dashboard();
     }
 
-    function openPromptDetails(id) {
-      const prompt = getPrompts().find(item => item.id === id);
-      if (!prompt) return;
-
-      state.currentPromptId = id;
-      document.getElementById("modalPromptTitle").textContent = prompt.title;
-      document.getElementById("modalPromptText").textContent = prompt.text;
-      document.getElementById("modalPromptMeta").innerHTML = `
-        <span class="category-badge">${escapeHTML(prompt.category)}</span>
-        ${(prompt.tags || []).map(tag => `<span class="tag-badge">${escapeHTML(tag)}</span>`).join("")}
-      `;
-
-      const sample = document.getElementById("modalSampleOutput");
-
-      if (prompt.image) {
-        sample.innerHTML = `
-          <img class="sample-image" id="sampleImage" src="${escapeHTML(prompt.image)}"
-               alt="نمونه خروجی برای ${escapeHTML(prompt.title)}" />
-        `;
-
-        document.getElementById("sampleImage").addEventListener("click", () => {
-          document.getElementById("largeImage").src = prompt.image;
-          openModal("imageModalOverlay");
-        });
-      } else {
-        sample.innerHTML = `
-          <div class="image-placeholder">
-            <div>
-              <i class="fa-regular fa-image"></i>
-              نمونه خروجی تصویری برای این پرامپت ثبت نشده است.
-            </div>
-          </div>
-        `;
-      }
-
-      openModal("promptModalOverlay");
+    function view(id) {
+      const p = prompts().find(x => x.id === id);
+      if (!p) return;
+      S.current = id;
+      $('mTitle').textContent = p.title;
+      $('mText').textContent = p.text;
+      $('mMeta').innerHTML = `<span class="badge badge-category">${esc(p.category)}</span>` + (p.tags||[]).map(t => `<span class="badge badge-tag">${esc(t)}</span>`).join('');
+      $('mSample').innerHTML = p.image
+        ? `<img id="modalImage" class="sample-image" src="${esc(p.image)}" alt="نمونه خروجی ${esc(p.title)}">`
+        : `<div class="image-placeholder"><div><i class="fa-regular fa-image"></i>نمونه خروجی تصویری برای این پرامپت ثبت نشده است.</div></div>`;
+      if (p.image) $('modalImage').onclick = () => { $('large').src = p.image; open('imageModal'); };
+      open('promptModal');
     }
 
-    document.getElementById("copyPromptBtn").addEventListener("click", () => {
-      const prompt = getPrompts().find(item => item.id === state.currentPromptId);
-      if (prompt) copyText(prompt.text, "پرامپت با موفقیت کپی شد ✓");
-    });
-
-    document.getElementById("globalSearch").addEventListener("input", event => {
-      state.search = event.target.value;
-      renderPrompts();
-    });
-
-    document.getElementById("sortSelect").addEventListener("change", event => {
-      state.sort = event.target.value;
-      renderPrompts();
-    });
-
-    document.getElementById("themeBtn").addEventListener("click", () => {
-      const current = localStorage.getItem(STORAGE_KEYS.theme) || "light";
-      localStorage.setItem(STORAGE_KEYS.theme, current === "light" ? "dark" : "light");
-      applyTheme();
-    });
-
-    /* =========================
-       ورود و پنل مدیریت
-    ========================= */
-
-    document.getElementById("adminEntryBtn").addEventListener("click", () => {
-      if (localStorage.getItem(STORAGE_KEYS.admin) === "true") {
-        showAdminView();
-      } else {
-        document.getElementById("adminPasswordInput").value = "";
-        openModal("adminPasswordOverlay");
-      }
-    });
-
-    function showAdminView() {
-      document.getElementById("userView").classList.add("hidden");
-      document.getElementById("loginView").classList.add("hidden");
-      document.getElementById("adminView").classList.remove("hidden");
-      closeModal("adminPasswordOverlay");
-      renderAdminPanel();
+    function dashboard() {
+      $('sp').textContent = fa(prompts().length);
+      $('sc').textContent = fa(cats().length);
+      $('st').textContent = fa(tags().length);
+      $('sf').textContent = fa(favs().length);
     }
 
-    document.getElementById("adminPasswordSubmit").addEventListener("click", () => {
-      const password = document.getElementById("adminPasswordInput").value;
-
-      // هشدار: این رمز در فرانت‌اند است و برای استفاده واقعی امن نیست.
-      if (password === "1348") {
-        localStorage.setItem(STORAGE_KEYS.admin, "true");
-        toast("ورود به پنل مدیریت موفق بود ✓", "success");
-        showAdminView();
-      } else {
-        toast("رمز مدیریت صحیح نیست.", "error");
-      }
-    });
-
-    document.getElementById("backToUserBtn").addEventListener("click", showUserView);
-
-    document.getElementById("adminLogoutBtn").addEventListener("click", () => {
-      localStorage.removeItem(STORAGE_KEYS.admin);
-      toast("از پنل مدیریت خارج شدید.", "info");
-      showUserView();
-    });
-
-    document.querySelectorAll(".admin-tab").forEach(button => {
-      button.addEventListener("click", () => {
-        document.querySelectorAll(".admin-tab").forEach(item => item.classList.remove("active"));
-        document.querySelectorAll(".admin-section").forEach(item => item.classList.remove("active"));
-
-        button.classList.add("active");
-        document.getElementById(`${button.dataset.tab}Tab`).classList.add("active");
-      });
-    });
-
-    function updateDashboard() {
-      const prompts = getPrompts();
-      const categories = getCategories();
-      const tags = getTags();
-      const favorites = getFavorites();
-
-      document.getElementById("statPrompts").textContent = toPersianNumber(prompts.length);
-      document.getElementById("statCategories").textContent = toPersianNumber(categories.length);
-      document.getElementById("statTags").textContent = toPersianNumber(tags.length);
-      document.getElementById("statFavorites").textContent = toPersianNumber(favorites.length);
+    function showAdmin() {
+      $('userView').classList.add('hidden');
+      $('adminView').classList.remove('hidden');
+      close('passwordModal');
+      renderAdmin();
     }
 
-    function renderAdminPanel() {
-      updateDashboard();
-      renderAdminPrompts();
-      renderAdminCategories();
-      renderAdminTags();
+    function renderAdmin() {
+      dashboard();
+      renderRows();
+      renderEntities();
     }
 
-    function renderAdminPrompts() {
-      const query = document.getElementById("adminPromptSearch").value.trim().toLowerCase();
-      const prompts = getPrompts().filter(prompt => {
-        return [prompt.title, prompt.category, prompt.description, ...(prompt.tags || [])]
-          .join(" ")
-          .toLowerCase()
-          .includes(query);
-      });
-
-      const body = document.getElementById("adminPromptsBody");
-
-      if (!prompts.length) {
-        body.innerHTML = `<tr><td colspan="5" style="text-align:center;color:var(--muted);padding:25px;">موردی پیدا نشد.</td></tr>`;
-        return;
-      }
-
-      body.innerHTML = prompts.map(prompt => `
+    function renderRows() {
+      const q = $('adminSearch').value.trim().toLowerCase();
+      const a = prompts().filter(p => [p.title,p.category,p.description,...(p.tags||[])].join(' ').toLowerCase().includes(q));
+      $('promptRows').innerHTML = a.length ? a.map(p => `
         <tr>
-          <td><strong>${escapeHTML(prompt.title)}</strong><br><small style="color:var(--muted);">${escapeHTML(prompt.description)}</small></td>
-          <td><span class="category-badge">${escapeHTML(prompt.category)}</span></td>
-          <td>${(prompt.tags || []).map(tag => `<span class="tag-badge">${escapeHTML(tag)}</span>`).join(" ")}</td>
-          <td>${formatDate(prompt.updatedAt)}</td>
+          <td><strong>${esc(p.title)}</strong><br><small style="color:var(--muted)">${esc(p.description)}</small></td>
+          <td><span class="badge badge-category">${esc(p.category)}</span></td>
+          <td>${(p.tags||[]).map(t => `<span class="badge badge-tag">${esc(t)}</span>`).join(' ')}</td>
+          <td>${date(p.updatedAt)}</td>
           <td>
             <div class="table-actions">
-              <button class="mini-btn" title="ویرایش" data-edit-prompt="${prompt.id}">
-                <i class="fa-solid fa-pen"></i>
-              </button>
-              <button class="mini-btn delete" title="حذف" data-delete-prompt="${prompt.id}">
-                <i class="fa-solid fa-trash"></i>
-              </button>
+              <button class="mini-btn" data-edit="${p.id}"><i class="fa-solid fa-pen"></i></button>
+              <button class="mini-btn del" data-del="${p.id}"><i class="fa-solid fa-trash"></i></button>
             </div>
           </td>
         </tr>
-      `).join("");
-
-      document.querySelectorAll("[data-edit-prompt]").forEach(button => {
-        button.addEventListener("click", () => openPromptForm(button.dataset.editPrompt));
-      });
-
-      document.querySelectorAll("[data-delete-prompt]").forEach(button => {
-        button.addEventListener("click", () => confirmDeletePrompt(button.dataset.deletePrompt));
-      });
+      `).join('') : `<tr><td colspan="5" style="text-align:center;color:var(--muted);padding:25px">موردی پیدا نشد.</td></tr>`;
+      document.querySelectorAll('[data-edit]').forEach(b => b.onclick = () => promptForm(b.dataset.edit));
+      document.querySelectorAll('[data-del]').forEach(b => b.onclick = () => deletePrompt(b.dataset.del));
     }
 
-    document.getElementById("adminPromptSearch").addEventListener("input", renderAdminPrompts);
-
-    function renderAdminCategories() {
-      const categories = getCategories();
-      const prompts = getPrompts();
-      const list = document.getElementById("adminCategoriesList");
-
-      list.innerHTML = categories.map(category => {
-        const count = prompts.filter(p => p.category === category).length;
-
-        return `
-          <div class="entity-item">
-            <span><i class="fa-solid fa-folder" style="color:var(--secondary);"></i> ${escapeHTML(category)}
-              <small style="color:var(--muted);font-weight:400;">(${toPersianNumber(count)} پرامپت)</small>
-            </span>
-            <div class="table-actions">
-              <button class="mini-btn" title="ویرایش" data-edit-category="${escapeHTML(category)}">
-                <i class="fa-solid fa-pen"></i>
-              </button>
-              <button class="mini-btn delete" title="حذف" data-delete-category="${escapeHTML(category)}">
-                <i class="fa-solid fa-trash"></i>
-              </button>
-            </div>
-          </div>
-        `;
-      }).join("");
-
-      document.querySelectorAll("[data-edit-category]").forEach(button => {
-        button.addEventListener("click", () => openEntityForm("category", button.dataset.editCategory));
-      });
-
-      document.querySelectorAll("[data-delete-category]").forEach(button => {
-        button.addEventListener("click", () => confirmDeleteCategory(button.dataset.deleteCategory));
-      });
+    function renderEntities() {
+      const p = prompts();
+      $('catEntities').innerHTML = cats().map(x => entity(x, 'category', p.filter(z => z.category === x).length)).join('');
+      $('tagEntities').innerHTML = tags().map(x => entity(x, 'tag', null)).join('');
+      document.querySelectorAll('[data-entity-edit]').forEach(b => b.onclick = () => entityForm(b.dataset.type, b.dataset.entityEdit));
+      document.querySelectorAll('[data-entity-del]').forEach(b => b.onclick = () => deleteEntity(b.dataset.type, b.dataset.entityDel));
     }
 
-    function renderAdminTags() {
-      const tags = getTags();
-      const list = document.getElementById("adminTagsList");
-
-      list.innerHTML = tags.map(tag => `
-        <div class="entity-item">
-          <span><i class="fa-solid fa-tag" style="color:var(--cyan);"></i> ${escapeHTML(tag)}</span>
+    function entity(x, type, n) {
+      return `
+        <div class="entity">
+          <span><i class="fa-solid fa-${type==='category'?'folder':'tag'}" style="color:var(--secondary)"></i> ${esc(x)} ${n!==null ? `<small style="color:var(--muted);font-weight:400">(${fa(n)} پرامپت)</small>` : ''}</span>
           <div class="table-actions">
-            <button class="mini-btn" title="ویرایش" data-edit-tag="${escapeHTML(tag)}">
-              <i class="fa-solid fa-pen"></i>
-            </button>
-            <button class="mini-btn delete" title="حذف" data-delete-tag="${escapeHTML(tag)}">
-              <i class="fa-solid fa-trash"></i>
-            </button>
+            <button class="mini-btn" data-entity-edit="${esc(x)}" data-type="${type}"><i class="fa-solid fa-pen"></i></button>
+            <button class="mini-btn del" data-entity-del="${esc(x)}" data-type="${type}"><i class="fa-solid fa-trash"></i></button>
           </div>
         </div>
-      `).join("");
-
-      document.querySelectorAll("[data-edit-tag]").forEach(button => {
-        button.addEventListener("click", () => openEntityForm("tag", button.dataset.editTag));
-      });
-
-      document.querySelectorAll("[data-delete-tag]").forEach(button => {
-        button.addEventListener("click", () => confirmDeleteTag(button.dataset.deleteTag));
-      });
-    }
-
-    /* =========================
-       مدیریت پرامپت‌ها
-    ========================= */
-
-    document.getElementById("addPromptBtn").addEventListener("click", () => openPromptForm());
-
-    function renderPromptFormOptions(selectedCategory = "", selectedTags = []) {
-      const categories = getCategories();
-      const tags = getTags();
-
-      document.getElementById("promptCategoryInput").innerHTML = `
-        <option value="">انتخاب دسته‌بندی</option>
-        ${categories.map(category => `
-          <option value="${escapeHTML(category)}" ${selectedCategory === category ? "selected" : ""}>
-            ${escapeHTML(category)}
-          </option>
-        `).join("")}
       `;
-
-      document.getElementById("promptTagsCheckboxes").innerHTML = tags.length
-        ? tags.map(tag => `
-          <label class="check-tag">
-            <input type="checkbox" value="${escapeHTML(tag)}" ${selectedTags.includes(tag) ? "checked" : ""} />
-            ${escapeHTML(tag)}
-          </label>
-        `).join("")
-        : `<span style="font-size:12px;color:var(--muted);">ابتدا از بخش برچسب‌ها، برچسب جدید اضافه کنید.</span>`;
     }
 
-    function openPromptForm(id = null) {
-      const form = document.getElementById("promptForm");
-      form.reset();
-      document.getElementById("editingPromptId").value = "";
-
-      if (id) {
-        const prompt = getPrompts().find(item => item.id === id);
-        if (!prompt) return;
-
-        document.getElementById("promptFormTitle").textContent = "ویرایش پرامپت";
-        document.getElementById("editingPromptId").value = prompt.id;
-        document.getElementById("promptTitleInput").value = prompt.title;
-        document.getElementById("promptDescInput").value = prompt.description;
-        document.getElementById("promptTextInput").value = prompt.text;
-        document.getElementById("promptImageUrlInput").value = prompt.image || "";
-        renderPromptFormOptions(prompt.category, prompt.tags || []);
-      } else {
-        document.getElementById("promptFormTitle").textContent = "افزودن پرامپت جدید";
-        renderPromptFormOptions();
+    function promptForm(id='') {
+      $('promptForm').reset();
+      $('editId').value = id;
+      const p = id ? prompts().find(x => x.id === id) : null;
+      $('formTitle').textContent = p ? 'ویرایش پرامپت' : 'افزودن پرامپت جدید';
+      $('pcat').innerHTML = '<option value="">انتخاب دسته‌بندی</option>' + cats().map(c => `<option ${p?.category===c?'selected':''} value="${esc(c)}">${esc(c)}</option>`).join('');
+      $('pchecks').innerHTML = tags().length ? tags().map(t => `<label class="check"><input type="checkbox" value="${esc(t)}" ${p?.tags.includes(t)?'checked':''}> ${esc(t)}</label>`).join('') : '<span style="font-size:12px;color:var(--muted)">ابتدا برچسب اضافه کنید.</span>';
+      if (p) {
+        $('ptitle').value = p.title;
+        $('pdesc').value = p.description;
+        $('ptext').value = p.text;
+        $('pimage').value = p.image || '';
       }
-
-      openModal("promptFormOverlay");
+      open('promptFormModal');
     }
 
-    function readFileAsDataURL(file) {
-      return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = () => resolve(reader.result);
-        reader.onerror = reject;
-        reader.readAsDataURL(file);
+    function readFile(f) {
+      return new Promise((ok, no) => {
+        const r = new FileReader();
+        r.onload = () => ok(r.result);
+        r.onerror = no;
+        r.readAsDataURL(f);
       });
     }
 
-    document.getElementById("promptForm").addEventListener("submit", async event => {
-      event.preventDefault();
+    async function savePrompt(e) {
+      e.preventDefault();
+      let title = $('ptitle').value.trim(),
+          category = $('pcat').value,
+          description = $('pdesc').value.trim(),
+          text = $('ptext').value.trim(),
+          id = $('editId').value,
+          image = $('pimage').value.trim(),
+          file = $('pfile').files[0],
+          selected = [...document.querySelectorAll('#pchecks input:checked')].map(x => x.value);
 
-      const title = document.getElementById("promptTitleInput").value.trim();
-      const category = document.getElementById("promptCategoryInput").value;
-      const description = document.getElementById("promptDescInput").value.trim();
-      const text = document.getElementById("promptTextInput").value.trim();
-      const imageUrl = document.getElementById("promptImageUrlInput").value.trim();
-      const file = document.getElementById("promptImageFileInput").files[0];
-      const id = document.getElementById("editingPromptId").value;
-      const selectedTags = [...document.querySelectorAll("#promptTagsCheckboxes input:checked")].map(item => item.value);
+      if (!title || !category || !description || !text) return toast('لطفاً فیلدهای ضروری را کامل کنید.', 'error');
+      if (file) try { image = await readFile(file); } catch { return toast('خواندن تصویر با خطا مواجه شد.', 'error'); }
 
-      if (!title || !category || !description || !text) {
-        toast("لطفاً تمام فیلدهای ضروری را کامل کنید.", "error");
-        return;
-      }
-
-      let image = imageUrl;
-      if (file) {
-        try {
-          image = await readFileAsDataURL(file);
-        } catch {
-          toast("خواندن تصویر با خطا مواجه شد.", "error");
-          return;
-        }
-      }
-
-      const prompts = getPrompts();
-      const now = new Date().toISOString();
-
+      let a = prompts(), now = new Date().toISOString();
       if (id) {
-        const index = prompts.findIndex(item => item.id === id);
-        if (index !== -1) {
-          prompts[index] = {
-            ...prompts[index],
-            title,
-            category,
-            description,
-            text,
-            tags: selectedTags,
-            image,
-            updatedAt: now
-          };
-        }
-        toast("پرامپت با موفقیت ویرایش شد ✓", "success");
+        let i = a.findIndex(x => x.id === id);
+        a[i] = { ...a[i], title, category, description, text, tags:selected, image, updatedAt:now };
+        toast('پرامپت با موفقیت ویرایش شد ✓');
       } else {
-        prompts.push({
-          id: `prompt_${Date.now()}`,
-          title,
-          category,
-          description,
-          text,
-          tags: selectedTags,
-          image,
-          createdAt: now,
-          updatedAt: now
-        });
-        toast("پرامپت جدید با موفقیت اضافه شد ✓", "success");
+        a.push({ id:'p_'+Date.now(), title, category, description, text, tags:selected, image, createdAt:now, updatedAt:now });
+        toast('پرامپت جدید با موفقیت اضافه شد ✓');
       }
-
-      setPrompts(prompts);
-      closeModal("promptFormOverlay");
-      renderAdminPanel();
-      renderUserPanel();
-    });
-
-    function confirmDeletePrompt(id) {
-      const prompt = getPrompts().find(item => item.id === id);
-      if (!prompt) return;
-
-      openConfirm(
-        "حذف پرامپت",
-        `آیا از حذف پرامپت «${prompt.title}» مطمئن هستید؟ این عملیات قابل بازگشت نیست.`,
-        () => {
-          setPrompts(getPrompts().filter(item => item.id !== id));
-          setFavorites(getFavorites().filter(item => item !== id));
-          toast("پرامپت حذف شد.", "success");
-          renderAdminPanel();
-          renderUserPanel();
-        }
-      );
+      set(K.prompts, a);
+      close('promptFormModal');
+      renderAdmin();
+      renderUser();
     }
 
-    /* =========================
-       مدیریت دسته‌بندی و برچسب
-    ========================= */
-
-    document.getElementById("addCategoryBtn").addEventListener("click", () => openEntityForm("category"));
-    document.getElementById("addTagBtn").addEventListener("click", () => openEntityForm("tag"));
-
-    function openEntityForm(type, oldValue = "") {
-      document.getElementById("entityForm").reset();
-      document.getElementById("entityType").value = type;
-      document.getElementById("entityOldValue").value = oldValue;
-      document.getElementById("entityNameInput").value = oldValue;
-
-      const isCategory = type === "category";
-      document.getElementById("entityFormTitle").textContent = oldValue
-        ? `ویرایش ${isCategory ? "دسته‌بندی" : "برچسب"}`
-        : `افزودن ${isCategory ? "دسته‌بندی" : "برچسب"} جدید`;
-
-      document.getElementById("entityNameLabel").textContent =
-        `نام ${isCategory ? "دسته‌بندی" : "برچسب"}`;
-
-      openModal("entityFormOverlay");
-      setTimeout(() => document.getElementById("entityNameInput").focus(), 150);
-    }
-
-    document.getElementById("entityForm").addEventListener("submit", event => {
-      event.preventDefault();
-
-      const type = document.getElementById("entityType").value;
-      const oldValue = document.getElementById("entityOldValue").value;
-      const newValue = document.getElementById("entityNameInput").value.trim();
-
-      if (!newValue) {
-        toast("نام نمی‌تواند خالی باشد.", "error");
-        return;
-      }
-
-      const isCategory = type === "category";
-      const values = isCategory ? getCategories() : getTags();
-
-      if (values.includes(newValue) && newValue !== oldValue) {
-        toast(`این ${isCategory ? "دسته‌بندی" : "برچسب"} قبلاً وجود دارد.`, "error");
-        return;
-      }
-
-      let updatedValues;
-
-      if (oldValue) {
-        updatedValues = values.map(item => item === oldValue ? newValue : item);
-
-        const prompts = getPrompts().map(prompt => {
-          if (isCategory && prompt.category === oldValue) {
-            return { ...prompt, category: newValue, updatedAt: new Date().toISOString() };
-          }
-
-          if (!isCategory && (prompt.tags || []).includes(oldValue)) {
-            return {
-              ...prompt,
-              tags: prompt.tags.map(tag => tag === oldValue ? newValue : tag),
-              updatedAt: new Date().toISOString()
-            };
-          }
-
-          return prompt;
-        });
-
-        setPrompts(prompts);
-        toast(`${isCategory ? "دسته‌بندی" : "برچسب"} با موفقیت ویرایش شد ✓`, "success");
-      } else {
-        updatedValues = [...values, newValue];
-        toast(`${isCategory ? "دسته‌بندی" : "برچسب"} جدید اضافه شد ✓`, "success");
-      }
-
-      if (isCategory) setCategories(updatedValues);
-      else setTags(updatedValues);
-
-      closeModal("entityFormOverlay");
-      renderAdminPanel();
-      renderUserPanel();
-    });
-
-    function confirmDeleteCategory(category) {
-      const promptCount = getPrompts().filter(prompt => prompt.category === category).length;
-
-      if (promptCount > 0) {
-        openConfirm(
-          "حذف دسته‌بندی",
-          `دسته‌بندی «${category}» دارای ${toPersianNumber(promptCount)} پرامپت است. ابتدا پرامپت‌های این دسته را ویرایش یا حذف کنید.`,
-          null,
-          "متوجه شدم"
-        );
-        return;
-      }
-
-      openConfirm(
-        "حذف دسته‌بندی",
-        `آیا از حذف دسته‌بندی «${category}» مطمئن هستید؟`,
-        () => {
-          setCategories(getCategories().filter(item => item !== category));
-          if (state.selectedCategory === category) state.selectedCategory = "همه پرامپت‌ها";
-          toast("دسته‌بندی حذف شد.", "success");
-          renderAdminPanel();
-          renderUserPanel();
-        }
-      );
-    }
-
-    function confirmDeleteTag(tag) {
-      const usedCount = getPrompts().filter(prompt => (prompt.tags || []).includes(tag)).length;
-      const message = usedCount
-        ? `برچسب «${tag}» از ${toPersianNumber(usedCount)} پرامپت نیز حذف خواهد شد. آیا ادامه می‌دهید؟`
-        : `آیا از حذف برچسب «${tag}» مطمئن هستید؟`;
-
-      openConfirm(
-        "حذف برچسب",
-        message,
-        () => {
-          setTags(getTags().filter(item => item !== tag));
-
-          const prompts = getPrompts().map(prompt => ({
-            ...prompt,
-            tags: (prompt.tags || []).filter(item => item !== tag)
-          }));
-
-          setPrompts(prompts);
-
-          if (state.selectedTag === tag) state.selectedTag = "";
-          toast("برچسب حذف شد.", "success");
-          renderAdminPanel();
-          renderUserPanel();
-        }
-      );
-    }
-
-    /* =========================
-       تأییدیه حذف
-    ========================= */
-
-    function openConfirm(title, text, callback = null, buttonText = "حذف") {
-      state.confirmCallback = callback;
-      document.getElementById("confirmTitle").textContent = title;
-      document.getElementById("confirmText").textContent = text;
-
-      const actionButton = document.getElementById("confirmActionBtn");
-
-      if (callback) {
-        actionButton.style.display = "inline-flex";
-        actionButton.innerHTML = `<i class="fa-solid fa-trash"></i> ${buttonText}`;
-      } else {
-        actionButton.style.display = "none";
-      }
-
-      openModal("confirmOverlay");
-    }
-
-    document.getElementById("confirmActionBtn").addEventListener("click", () => {
-      if (typeof state.confirmCallback === "function") {
-        state.confirmCallback();
-      }
-      closeModal("confirmOverlay");
-      state.confirmCallback = null;
-    });
-
-    /* =========================
-       پشتیبانی و مودال‌ها
-    ========================= */
-
-    document.getElementById("supportFab").addEventListener("click", () => {
-      document.getElementById("supportBox").classList.toggle("show");
-    });
-
-    document.getElementById("copyEmailBtn").addEventListener("click", () => {
-      copyText("bratymhdy910@gmail.com", "ایمیل کپی شد ✓");
-    });
-
-    document.querySelectorAll("[data-close]").forEach(button => {
-      button.addEventListener("click", () => closeModal(button.dataset.close));
-    });
-
-    document.querySelectorAll(".modal-overlay").forEach(overlay => {
-      overlay.addEventListener("click", event => {
-        if (event.target === overlay) {
-          overlay.classList.remove("show");
-        }
+    function deletePrompt(id) {
+      const p = prompts().find(x => x.id === id);
+      confirmBox('حذف پرامپت', `آیا از حذف پرامپت «${p.title}» مطمئن هستید؟`, () => {
+        set(K.prompts, prompts().filter(x => x.id !== id));
+        set(K.favs, favs().filter(x => x !== id));
+        toast('پرامپت حذف شد.');
+        renderAdmin();
+        renderUser();
       });
-    });
-
-    document.addEventListener("keydown", event => {
-      if (event.key === "Escape") {
-        document.querySelectorAll(".modal-overlay.show").forEach(overlay => {
-          overlay.classList.remove("show");
-        });
-      }
-    });
-
-    /* =========================
-       راه‌اندازی برنامه
-    ========================= */
-
-    initializeData();
-    applyTheme();
-
-    if (localStorage.getItem(STORAGE_KEYS.user)) {
-      showUserView();
-    } else {
-      showLoginView();
     }
+
+    function entityForm(type, old='') {
+      $('entityForm').reset();
+      $('etype').value = type;
+      $('eold').value = old;
+      $('ename').value = old;
+      const n = type === 'category' ? 'دسته‌بندی' : 'برچسب';
+      $('entityTitle').textContent = old ? `ویرایش ${n}` : `افزودن ${n} جدید`;
+      $('elabel').textContent = `نام ${n}`;
+      open('entityModal');
+      setTimeout(() => $('ename').focus(), 100);
+    }
+
+    function saveEntity(e) {
+      e.preventDefault();
+      let type = $('etype').value, old = $('eold').value, n = $('ename').value.trim(), a = type === 'category' ? cats() : tags();
+      if (!n) return;
+      if (a.includes(n) && n !== old) return toast('این مورد قبلاً وجود دارد.', 'error');
+
+      let out = old ? a.map(x => x === old ? n : x) : [...a, n];
+      if (type === 'category') {
+        set(K.cats, out);
+        if (old) set(K.prompts, prompts().map(p => p.category === old ? { ...p, category:n, updatedAt:new Date().toISOString() } : p));
+      } else {
+        set(K.tags, out);
+        if (old) set(K.prompts, prompts().map(p => ({ ...p, tags:(p.tags||[]).map(t => t === old ? n : t) })));
+      }
+      close('entityModal');
+      toast('اطلاعات با موفقیت ذخیره شد ✓');
+      renderAdmin();
+      renderUser();
+    }
+
+    function deleteEntity(type, x) {
+      let used = type === 'category' ? prompts().filter(p => p.category === x).length : prompts().filter(p => (p.tags||[]).includes(x)).length;
+      if (type === 'category' && used) {
+        return confirmBox('حذف دسته‌بندی', `دسته‌بندی «${x}» دارای ${fa(used)} پرامپت است. ابتدا پرامپت‌های این دسته را ویرایش یا حذف کنید.`, null);
+      }
+      confirmBox(`حذف ${type==='category'?'دسته‌بندی':'برچسب'}`, type==='tag' && used ? `برچسب «${x}» از ${fa(used)} پرامپت نیز حذف خواهد شد. آیا ادامه می‌دهید؟` : `آیا از حذف «${x}» مطمئن هستید؟`, () => {
+        if (type === 'category') {
+          set(K.cats, cats().filter(t => t !== x));
+          if (S.category === x) S.category = 'همه پرامپت‌ها';
+        } else {
+          set(K.tags, tags().filter(t => t !== x));
+          set(K.prompts, prompts().map(p => ({ ...p, tags:(p.tags||[]).filter(t => t !== x) })));
+          if (S.tag === x) S.tag = '';
+        }
+        toast('مورد حذف شد.');
+        renderAdmin();
+        renderUser();
+      });
+    }
+
+    function confirmBox(title, text, fn) {
+      S.confirm = fn;
+      $('confirmTitle').textContent = title;
+      $('confirmText').textContent = text;
+      $('confirmBtn').style.display = fn ? 'inline-flex' : 'none';
+      open('confirmModal');
+    }
+
+    $('mobile').oninput = e => {
+      let faD = '۰۱۲۳۴۵۶۷۸۹', ar = '٠١٢٣٤٥٦٧٨٩';
+      e.target.value = e.target.value
+        .replace(/[۰-۹]/g, c => faD.indexOf(c))
+        .replace(/[٠-٩]/g, c => ar.indexOf(c))
+        .replace(/\D/g, '')
+        .slice(0,11);
+      $('loginErr').style.display = 'none';
+    };
+
+    $('loginForm').onsubmit = e => {
+      e.preventDefault();
+      let m = $('mobile').value;
+      if (!m) return loginError('لطفاً شماره موبایل خود را وارد کنید.');
+      if (m.length !== 11) return loginError('شماره موبایل باید 11 رقم باشد.');
+      if (!m.startsWith('09')) return loginError('شماره موبایل باید با 09 شروع شود.');
+      localStorage.setItem(K.user, JSON.stringify({ mobile:m, loginAt:new Date().toISOString() }));
+      toast('ورود شما با موفقیت انجام شد ✓');
+      showUser();
+    };
+
+    function loginError(x) {
+      $('loginErr').textContent = x;
+      $('loginErr').style.display = 'block';
+    }
+
+    $('logoutBtn').onclick = () => {
+      localStorage.removeItem(K.user);
+      localStorage.removeItem(K.admin);
+      toast('از حساب کاربری خارج شدید.', 'info');
+      showLogin();
+    };
+
+    $('themeBtn').onclick = () => {
+      const t = localStorage.getItem(K.theme) || 'light';
+      localStorage.setItem(K.theme, t === 'light' ? 'dark' : 'light');
+      theme();
+    };
+
+    $('search').oninput = e => { S.search = e.target.value; renderGrid(); };
+    $('sort').onchange = e => { S.sort = e.target.value; renderGrid(); };
+
+    $('copyPrompt').onclick = () => {
+      const p = prompts().find(x => x.id === S.current);
+      if (p) copy(p.text, 'پرامپت با موفقیت کپی شد ✓');
+    };
+
+    $('adminBtn').onclick = () => localStorage.getItem(K.admin) === '1' ? showAdmin() : open('passwordModal');
+    $('passSubmit').onclick = () => {
+      $('pass').value === 'admin123'
+        ? (localStorage.setItem(K.admin, '1'), toast('ورود به پنل مدیریت موفق بود ✓'), showAdmin())
+        : toast('رمز مدیریت صحیح نیست.', 'error');
+    };
+
+    $('backBtn').onclick = showUser;
+    $('adminOutBtn').onclick = () => {
+      localStorage.removeItem(K.admin);
+      toast('از پنل مدیریت خارج شدید.', 'info');
+      showUser();
+    };
+
+    document.querySelectorAll('.admin-tab').forEach(b => b.onclick = () => {
+      document.querySelectorAll('.admin-tab').forEach(x => x.classList.remove('active'));
+      document.querySelectorAll('.admin-section').forEach(x => x.classList.remove('active'));
+      b.classList.add('active');
+      $(b.dataset.tab + 'Tab').classList.add('active');
+    });
+
+    $('adminSearch').oninput = renderRows;
+    $('addPrompt').onclick = () => promptForm();
+    $('addCat').onclick = () => entityForm('category');
+    $('addTag').onclick = () => entityForm('tag');
+    $('promptForm').onsubmit = savePrompt;
+    $('entityForm').onsubmit = saveEntity;
+
+    $('confirmBtn').onclick = () => {
+      if (typeof S.confirm === 'function') S.confirm();
+      close('confirmModal');
+      S.confirm = null;
+    };
+
+    $('supportBtn').onclick = () => $('support').classList.toggle('show');
+    $('email').onclick = () => copy('bratymhdy910@gmail.com', 'ایمیل کپی شد ✓');
+
+    document.querySelectorAll('[data-close]').forEach(b => b.onclick = () => close(b.dataset.close));
+    document.querySelectorAll('.overlay').forEach(o => o.onclick = e => { if (e.target === o) o.classList.remove('show'); });
+    document.onkeydown = e => {
+      if (e.key === 'Escape') document.querySelectorAll('.overlay.show').forEach(x => x.classList.remove('show'));
+    };
+
+    init();
+    theme();
+    localStorage.getItem(K.user) ? showUser() : showLogin();
   </script>
 </body>
 </html>
-نمایشی
