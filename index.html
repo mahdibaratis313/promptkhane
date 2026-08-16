@@ -2461,6 +2461,66 @@ body {
   <script>
     'use strict';
     const K = { init:'pk_init_v2', prompts:'pk_prompts', cats:'pk_cats', tags:'pk_tags', favs:'pk_favs', user:'pk_user', admin:'pk_admin', theme:'pk_theme' };
+    const API_BASE = 'https://promptkhane-api.mahdibarati-s313.workers.dev';
+const ADMIN_KEY = '1348';
+const state = {
+  prompts: [],
+  categories: [],
+  tags: [],
+  favorites: [],
+  loaded: false
+};
+
+async function apiGetData() {
+  const res = await fetch(`${API_BASE}/data`, {
+    method: 'GET',
+    headers: { 'Accept': 'application/json' }
+  });
+  if (!res.ok) throw new Error('خطا در دریافت داده‌ها از سرور');
+  return await res.json();
+}
+
+async function apiSaveData(payload) {
+  const res = await fetch(`${API_BASE}/data`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Admin-Key': ADMIN_KEY
+    },
+    body: JSON.stringify(payload)
+  });
+  if (!res.ok) {
+    const txt = await res.text().catch(() => '');
+    throw new Error(txt || 'خطا در ذخیره داده‌ها روی سرور');
+  }
+  return await res.json().catch(() => ({}));
+}
+
+function normalizeData(data) {
+  return {
+    prompts: Array.isArray(data?.prompts) ? data.prompts : [],
+    categories: Array.isArray(data?.categories) ? data.categories : [],
+    tags: Array.isArray(data?.tags) ? data.tags : [],
+    favorites: Array.isArray(data?.favorites) ? data.favorites : []
+  };
+}
+
+function syncStateToUI(data) {
+  const d = normalizeData(data);
+  state.prompts = d.prompts;
+  state.categories = d.categories;
+  state.tags = d.tags;
+  state.favorites = d.favorites;
+}
+async function saveAllData() {
+  return apiSaveData({
+    prompts: state.prompts,
+    categories: state.categories,
+    tags: state.tags,
+    favorites: state.favorites
+  });
+}
+
     const baseCats = ['تولید تصویر','تولید محتوا','شبکه‌های اجتماعی','آموزشی','کسب‌وکار','برنامه‌نویسی','ترجمه','ایده‌پردازی'];
     const baseTags = ['تصویر','محصول','تبلیغات','اینستاگرام','محتوا','بازاریابی','برنامه‌نویسی','آموزش','ساده‌سازی','فروش'];
     const basePrompts = [
@@ -2472,27 +2532,52 @@ body {
     const S = { category:'همه پرامپت‌ها', tag:'', search:'', sort:'new', current:null, confirm:null };
     const $ = id => document.getElementById(id);
 
-    const get = (k,d) => { try { const x = localStorage.getItem(k); return x ? JSON.parse(x) : d; } catch { return d; } };
-    const set = (k,v) => localStorage.setItem(k, JSON.stringify(v));
+const get = (k,d) => {
+  if (k === K.prompts) return state.prompts;
+  if (k === K.cats) return state.categories;
+  if (k === K.tags) return state.tags;
+  if (k === K.favs) return state.favorites;
+  try {
+    const x = localStorage.getItem(k);
+    return x ? JSON.parse(x) : d;
+  } catch {
+    return d;
+  }
+};
 
-    const prompts = () => get(K.prompts, []);
-    const cats = () => get(K.cats, []);
-    const tags = () => get(K.tags, []);
-    const favs = () => get(K.favs, []);
+const set = (k,v) => {
+  if (k === K.prompts) state.prompts = v;
+  else if (k === K.cats) state.categories = v;
+  else if (k === K.tags) state.tags = v;
+  else if (k === K.favs) state.favorites = v;
+  else localStorage.setItem(k, JSON.stringify(v));
+};
+
+const prompts = () => state.prompts;
+const cats = () => state.categories;
+const tags = () => state.tags;
+const favs = () => state.favorites;
 
     const esc = x => String(x ?? '').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#039;');
     const fa = n => String(n).replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[d]);
     const date = x => new Intl.DateTimeFormat('fa-IR',{year:'numeric',month:'short',day:'numeric'}).format(new Date(x));
 
-    function init() {
-      if (!localStorage.getItem(K.init)) {
-        set(K.prompts, basePrompts);
-        set(K.cats, baseCats);
-        set(K.tags, baseTags);
-        set(K.favs, []);
-        localStorage.setItem(K.init, '1');
-      }
-    }
+async function init() {
+  try {
+    const data = await apiGetData();
+    syncStateToUI(data);
+    state.loaded = true;
+  } catch (err) {
+    console.error(err);
+    syncStateToUI({
+      prompts: basePrompts,
+      categories: baseCats,
+      tags: baseTags,
+      favorites: []
+    });
+    state.loaded = true;
+  }
+}
 
     function toast(t, type='success') {
       const i = { success:'fa-circle-check', error:'fa-circle-exclamation', info:'fa-circle-info' }[type];
@@ -2621,17 +2706,18 @@ body {
       document.querySelectorAll('[data-image]').forEach(i => i.onclick = () => { $('large').src = i.dataset.image; open('imageModal'); });
     }
 
-    function toggleFav(id) {
-      const f = favs();
-      if (f.includes(id)) {
-        set(K.favs, f.filter(x => x !== id));
-        toast('از علاقه‌مندی‌ها حذف شد.', 'info');
-      } else {
-        set(K.favs, [...f, id]);
-        toast('به علاقه‌مندی‌ها اضافه شد ✓');
-      }
-      renderUser();
-    }
+    async function toggleFav(id) {
+  const f = favs();
+  if (f.includes(id)) {
+    set(K.favs, f.filter(x => x !== id));
+    toast('از علاقه‌مندی‌ها حذف شد.', 'info');
+  } else {
+    set(K.favs, [...f, id]);
+    toast('به علاقه‌مندی‌ها اضافه شد ✓');
+  }
+  try { await saveAllData(); } catch (e) { toast('ذخیره روی سرور ناموفق بود.', 'error'); }
+  renderUser();
+}
 
     function renderUser() {
       renderCats();
@@ -2740,45 +2826,48 @@ body {
       });
     }
 
-    async function savePrompt(e) {
-      e.preventDefault();
-      let title = $('ptitle').value.trim(),
-          category = $('pcat').value,
-          description = $('pdesc').value.trim(),
-          text = $('ptext').value.trim(),
-          id = $('editId').value,
-          image = $('pimage').value.trim(),
-          file = $('pfile').files[0],
-          selected = [...document.querySelectorAll('#pchecks input:checked')].map(x => x.value);
+async function savePrompt(e) {
+  e.preventDefault();
+  let title = $('ptitle').value.trim(),
+      category = $('pcat').value,
+      description = $('pdesc').value.trim(),
+      text = $('ptext').value.trim(),
+      id = $('editId').value,
+      image = $('pimage').value.trim(),
+      file = $('pfile').files[0],
+      selected = [...document.querySelectorAll('#pchecks input:checked')].map(x => x.value);
 
-      if (!title || !category || !description || !text) return toast('لطفاً فیلدهای ضروری را کامل کنید.', 'error');
-      if (file) try { image = await readFile(file); } catch { return toast('خواندن تصویر با خطا مواجه شد.', 'error'); }
+  if (!title || !category || !description || !text) return toast('لطفاً فیلدهای ضروری را کامل کنید.', 'error');
+  if (file) try { image = await readFile(file); } catch { return toast('خواندن تصویر با خطا مواجه شد.', 'error'); }
 
-      let a = prompts(), now = new Date().toISOString();
-      if (id) {
-        let i = a.findIndex(x => x.id === id);
-        a[i] = { ...a[i], title, category, description, text, tags:selected, image, updatedAt:now };
-        toast('پرامپت با موفقیت ویرایش شد ✓');
-      } else {
-        a.push({ id:'p_'+Date.now(), title, category, description, text, tags:selected, image, createdAt:now, updatedAt:now });
-        toast('پرامپت جدید با موفقیت اضافه شد ✓');
-      }
-      set(K.prompts, a);
-      close('promptFormModal');
-      renderAdmin();
-      renderUser();
-    }
+  let a = prompts(), now = new Date().toISOString();
+  if (id) {
+    let i = a.findIndex(x => x.id === id);
+    a[i] = { ...a[i], title, category, description, text, tags:selected, image, updatedAt:now };
+    toast('پرامپت با موفقیت ویرایش شد ✓');
+  } else {
+    a.push({ id:'p_'+Date.now(), title, category, description, text, tags:selected, image, createdAt:now, updatedAt:now });
+    toast('پرامپت جدید با موفقیت اضافه شد ✓');
+  }
+  set(K.prompts, a);
+  try { await saveAllData(); } catch (err) { toast('ذخیره روی سرور ناموفق بود.', 'error'); }
+  close('promptFormModal');
+  renderAdmin();
+  renderUser();
+}
 
-    function deletePrompt(id) {
-      const p = prompts().find(x => x.id === id);
-      confirmBox('حذف پرامپت', `آیا از حذف پرامپت «${p.title}» مطمئن هستید؟`, () => {
-        set(K.prompts, prompts().filter(x => x.id !== id));
-        set(K.favs, favs().filter(x => x !== id));
-        toast('پرامپت حذف شد.');
-        renderAdmin();
-        renderUser();
-      });
-    }
+
+async function deletePrompt(id) {
+  const p = prompts().find(x => x.id === id);
+  confirmBox('حذف پرامپت', `آیا از حذف پرامپت «${p.title}» مطمئن هستید؟`, async () => {
+    set(K.prompts, prompts().filter(x => x.id !== id));
+    set(K.favs, favs().filter(x => x !== id));
+    try { await saveAllData(); } catch (err) { toast('ذخیره روی سرور ناموفق بود.', 'error'); }
+    toast('پرامپت حذف شد.');
+    renderAdmin();
+    renderUser();
+  });
+}
 
     function entityForm(type, old='') {
       $('entityForm').reset();
@@ -2792,45 +2881,49 @@ body {
       setTimeout(() => $('ename').focus(), 100);
     }
 
-    function saveEntity(e) {
-      e.preventDefault();
-      let type = $('etype').value, old = $('eold').value, n = $('ename').value.trim(), a = type === 'category' ? cats() : tags();
-      if (!n) return;
-      if (a.includes(n) && n !== old) return toast('این مورد قبلاً وجود دارد.', 'error');
+async function saveEntity(e) {
+  e.preventDefault();
+  let type = $('etype').value, old = $('eold').value, n = $('ename').value.trim(), a = type === 'category' ? cats() : tags();
+  if (!n) return;
+  if (a.includes(n) && n !== old) return toast('این مورد قبلاً وجود دارد.', 'error');
 
-      let out = old ? a.map(x => x === old ? n : x) : [...a, n];
-      if (type === 'category') {
-        set(K.cats, out);
-        if (old) set(K.prompts, prompts().map(p => p.category === old ? { ...p, category:n, updatedAt:new Date().toISOString() } : p));
-      } else {
-        set(K.tags, out);
-        if (old) set(K.prompts, prompts().map(p => ({ ...p, tags:(p.tags||[]).map(t => t === old ? n : t) })));
-      }
-      close('entityModal');
-      toast('اطلاعات با موفقیت ذخیره شد ✓');
-      renderAdmin();
-      renderUser();
-    }
+  let out = old ? a.map(x => x === old ? n : x) : [...a, n];
+  if (type === 'category') {
+    set(K.cats, out);
+    if (old) set(K.prompts, prompts().map(p => p.category === old ? { ...p, category:n, updatedAt:new Date().toISOString() } : p));
+  } else {
+    set(K.tags, out);
+    if (old) set(K.prompts, prompts().map(p => ({ ...p, tags:(p.tags||[]).map(t => t === old ? n : t) })));
+  }
+  try { await saveAllData(); } catch (err) { toast('ذخیره روی سرور ناموفق بود.', 'error'); }
+  close('entityModal');
+  toast('اطلاعات با موفقیت ذخیره شد ✓');
+  renderAdmin();
+  renderUser();
+}
 
-    function deleteEntity(type, x) {
-      let used = type === 'category' ? prompts().filter(p => p.category === x).length : prompts().filter(p => (p.tags||[]).includes(x)).length;
-      if (type === 'category' && used) {
-        return confirmBox('حذف دسته‌بندی', `دسته‌بندی «${x}» دارای ${fa(used)} پرامپت است. ابتدا پرامپت‌های این دسته را ویرایش یا حذف کنید.`, null);
-      }
-      confirmBox(`حذف ${type==='category'?'دسته‌بندی':'برچسب'}`, type==='tag' && used ? `برچسب «${x}» از ${fa(used)} پرامپت نیز حذف خواهد شد. آیا ادامه می‌دهید؟` : `آیا از حذف «${x}» مطمئن هستید؟`, () => {
-        if (type === 'category') {
-          set(K.cats, cats().filter(t => t !== x));
-          if (S.category === x) S.category = 'همه پرامپت‌ها';
-        } else {
-          set(K.tags, tags().filter(t => t !== x));
-          set(K.prompts, prompts().map(p => ({ ...p, tags:(p.tags||[]).filter(t => t !== x) })));
-          if (S.tag === x) S.tag = '';
-        }
-        toast('مورد حذف شد.');
-        renderAdmin();
-        renderUser();
-      });
+
+async function deleteEntity(type, x) {
+  let used = type === 'category' ? prompts().filter(p => p.category === x).length : prompts().filter(p => (p.tags||[]).includes(x)).length;
+  if (type === 'category' && used) {
+    return confirmBox('حذف دسته‌بندی', `دسته‌بندی «${x}» دارای ${fa(used)} پرامپت است. ابتدا پرامپت‌های این دسته را ویرایش یا حذف کنید.`, null);
+  }
+  confirmBox(`حذف ${type==='category'?'دسته‌بندی':'برچسب'}`, type==='tag' && used ? `برچسب «${x}» از ${fa(used)} پرامپت نیز حذف خواهد شد. آیا ادامه می‌دهید؟` : `آیا از حذف «${x}» مطمئن هستید؟`, async () => {
+    if (type === 'category') {
+      set(K.cats, cats().filter(t => t !== x));
+      if (S.category === x) S.category = 'همه پرامپت‌ها';
+    } else {
+      set(K.tags, tags().filter(t => t !== x));
+      set(K.prompts, prompts().map(p => ({ ...p, tags:(p.tags||[]).filter(t => t !== x) })));
+      if (S.tag === x) S.tag = '';
     }
+    try { await saveAllData(); } catch (err) { toast('ذخیره روی سرور ناموفق بود.', 'error'); }
+    toast('مورد حذف شد.');
+    renderAdmin();
+    renderUser();
+  });
+}
+
 
     function confirmBox(title, text, fn) {
       S.confirm = fn;
@@ -2889,7 +2982,8 @@ body {
 
     $('adminBtn').onclick = () => localStorage.getItem(K.admin) === '1' ? showAdmin() : open('passwordModal');
     $('passSubmit').onclick = () => {
-      $('pass').value === '1348'
+      $('pass').value === ADMIN_KEY
+
         ? (localStorage.setItem(K.admin, '1'), toast('ورود به پنل مدیریت موفق بود ✓'), showAdmin())
         : toast('رمز مدیریت صحیح نیست.', 'error');
     };
@@ -2930,9 +3024,10 @@ body {
       if (e.key === 'Escape') document.querySelectorAll('.overlay.show').forEach(x => x.classList.remove('show'));
     };
 
-    init();
-    theme();
-    localStorage.getItem(K.user) ? showUser() : showLogin();
+init().then(() => {
+  theme();
+  localStorage.getItem(K.user) ? showUser() : showLogin();
+});
   </script>
 </body>
 </html>
